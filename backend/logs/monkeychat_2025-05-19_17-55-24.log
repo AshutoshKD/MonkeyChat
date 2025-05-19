@@ -1,0 +1,59 @@
+2025/05/19 17:55:24 [2025-05-19 17:55:24.012] [INFO] Starting MonkeyChat server on :8080
+2025/05/19 17:55:24 [2025-05-19 17:55:24.012] [INFO] Server started on :8080
+2025/05/19 17:55:39 [2025-05-19 17:55:39.121] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 17:55:39 [2025-05-19 17:55:39.122] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 17:55:39 [2025-05-19 17:55:39.122] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 17:55:39 [2025-05-19 17:55:39.125] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 17:55:39 [2025-05-19 17:55:39.125] [WARN] Error reading message from 127.0.0.1: websocket: close 1006 (abnormal closure): unexpected EOF
+2025/05/19 17:55:39 [2025-05-19 17:55:39.137] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 17:55:39 [2025-05-19 17:55:39.137] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 17:55:39 [2025-05-19 17:55:39.137] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 17:55:39 [2025-05-19 17:55:39.137] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 17:55:39 [2025-05-19 17:55:39.139] [INFO] Received join message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:39 [2025-05-19 17:55:39.140] [INFO] New room created: e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:39 [2025-05-19 17:55:39.140] [INFO] User 'Unknown' joined room e09f9bc0-a691-4406-a57b-6ad67124e76b, connections: 1
+2025/05/19 17:55:39 [2025-05-19 17:55:39.140] [INFO] Current room status:
+2025/05/19 17:55:39 [2025-05-19 17:55:39.140] [INFO]   Room e09f9bc0-a691-4406-a57b-6ad67124e76b: 1 connections - Users: [Unknown]
+2025/05/19 17:55:40 [2025-05-19 17:55:40.593] [INFO] Received offer message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:40 [2025-05-19 17:55:40.595] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:40 [2025-05-19 17:55:40.596] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:40 [2025-05-19 17:55:40.617] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:40 [2025-05-19 17:55:40.618] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:40 [2025-05-19 17:55:40.718] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:40 [2025-05-19 17:55:40.719] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.075] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 17:55:44 [2025-05-19 17:55:44.075] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 17:55:44 [2025-05-19 17:55:44.075] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 17:55:44 [2025-05-19 17:55:44.075] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 17:55:44 [2025-05-19 17:55:44.087] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 17:55:44 [2025-05-19 17:55:44.087] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 17:55:44 [2025-05-19 17:55:44.087] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 17:55:44 [2025-05-19 17:55:44.087] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 17:55:44 [2025-05-19 17:55:44.112] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 17:55:44 [2025-05-19 17:55:44.486] [INFO] Received join message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.486] [INFO] User 'Unknown' joined room e09f9bc0-a691-4406-a57b-6ad67124e76b, connections: 2
+2025/05/19 17:55:44 [2025-05-19 17:55:44.486] [INFO] Current room status:
+2025/05/19 17:55:44 [2025-05-19 17:55:44.486] [INFO]   Room e09f9bc0-a691-4406-a57b-6ad67124e76b: 2 connections - Users: [Unknown Unknown]
+2025/05/19 17:55:44 [2025-05-19 17:55:44.732] [INFO] Received offer message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.732] [INFO] Relayed offer message from 'Unknown' to 'Unknown' in room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.734] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.734] [INFO] Relayed ice-candidate message from 'Unknown' to 'Unknown' in room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.735] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.735] [INFO] Relayed ice-candidate message from 'Unknown' to 'Unknown' in room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.743] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.743] [INFO] Relayed ice-candidate message from 'Unknown' to 'Unknown' in room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.744] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.744] [INFO] Relayed ice-candidate message from 'Unknown' to 'Unknown' in room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.762] [INFO] Received answer message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.762] [INFO] Relayed answer message from 'Unknown' to 'Unknown' in room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.773] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.773] [INFO] Relayed ice-candidate message from 'Unknown' to 'Unknown' in room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.783] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.784] [INFO] Relayed ice-candidate message from 'Unknown' to 'Unknown' in room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.874] [INFO] Received ice-candidate message from 127.0.0.1 for room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:44 [2025-05-19 17:55:44.875] [INFO] Relayed ice-candidate message from 'Unknown' to 'Unknown' in room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:53 [2025-05-19 17:55:53.687] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 17:55:53 [2025-05-19 17:55:53.688] [INFO] Removed connection for user 'Unknown' from room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:54 [2025-05-19 17:55:54.600] [WARN] Error reading message from 127.0.0.1: websocket: close 1005 (no status)
+2025/05/19 17:55:54 [2025-05-19 17:55:54.600] [INFO] Removed connection for user 'Unknown' from room e09f9bc0-a691-4406-a57b-6ad67124e76b
+2025/05/19 17:55:54 [2025-05-19 17:55:54.600] [INFO] Removed empty room e09f9bc0-a691-4406-a57b-6ad67124e76b

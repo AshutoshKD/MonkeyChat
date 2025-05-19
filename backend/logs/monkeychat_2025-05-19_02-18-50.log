@@ -1,0 +1,133 @@
+2025/05/19 02:18:50 [2025-05-19 02:18:50.330] [INFO] Starting MonkeyChat server on :8080
+2025/05/19 02:18:50 [2025-05-19 02:18:50.330] [INFO] Server started on :8080
+2025/05/19 02:18:57 [2025-05-19 02:18:57.080] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:18:57 [2025-05-19 02:18:57.080] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:18:57 [2025-05-19 02:18:57.080] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:18:57 [2025-05-19 02:18:57.081] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:18:57 [2025-05-19 02:18:57.092] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:18:57 [2025-05-19 02:18:57.092] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:18:57 [2025-05-19 02:18:57.092] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:18:57 [2025-05-19 02:18:57.092] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:18:57 [2025-05-19 02:18:57.122] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:18:57 [2025-05-19 02:18:57.494] [INFO] Received join message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:18:57 [2025-05-19 02:18:57.494] [INFO] New room created: 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:18:57 [2025-05-19 02:18:57.494] [INFO] User joined room: 72a9904d-e293-4477-afcb-408e5ff667b7, connections: 1
+2025/05/19 02:18:57 [2025-05-19 02:18:57.494] [INFO] Current room status:
+2025/05/19 02:18:57 [2025-05-19 02:18:57.494] [INFO]   Room 72a9904d-e293-4477-afcb-408e5ff667b7: 1 connections
+2025/05/19 02:18:58 [2025-05-19 02:18:58.796] [INFO] Received offer message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:18:58 [2025-05-19 02:18:58.801] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:18:58 [2025-05-19 02:18:58.802] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:18:58 [2025-05-19 02:18:58.847] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:18:58 [2025-05-19 02:18:58.848] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:18:58 [2025-05-19 02:18:58.914] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:18:58 [2025-05-19 02:18:58.914] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:01 [2025-05-19 02:19:01.820] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:19:01 [2025-05-19 02:19:01.820] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:19:01 [2025-05-19 02:19:01.820] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:19:01 [2025-05-19 02:19:01.820] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:19:01 [2025-05-19 02:19:01.836] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:19:01 [2025-05-19 02:19:01.836] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:19:01 [2025-05-19 02:19:01.836] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:19:01 [2025-05-19 02:19:01.836] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:19:01 [2025-05-19 02:19:01.849] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:19:02 [2025-05-19 02:19:02.214] [INFO] Received join message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.214] [INFO] User joined room: 72a9904d-e293-4477-afcb-408e5ff667b7, connections: 2
+2025/05/19 02:19:02 [2025-05-19 02:19:02.214] [INFO] Current room status:
+2025/05/19 02:19:02 [2025-05-19 02:19:02.214] [INFO]   Room 72a9904d-e293-4477-afcb-408e5ff667b7: 2 connections
+2025/05/19 02:19:02 [2025-05-19 02:19:02.462] [INFO] Received offer message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.462] [INFO] Relayed offer message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.463] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.463] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.464] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.464] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.471] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.471] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.471] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.471] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.481] [INFO] Received answer message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.482] [INFO] Relayed answer message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.485] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.485] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.492] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:02 [2025-05-19 02:19:02.492] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:44 [2025-05-19 02:19:44.154] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:19:44 [2025-05-19 02:19:44.154] [INFO] Removed connection from room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:45 [2025-05-19 02:19:45.660] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:19:45 [2025-05-19 02:19:45.660] [INFO] Removed connection from room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:45 [2025-05-19 02:19:45.661] [INFO] Removed empty room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:45 [2025-05-19 02:19:45.704] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:19:45 [2025-05-19 02:19:45.704] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:19:45 [2025-05-19 02:19:45.704] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:19:45 [2025-05-19 02:19:45.705] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:19:45 [2025-05-19 02:19:45.707] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:19:45 [2025-05-19 02:19:45.716] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:19:45 [2025-05-19 02:19:45.716] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:19:45 [2025-05-19 02:19:45.716] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:19:45 [2025-05-19 02:19:45.716] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:19:45 [2025-05-19 02:19:45.892] [INFO] Received join message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:45 [2025-05-19 02:19:45.895] [INFO] New room created: 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:45 [2025-05-19 02:19:45.895] [INFO] User joined room: 72a9904d-e293-4477-afcb-408e5ff667b7, connections: 1
+2025/05/19 02:19:45 [2025-05-19 02:19:45.895] [INFO] Current room status:
+2025/05/19 02:19:45 [2025-05-19 02:19:45.895] [INFO]   Room 72a9904d-e293-4477-afcb-408e5ff667b7: 1 connections
+2025/05/19 02:19:46 [2025-05-19 02:19:46.131] [INFO] Received offer message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:46 [2025-05-19 02:19:46.131] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:46 [2025-05-19 02:19:46.132] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:46 [2025-05-19 02:19:46.137] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:46 [2025-05-19 02:19:46.138] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:46 [2025-05-19 02:19:46.260] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:46 [2025-05-19 02:19:46.261] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:55 [2025-05-19 02:19:55.606] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:19:55 [2025-05-19 02:19:55.606] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:19:55 [2025-05-19 02:19:55.606] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:19:55 [2025-05-19 02:19:55.606] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:19:55 [2025-05-19 02:19:55.618] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:19:55 [2025-05-19 02:19:55.618] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:19:55 [2025-05-19 02:19:55.618] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:19:55 [2025-05-19 02:19:55.618] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:19:55 [2025-05-19 02:19:55.640] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:19:56 [2025-05-19 02:19:56.004] [INFO] Received join message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.005] [INFO] User joined room: 72a9904d-e293-4477-afcb-408e5ff667b7, connections: 2
+2025/05/19 02:19:56 [2025-05-19 02:19:56.005] [INFO] Current room status:
+2025/05/19 02:19:56 [2025-05-19 02:19:56.005] [INFO]   Room 72a9904d-e293-4477-afcb-408e5ff667b7: 2 connections
+2025/05/19 02:19:56 [2025-05-19 02:19:56.257] [INFO] Received offer message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.257] [INFO] Relayed offer message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.259] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.259] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.260] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.260] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.267] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.267] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.267] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.267] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.275] [INFO] Received answer message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.275] [INFO] Relayed answer message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.284] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.284] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.292] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:19:56 [2025-05-19 02:19:56.292] [INFO] Relayed ice-candidate message to peer in room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:05 [2025-05-19 02:20:05.355] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:20:05 [2025-05-19 02:20:05.355] [INFO] Removed connection from room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.264] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:20:06 [2025-05-19 02:20:06.265] [INFO] Removed connection from room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.265] [INFO] Removed empty room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.310] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:20:06 [2025-05-19 02:20:06.310] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:20:06 [2025-05-19 02:20:06.310] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:20:06 [2025-05-19 02:20:06.310] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:20:06 [2025-05-19 02:20:06.310] [WARN] Error reading message from 127.0.0.1: read tcp4 127.0.0.1:8080->127.0.0.1:58600: read: connection reset by peer
+2025/05/19 02:20:06 [2025-05-19 02:20:06.317] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:20:06 [2025-05-19 02:20:06.317] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:20:06 [2025-05-19 02:20:06.317] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:20:06 [2025-05-19 02:20:06.317] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:20:06 [2025-05-19 02:20:06.483] [INFO] Received join message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.483] [INFO] New room created: 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.483] [INFO] User joined room: 72a9904d-e293-4477-afcb-408e5ff667b7, connections: 1
+2025/05/19 02:20:06 [2025-05-19 02:20:06.483] [INFO] Current room status:
+2025/05/19 02:20:06 [2025-05-19 02:20:06.483] [INFO]   Room 72a9904d-e293-4477-afcb-408e5ff667b7: 1 connections
+2025/05/19 02:20:06 [2025-05-19 02:20:06.717] [INFO] Received offer message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.717] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.718] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.724] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.725] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.837] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7
+2025/05/19 02:20:06 [2025-05-19 02:20:06.838] [INFO] Received ice-candidate message from 127.0.0.1 for room 72a9904d-e293-4477-afcb-408e5ff667b7

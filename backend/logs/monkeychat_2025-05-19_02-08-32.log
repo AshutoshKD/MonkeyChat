@@ -1,0 +1,76 @@
+2025/05/19 02:08:32 [2025-05-19 02:08:32.065] [INFO] Starting MonkeyChat server on :8080
+2025/05/19 02:08:32 [2025-05-19 02:08:32.065] [INFO] Server started on :8080
+2025/05/19 02:08:37 [2025-05-19 02:08:37.917] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:08:37 [2025-05-19 02:08:37.917] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:08:37 [2025-05-19 02:08:37.917] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:08:37 [2025-05-19 02:08:37.920] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:08:38 [2025-05-19 02:08:38.142] [INFO] Received join message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:38 [2025-05-19 02:08:38.142] [INFO] New room created: 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:38 [2025-05-19 02:08:38.142] [INFO] User joined room: 7e3b3598-f415-4166-a7e1-a46e57e65da5, connections: 1
+2025/05/19 02:08:38 [2025-05-19 02:08:38.142] [INFO] Current room status:
+2025/05/19 02:08:38 [2025-05-19 02:08:38.142] [INFO]   Room 7e3b3598-f415-4166-a7e1-a46e57e65da5: 1 connections
+2025/05/19 02:08:42 [2025-05-19 02:08:42.687] [INFO] Received offer message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:42 [2025-05-19 02:08:42.687] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:42 [2025-05-19 02:08:42.688] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:42 [2025-05-19 02:08:42.712] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:42 [2025-05-19 02:08:42.712] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:42 [2025-05-19 02:08:42.810] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:42 [2025-05-19 02:08:42.811] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:45 [2025-05-19 02:08:45.645] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:08:45 [2025-05-19 02:08:45.645] [INFO] Removed connection from room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:45 [2025-05-19 02:08:45.645] [INFO] Removed empty room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:45 [2025-05-19 02:08:45.696] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:08:45 [2025-05-19 02:08:45.696] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:08:45 [2025-05-19 02:08:45.696] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:08:45 [2025-05-19 02:08:45.696] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:08:45 [2025-05-19 02:08:45.696] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:08:45 [2025-05-19 02:08:45.706] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:08:45 [2025-05-19 02:08:45.706] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:08:45 [2025-05-19 02:08:45.706] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:08:45 [2025-05-19 02:08:45.706] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:08:45 [2025-05-19 02:08:45.886] [INFO] Received join message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:45 [2025-05-19 02:08:45.886] [INFO] New room created: 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:45 [2025-05-19 02:08:45.886] [INFO] User joined room: 7e3b3598-f415-4166-a7e1-a46e57e65da5, connections: 1
+2025/05/19 02:08:45 [2025-05-19 02:08:45.886] [INFO] Current room status:
+2025/05/19 02:08:45 [2025-05-19 02:08:45.886] [INFO]   Room 7e3b3598-f415-4166-a7e1-a46e57e65da5: 1 connections
+2025/05/19 02:08:47 [2025-05-19 02:08:47.166] [INFO] Received offer message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:47 [2025-05-19 02:08:47.166] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:47 [2025-05-19 02:08:47.166] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:47 [2025-05-19 02:08:47.179] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:47 [2025-05-19 02:08:47.179] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:47 [2025-05-19 02:08:47.278] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:47 [2025-05-19 02:08:47.278] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.319] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:08:49 [2025-05-19 02:08:49.319] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:08:49 [2025-05-19 02:08:49.320] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:08:49 [2025-05-19 02:08:49.320] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:08:49 [2025-05-19 02:08:49.321] [WARN] Error reading message from 127.0.0.1: websocket: close 1006 (abnormal closure): unexpected EOF
+2025/05/19 02:08:49 [2025-05-19 02:08:49.331] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 02:08:49 [2025-05-19 02:08:49.331] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 02:08:49 [2025-05-19 02:08:49.331] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 02:08:49 [2025-05-19 02:08:49.331] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 02:08:49 [2025-05-19 02:08:49.497] [INFO] Received join message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.498] [INFO] User joined room: 7e3b3598-f415-4166-a7e1-a46e57e65da5, connections: 2
+2025/05/19 02:08:49 [2025-05-19 02:08:49.499] [INFO] Current room status:
+2025/05/19 02:08:49 [2025-05-19 02:08:49.499] [INFO]   Room 7e3b3598-f415-4166-a7e1-a46e57e65da5: 2 connections
+2025/05/19 02:08:49 [2025-05-19 02:08:49.730] [INFO] Received offer message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.731] [INFO] Relayed offer message to peer in room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.731] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.731] [INFO] Relayed ice-candidate message to peer in room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.731] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.731] [INFO] Relayed ice-candidate message to peer in room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.737] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.737] [INFO] Relayed ice-candidate message to peer in room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.737] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.737] [INFO] Relayed ice-candidate message to peer in room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.750] [INFO] Received answer message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.750] [INFO] Relayed answer message to peer in room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.758] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.758] [INFO] Relayed ice-candidate message to peer in room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.764] [INFO] Received ice-candidate message from 127.0.0.1 for room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:08:49 [2025-05-19 02:08:49.764] [INFO] Relayed ice-candidate message to peer in room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:09:23 [2025-05-19 02:09:23.654] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:09:23 [2025-05-19 02:09:23.655] [INFO] Removed connection from room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:09:25 [2025-05-19 02:09:25.351] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 02:09:25 [2025-05-19 02:09:25.351] [INFO] Removed connection from room 7e3b3598-f415-4166-a7e1-a46e57e65da5
+2025/05/19 02:09:25 [2025-05-19 02:09:25.351] [INFO] Removed empty room 7e3b3598-f415-4166-a7e1-a46e57e65da5
