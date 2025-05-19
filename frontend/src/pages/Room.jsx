@@ -6,8 +6,8 @@ const Room = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // Get userName from location state or use a default
-  const userName = location.state?.userName || 'Anonymous';
+  // Get userName from localStorage (authenticated) or location state as fallback
+  const userName = localStorage.getItem('username') || location.state?.userName || 'Anonymous';
   
   const [localStream, setLocalStream] = useState(null);
   const [remoteStream, setRemoteStream] = useState(null);
@@ -30,6 +30,17 @@ const Room = () => {
       { urls: 'stun:stun1.l.google.com:19302' },
     ],
   };
+
+  // Check for authentication
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const storedUsername = localStorage.getItem('username');
+    
+    // This is a backup check since we're already using ProtectedRoute
+    if (!token || !storedUsername) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   // Logger function to help with debugging
   const logEvent = (type, message, data) => {
@@ -62,7 +73,11 @@ const Room = () => {
 
   useEffect(() => {
     // Connect to WebSocket server
-    const wsUrl = 'ws://localhost:8080/ws';
+    const token = localStorage.getItem('token');
+    const wsUrl = token 
+      ? `ws://localhost:8080/ws?token=${token}` 
+      : 'ws://localhost:8080/ws';
+      
     logEvent('INFO', 'Connecting to WebSocket server', { wsUrl });
     
     try {
@@ -86,7 +101,7 @@ const Room = () => {
       
       webSocketRef.current.onmessage = (event) => {
         const message = JSON.parse(event.data);
-        logEvent('INFO', 'Received WebSocket message', { event: message.event });
+        logEvent('INFO', 'Received WebSocket message', { event: message.event, payload: message.payload });
         
         switch (message.event) {
           case 'joined':
@@ -98,12 +113,36 @@ const Room = () => {
             
           case 'user-joined':
             if (message.payload) {
-              const data = JSON.parse(message.payload);
-              if (data.userName) {
-                setPeerName(data.userName);
-                logEvent('INFO', 'Peer joined with name', { peerName: data.userName });
+              try {
+                const data = JSON.parse(message.payload);
+                if (data.userName) {
+                  // Ensure we don't set our own name as the peer name
+                  if (data.userName !== userName) {
+                    logEvent('INFO', 'Setting peer name from user-joined event', { 
+                      peerName: data.userName,
+                      currentPeerName: peerName,
+                      myUserName: userName
+                    });
+                    
+                    setPeerName(data.userName);
+                    
+                    // If we already have a remote stream, update the connection status
+                    if (remoteStream) {
+                      setConnectionStatus(`Connected to ${data.userName}`);
+                    }
+                  } else {
+                    logEvent('INFO', 'Ignored own username from user-joined event');
+                  }
+                }
+              } catch (err) {
+                logEvent('ERROR', 'Error parsing user-joined payload', { error: err.message, payload: message.payload });
               }
             }
+            break;
+            
+          case 'user-left':
+            logEvent('INFO', 'Peer left the room');
+            handlePeerDisconnect();
             break;
             
           case 'offer':
@@ -122,9 +161,20 @@ const Room = () => {
       
       webSocketRef.current.onclose = () => {
         logEvent('WARN', 'WebSocket disconnected');
-        setConnectionStatus('Disconnected');
+        setConnectionStatus('Server disconnected');
         if (isConnected) {
-          setErrorMessage('Connection to server lost. Please refresh the page.');
+          setErrorMessage('Connection to server lost. Please refresh the page to reconnect.');
+          
+          // Clean up the peer connection
+          if (remoteStream) {
+            remoteStream.getTracks().forEach(track => track.stop());
+            setRemoteStream(null);
+          }
+          
+          if (peerConnectionRef.current) {
+            peerConnectionRef.current.close();
+            peerConnectionRef.current = null;
+          }
         }
       };
       
@@ -169,10 +219,10 @@ const Room = () => {
       logEvent('INFO', 'Setting remote video stream');
       remoteVideoRef.current.srcObject = remoteStream;
       // We have a remote stream, so we're fully connected to a peer
-      setConnectionStatus('Connected to peer');
+      setConnectionStatus(peerName ? `Connected to ${peerName}` : 'Connected to peer');
       setErrorMessage('');
     }
-  }, [localStream, remoteStream]);
+  }, [localStream, remoteStream, peerName]);
 
   const initLocalVideo = async () => {
     logEvent('INFO', 'Initializing local video');
@@ -249,10 +299,17 @@ const Room = () => {
       peerConnectionRef.current.onicecandidate = (event) => {
         if (event.candidate) {
           logEvent('INFO', 'Generated ICE candidate', { candidate: event.candidate.candidate });
+          
+          // Include username with ICE candidate
+          const candidateWithName = {
+            candidate: event.candidate,
+            userName: userName
+          };
+          
           sendMessage({
             event: 'ice-candidate',
             roomId: roomId,
-            payload: JSON.stringify(event.candidate),
+            payload: JSON.stringify(candidateWithName),
           });
         }
       };
@@ -261,6 +318,16 @@ const Room = () => {
         logEvent('INFO', 'Received remote track', { kind: event.track.kind });
         // Make sure we use the same stream if multiple tracks are received
         setRemoteStream(event.streams[0]);
+        
+        // When we get a remote track, we know the peer is connected
+        setConnectionStatus('Connected to peer');
+        
+        // If we don't have a peer name yet, we should show a generic name
+        // rather than "Waiting for peer..." since we're clearly connected
+        if (!peerName) {
+          setPeerName('Peer');
+          logEvent('INFO', 'Setting generic peer name since actual name not received yet');
+        }
       };
       
       peerConnectionRef.current.onnegotiationneeded = async () => {
@@ -273,11 +340,17 @@ const Room = () => {
           });
           await peerConnectionRef.current.setLocalDescription(offer);
           
+          // Include user name with the offer
+          const offerWithName = {
+            sdp: peerConnectionRef.current.localDescription,
+            userName: userName
+          };
+          
           logEvent('INFO', 'Sending offer', { type: offer.type });
           sendMessage({
             event: 'offer',
             roomId: roomId,
-            payload: JSON.stringify(peerConnectionRef.current.localDescription),
+            payload: JSON.stringify(offerWithName),
           });
         } catch (error) {
           logEvent('ERROR', 'Error creating offer', { error: error.message });
@@ -288,8 +361,8 @@ const Room = () => {
         const state = peerConnectionRef.current.iceConnectionState;
         logEvent('INFO', 'ICE connection state changed', { state });
         
-        if (state === 'disconnected' || state === 'failed') {
-          setConnectionStatus('Peer disconnected');
+        if (state === 'disconnected' || state === 'failed' || state === 'closed') {
+          handlePeerDisconnect();
         } else if (state === 'connected') {
           setConnectionStatus('Connected to peer');
           // Clear error message when ICE connection is established
@@ -302,39 +375,84 @@ const Room = () => {
     }
   };
   
-  const handleOffer = async (offer) => {
-    logEvent('INFO', 'Received offer, creating answer');
+  const handleOffer = async (offerData) => {
+    logEvent('INFO', 'Received offer, creating answer', { offerData });
     try {
+      // Extract the SDP and userName
+      const { sdp, userName: peerUserName } = offerData;
+      
+      // Update peer name if it was included in the offer
+      if (peerUserName && peerUserName !== userName) {
+        logEvent('INFO', 'Setting peer name from offer', { 
+          peerName: peerUserName,
+          currentPeerName: peerName,
+          myUserName: userName
+        });
+        setPeerName(peerUserName);
+      }
+      
       // Set remote description based on received offer
-      await peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(offer));
+      await peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
       
       // Create and send answer
       const answer = await peerConnectionRef.current.createAnswer();
       await peerConnectionRef.current.setLocalDescription(answer);
       
-      logEvent('INFO', 'Sending answer', { type: answer.type });
+      // Include user name with the answer
+      const answerWithName = {
+        sdp: peerConnectionRef.current.localDescription,
+        userName: userName
+      };
+      
+      logEvent('INFO', 'Sending answer', { type: answer.type, myUserName: userName });
       sendMessage({
         event: 'answer',
         roomId: roomId,
-        payload: JSON.stringify(peerConnectionRef.current.localDescription),
+        payload: JSON.stringify(answerWithName),
       });
     } catch (error) {
       logEvent('ERROR', 'Error handling offer', { error: error.message });
     }
   };
   
-  const handleAnswer = async (answer) => {
-    logEvent('INFO', 'Received answer');
+  const handleAnswer = async (answerData) => {
+    logEvent('INFO', 'Received answer', { answerData });
     try {
-      await peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(answer));
+      // Extract the SDP and userName
+      const { sdp, userName: peerUserName } = answerData;
+      
+      // Update peer name if it was included in the answer
+      if (peerUserName && peerUserName !== userName) {
+        logEvent('INFO', 'Setting peer name from answer', { 
+          peerName: peerUserName,
+          currentPeerName: peerName,
+          myUserName: userName
+        });
+        setPeerName(peerUserName);
+      }
+      
+      await peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
     } catch (error) {
       logEvent('ERROR', 'Error handling answer', { error: error.message });
     }
   };
   
-  const handleIceCandidate = async (candidate) => {
-    logEvent('INFO', 'Received ICE candidate');
+  const handleIceCandidate = async (candidateData) => {
+    logEvent('INFO', 'Received ICE candidate', { candidateData });
     try {
+      // Extract the candidate and userName
+      const { candidate, userName: peerUserName } = candidateData;
+      
+      // Update peer name if it was included in the candidate and we don't have one yet
+      if (peerUserName && peerUserName !== userName && (!peerName || peerName === 'Peer')) {
+        logEvent('INFO', 'Setting peer name from ICE candidate', { 
+          peerName: peerUserName,
+          currentPeerName: peerName,
+          myUserName: userName
+        });
+        setPeerName(peerUserName);
+      }
+      
       if (candidate && peerConnectionRef.current) {
         await peerConnectionRef.current.addIceCandidate(new RTCIceCandidate(candidate));
       }
@@ -354,6 +472,27 @@ const Room = () => {
   
   const leaveRoom = () => {
     logEvent('INFO', 'Leaving room');
+    
+    // Notify server that user is leaving
+    sendMessage({
+      event: 'leave',
+      roomId: roomId,
+      payload: JSON.stringify({ userName: userName })
+    });
+    
+    // Clean up resources
+    if (localStream) {
+      localStream.getTracks().forEach(track => track.stop());
+    }
+    
+    if (peerConnectionRef.current) {
+      peerConnectionRef.current.close();
+    }
+    
+    if (webSocketRef.current) {
+      webSocketRef.current.close();
+    }
+    
     navigate('/');
   };
   
@@ -410,6 +549,39 @@ const Room = () => {
     }
   };
 
+  // Add a new function to send a name refresh request
+  const requestPeerNameRefresh = () => {
+    logEvent('INFO', 'Manually requesting peer name refresh');
+    // Resend our name to trigger a reciprocal response
+    sendMessage({
+      event: 'join',
+      roomId: roomId,
+      payload: JSON.stringify({ userName: userName })
+    });
+  };
+
+  // Add this function to handle peer disconnection properly
+  const handlePeerDisconnect = () => {
+    logEvent('INFO', 'Peer disconnected, cleaning up resources');
+    
+    // Stop displaying the remote stream
+    if (remoteStream) {
+      // Stop all tracks
+      remoteStream.getTracks().forEach(track => track.stop());
+      setRemoteStream(null);
+    }
+    
+    // Reset state related to peer
+    setPeerName('');
+    setConnectionStatus('Peer disconnected. Waiting for new connection...');
+    
+    // Close and recreate peer connection
+    if (peerConnectionRef.current) {
+      peerConnectionRef.current.close();
+      createPeerConnection();
+    }
+  };
+
   return (
     <div className="room">
       <div className="room-header">
@@ -417,6 +589,11 @@ const Room = () => {
         <div className="room-actions">
           <button onClick={copyRoomId}>Copy Room ID</button>
           <button onClick={leaveRoom}>Leave Room</button>
+          {remoteStream && !peerName && (
+            <button onClick={requestPeerNameRefresh} className="refresh-btn">
+              Refresh Peer Name
+            </button>
+          )}
         </div>
         <div className="connection-status">Status: {connectionStatus}</div>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
@@ -448,7 +625,9 @@ const Room = () => {
         <div className="video-wrapper remote-video">
           <video ref={remoteVideoRef} autoPlay playsInline></video>
           <div className="video-label">
-            {peerName ? `${peerName}` : 'Waiting for peer...'}
+            {remoteStream 
+              ? (peerName && peerName !== 'Peer' ? peerName : userName) 
+              : 'Waiting for peer...'}
           </div>
           {!remoteStream && <div className="waiting-message">Waiting for peer to join...</div>}
         </div>

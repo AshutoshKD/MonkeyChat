@@ -54,6 +54,9 @@ func main() {
 	setupLogging()
 	defer logFile.Close()
 
+	// Initialize authentication system with test users
+	InitAuth()
+
 	logMessage("INFO", "Starting MonkeyChat server on %s", *addr)
 
 	// Create a CORS middleware
@@ -69,8 +72,8 @@ func main() {
 
 			// Set CORS headers
 			ctx.Response.Header.Set("Access-Control-Allow-Origin", origin)
-			ctx.Response.Header.Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-			ctx.Response.Header.Set("Access-Control-Allow-Headers", "Content-Type")
+			ctx.Response.Header.Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
+			ctx.Response.Header.Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 			ctx.Response.Header.Set("Access-Control-Allow-Credentials", "true")
 
 			// Handle preflight requests
@@ -83,23 +86,32 @@ func main() {
 		}
 	}
 
-	// Set up the router
-	router := func(ctx *fasthttp.RequestCtx) {
+	// Apply Auth middleware to the router
+	router := authMiddleware(func(ctx *fasthttp.RequestCtx, username string) {
 		path := string(ctx.Path())
+		method := string(ctx.Method())
 
-		switch path {
-		case "/ws":
-			handleWebSocket(ctx)
-		case "/health":
+		switch {
+		case path == "/ws":
+			handleWebSocket(ctx, username)
+		case path == "/health":
 			ctx.SetBodyString("OK")
-		case "/logs":
+		case path == "/logs":
 			// Endpoint to download server logs
 			serveLogFile(ctx)
+		case path == "/login" && method == "POST":
+			handleLogin(ctx)
+		case path == "/register" && method == "POST":
+			handleRegister(ctx)
+		case path == "/logout" && method == "POST":
+			handleLogout(ctx, username)
+		case path == "/rooms" && method == "GET":
+			handleGetRooms(ctx, username)
 		default:
 			logMessage("WARN", "404 Not Found: %s", path)
 			ctx.SetStatusCode(fasthttp.StatusNotFound)
 		}
-	}
+	})
 
 	// Apply CORS middleware
 	handler := corsMiddleware(router)
@@ -162,7 +174,7 @@ var upgrader = websocket.FastHTTPUpgrader{
 	},
 }
 
-func handleWebSocket(ctx *fasthttp.RequestCtx) {
+func handleWebSocket(ctx *fasthttp.RequestCtx, authUsername string) {
 	clientIP := ctx.RemoteIP().String()
 	logMessage("INFO", "WebSocket connection request from %s", clientIP)
 
@@ -170,7 +182,7 @@ func handleWebSocket(ctx *fasthttp.RequestCtx) {
 		// Create a new connection without user info yet
 		conn := &Connection{
 			Conn:     ws,
-			UserName: "Unknown",
+			UserName: authUsername, // Use the authenticated username if available
 		}
 
 		defer ws.Close()
@@ -196,12 +208,14 @@ func handleWebSocket(ctx *fasthttp.RequestCtx) {
 
 			switch msg.Event {
 			case "join":
-				// Extract user name from payload
-				if len(msg.Payload) > 0 {
+				// Extract user name from payload if not authenticated
+				if conn.UserName == "" && len(msg.Payload) > 0 {
 					var userInfo UserInfo
-					if err := json.Unmarshal(msg.Payload, &userInfo); err == nil {
+					if err := json.Unmarshal(msg.Payload, &userInfo); err == nil && userInfo.UserName != "" {
 						conn.UserName = userInfo.UserName
 						logMessage("INFO", "User '%s' is joining room %s", conn.UserName, roomID)
+					} else {
+						conn.UserName = "Anonymous"
 					}
 				}
 
@@ -210,6 +224,11 @@ func handleWebSocket(ctx *fasthttp.RequestCtx) {
 				if _, ok := rooms[roomID]; !ok {
 					rooms[roomID] = []*Connection{}
 					logMessage("INFO", "New room created: %s", roomID)
+
+					// If user is authenticated, add room to active rooms
+					if conn.UserName != "" && conn.UserName != "Anonymous" {
+						addActiveRoom(roomID, conn.UserName)
+					}
 				}
 
 				// Notify existing peers about the new user
@@ -238,6 +257,26 @@ func handleWebSocket(ctx *fasthttp.RequestCtx) {
 				// Log room status
 				logRoomStatus()
 
+			case "leave":
+				// Notify other users in the room that this user is leaving
+				var userInfo UserInfo
+				if err := json.Unmarshal(msg.Payload, &userInfo); err == nil {
+					// Use the provided username or the connection's username
+					leavingUserName := userInfo.UserName
+					if leavingUserName == "" {
+						leavingUserName = conn.UserName
+					}
+
+					logMessage("INFO", "User '%s' is leaving room %s", leavingUserName, roomID)
+
+					// Notify other users in the room
+					notifyUserLeft(conn, roomID, leavingUserName)
+				}
+
+				// Clean up the connection
+				cleanupConnection(conn)
+				break
+
 			case "offer", "answer", "ice-candidate":
 				// Relay message to other peers in the room
 				relayMessageToRoom(conn, roomID, message)
@@ -265,6 +304,36 @@ func notifyUserJoined(conn *Connection, roomID, userName string) {
 	respondJSON(conn, userJoinedMsg)
 }
 
+func notifyUserLeft(leavingConn *Connection, roomID, userName string) {
+	payload, _ := json.Marshal(map[string]string{
+		"userName": userName,
+	})
+
+	userLeftMsg := Message{
+		Event:   "user-left",
+		RoomID:  roomID,
+		Payload: payload,
+	}
+
+	// Find the room
+	mutex.RLock()
+	defer mutex.RUnlock()
+
+	connections, ok := rooms[roomID]
+	if !ok {
+		return
+	}
+
+	// Notify all other users in the room
+	for _, conn := range connections {
+		if conn.Conn != leavingConn.Conn {
+			respondJSON(conn, userLeftMsg)
+			logMessage("INFO", "Notified user '%s' that '%s' left room %s",
+				conn.UserName, userName, roomID)
+		}
+	}
+}
+
 func cleanupConnection(conn *Connection) {
 	mutex.Lock()
 	defer mutex.Unlock()
@@ -279,6 +348,7 @@ func cleanupConnection(conn *Connection) {
 				// If room is empty, remove it
 				if len(rooms[roomID]) == 0 {
 					delete(rooms, roomID)
+					removeActiveRoom(roomID)
 					logMessage("INFO", "Removed empty room %s", roomID)
 				}
 				return

@@ -1,0 +1,860 @@
+2025/05/19 19:12:16 [2025-05-19 19:12:16.603] [INFO] Auth module initialized with test users
+2025/05/19 19:12:16 [2025-05-19 19:12:16.603] [INFO] Starting MonkeyChat server on :8080
+2025/05/19 19:12:16 [2025-05-19 19:12:16.603] [INFO] Server started on :8080
+2025/05/19 19:12:20 [2025-05-19 19:12:20.289] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:12:20 [2025-05-19 19:12:20.289] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:12:20 [2025-05-19 19:12:20.289] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:12:20 [2025-05-19 19:12:20.290] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:12:20 [2025-05-19 19:12:20.777] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:12:20 [2025-05-19 19:12:20.778] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:12:22 [2025-05-19 19:12:22.012] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:12:22 [2025-05-19 19:12:22.013] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:12:24 [2025-05-19 19:12:24.563] [DEBUG] Request from origin: http://localhost:5173, path: /logout, method: OPTIONS
+2025/05/19 19:12:24 [2025-05-19 19:12:24.564] [DEBUG] Request from origin: http://localhost:5173, path: /logout, method: POST
+2025/05/19 19:12:38 [2025-05-19 19:12:38.664] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: OPTIONS
+2025/05/19 19:12:38 [2025-05-19 19:12:38.666] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: POST
+2025/05/19 19:12:41 [2025-05-19 19:12:41.338] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: POST
+2025/05/19 19:12:45 [2025-05-19 19:12:45.665] [DEBUG] Request from origin: http://localhost:5173, path: /register, method: OPTIONS
+2025/05/19 19:12:45 [2025-05-19 19:12:45.669] [DEBUG] Request from origin: http://localhost:5173, path: /register, method: POST
+2025/05/19 19:12:45 [2025-05-19 19:12:45.736] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:12:45 [2025-05-19 19:12:45.736] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:12:45 [2025-05-19 19:12:45.737] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:12:45 [2025-05-19 19:12:45.737] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:12:47 [2025-05-19 19:12:47.804] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:12:47 [2025-05-19 19:12:47.804] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:12:47 [2025-05-19 19:12:47.804] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:12:47 [2025-05-19 19:12:47.804] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:12:47 [2025-05-19 19:12:47.815] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:12:47 [2025-05-19 19:12:47.815] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:12:47 [2025-05-19 19:12:47.815] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:12:47 [2025-05-19 19:12:47.816] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:12:47 [2025-05-19 19:12:47.816] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 19:12:47 [2025-05-19 19:12:47.830] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:47 [2025-05-19 19:12:47.830] [INFO] New room created: 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:47 [2025-05-19 19:12:47.830] [INFO] New active room added: 8231ece1-07c3-4013-b1c9-d71e40afcd82 created by jam
+2025/05/19 19:12:47 [2025-05-19 19:12:47.830] [INFO] User 'jam' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 1
+2025/05/19 19:12:47 [2025-05-19 19:12:47.830] [INFO] Current room status:
+2025/05/19 19:12:47 [2025-05-19 19:12:47.830] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 1 connections - Users: [jam]
+2025/05/19 19:12:49 [2025-05-19 19:12:49.143] [INFO] Received offer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:49 [2025-05-19 19:12:49.149] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:49 [2025-05-19 19:12:49.153] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:49 [2025-05-19 19:12:49.156] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:49 [2025-05-19 19:12:49.159] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:49 [2025-05-19 19:12:49.263] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:49 [2025-05-19 19:12:49.266] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:49 [2025-05-19 19:12:49.269] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:49 [2025-05-19 19:12:49.271] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:50 [2025-05-19 19:12:50.034] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:12:50 [2025-05-19 19:12:50.040] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:05 [2025-05-19 19:13:05.623] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:13:05 [2025-05-19 19:13:05.624] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:13:05 [2025-05-19 19:13:05.624] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:13:05 [2025-05-19 19:13:05.624] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:13:05 [2025-05-19 19:13:05.624] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away): WebSocket is closed before the connection is established.
+2025/05/19 19:13:05 [2025-05-19 19:13:05.627] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:13:05 [2025-05-19 19:13:05.627] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:13:05 [2025-05-19 19:13:05.627] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:13:05 [2025-05-19 19:13:05.627] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:13:05 [2025-05-19 19:13:05.633] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:05 [2025-05-19 19:13:05.634] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 2
+2025/05/19 19:13:05 [2025-05-19 19:13:05.634] [INFO] Current room status:
+2025/05/19 19:13:05 [2025-05-19 19:13:05.634] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 2 connections - Users: [jam rijey]
+2025/05/19 19:13:07 [2025-05-19 19:13:07.459] [INFO] Received offer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.460] [INFO] Relayed offer message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.473] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.473] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.473] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.474] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.476] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.476] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.476] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.476] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.534] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.535] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.536] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.536] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.539] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.540] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.541] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.542] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.585] [INFO] Received answer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.585] [INFO] Relayed answer message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.669] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.669] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.672] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:07 [2025-05-19 19:13:07.672] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:14 [2025-05-19 19:13:14.471] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 19:13:14 [2025-05-19 19:13:14.472] [INFO] Removed connection for user 'rijey' from room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:14 [2025-05-19 19:13:14.671] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:13:14 [2025-05-19 19:13:14.672] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:13:14 [2025-05-19 19:13:14.672] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:13:14 [2025-05-19 19:13:14.672] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:13:14 [2025-05-19 19:13:14.672] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away): WebSocket is closed before the connection is established.
+2025/05/19 19:13:14 [2025-05-19 19:13:14.676] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:13:14 [2025-05-19 19:13:14.676] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:13:14 [2025-05-19 19:13:14.676] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:13:14 [2025-05-19 19:13:14.676] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:13:14 [2025-05-19 19:13:14.680] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:14 [2025-05-19 19:13:14.680] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 2
+2025/05/19 19:13:14 [2025-05-19 19:13:14.680] [INFO] Current room status:
+2025/05/19 19:13:14 [2025-05-19 19:13:14.680] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 2 connections - Users: [jam rijey]
+2025/05/19 19:13:16 [2025-05-19 19:13:16.331] [INFO] Received offer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.331] [INFO] Relayed offer message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.357] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.357] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.358] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.358] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.358] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.358] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.359] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.359] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.360] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.360] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.361] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.361] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.362] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.362] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.362] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.362] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.472] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.473] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.477] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.477] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.478] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.478] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.478] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.478] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.486] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.486] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.486] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.486] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.487] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.487] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.487] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:16 [2025-05-19 19:13:16.487] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:31 [2025-05-19 19:13:31.700] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 19:13:31 [2025-05-19 19:13:31.701] [INFO] Removed connection for user 'jam' from room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:31 [2025-05-19 19:13:31.784] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:13:31 [2025-05-19 19:13:31.786] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:13:31 [2025-05-19 19:13:31.786] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:13:31 [2025-05-19 19:13:31.786] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:13:31 [2025-05-19 19:13:31.786] [WARN] Error reading message from 127.0.0.1: read tcp4 127.0.0.1:8080->127.0.0.1:62082: read: connection reset by peer
+2025/05/19 19:13:31 [2025-05-19 19:13:31.795] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:13:31 [2025-05-19 19:13:31.795] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:13:31 [2025-05-19 19:13:31.795] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:13:31 [2025-05-19 19:13:31.795] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:13:32 [2025-05-19 19:13:32.045] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.045] [INFO] User 'jam' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 2
+2025/05/19 19:13:32 [2025-05-19 19:13:32.045] [INFO] Current room status:
+2025/05/19 19:13:32 [2025-05-19 19:13:32.045] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 2 connections - Users: [rijey jam]
+2025/05/19 19:13:32 [2025-05-19 19:13:32.236] [INFO] Received offer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.237] [INFO] Relayed offer message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.243] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.243] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.246] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.247] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.251] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.251] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.255] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.255] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.272] [INFO] Received answer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.273] [INFO] Relayed answer message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.273] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.274] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.274] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.274] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.285] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.285] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.314] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.314] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.355] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.355] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.359] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:32 [2025-05-19 19:13:32.359] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:38 [2025-05-19 19:13:38.750] [INFO] Received leave message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:38 [2025-05-19 19:13:38.752] [INFO] Removed connection for user 'jam' from room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:38 [2025-05-19 19:13:38.756] [WARN] Error reading message from 127.0.0.1: websocket: close 1005 (no status)
+2025/05/19 19:13:38 [2025-05-19 19:13:38.783] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:13:38 [2025-05-19 19:13:38.783] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:13:38 [2025-05-19 19:13:38.784] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:13:38 [2025-05-19 19:13:38.785] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:13:48 [2025-05-19 19:13:48.347] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:48 [2025-05-19 19:13:48.347] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 2
+2025/05/19 19:13:48 [2025-05-19 19:13:48.348] [INFO] Current room status:
+2025/05/19 19:13:48 [2025-05-19 19:13:48.348] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 2 connections - Users: [rijey rijey]
+2025/05/19 19:13:49 [2025-05-19 19:13:49.530] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:49 [2025-05-19 19:13:49.530] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 3
+2025/05/19 19:13:49 [2025-05-19 19:13:49.530] [INFO] Current room status:
+2025/05/19 19:13:49 [2025-05-19 19:13:49.530] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 3 connections - Users: [rijey rijey rijey]
+2025/05/19 19:13:50 [2025-05-19 19:13:50.146] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:50 [2025-05-19 19:13:50.147] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 4
+2025/05/19 19:13:50 [2025-05-19 19:13:50.147] [INFO] Current room status:
+2025/05/19 19:13:50 [2025-05-19 19:13:50.147] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 4 connections - Users: [rijey rijey rijey rijey]
+2025/05/19 19:13:50 [2025-05-19 19:13:50.531] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:50 [2025-05-19 19:13:50.531] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 5
+2025/05/19 19:13:50 [2025-05-19 19:13:50.531] [INFO] Current room status:
+2025/05/19 19:13:50 [2025-05-19 19:13:50.531] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 5 connections - Users: [rijey rijey rijey rijey rijey]
+2025/05/19 19:13:50 [2025-05-19 19:13:50.964] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:50 [2025-05-19 19:13:50.964] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 6
+2025/05/19 19:13:50 [2025-05-19 19:13:50.964] [INFO] Current room status:
+2025/05/19 19:13:50 [2025-05-19 19:13:50.964] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 6 connections - Users: [rijey rijey rijey rijey rijey rijey]
+2025/05/19 19:13:55 [2025-05-19 19:13:55.181] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:13:55 [2025-05-19 19:13:55.182] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 7
+2025/05/19 19:13:55 [2025-05-19 19:13:55.182] [INFO] Current room status:
+2025/05/19 19:13:55 [2025-05-19 19:13:55.182] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 7 connections - Users: [rijey rijey rijey rijey rijey rijey rijey]
+2025/05/19 19:14:02 [2025-05-19 19:14:02.463] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:02 [2025-05-19 19:14:02.463] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 8
+2025/05/19 19:14:02 [2025-05-19 19:14:02.463] [INFO] Current room status:
+2025/05/19 19:14:02 [2025-05-19 19:14:02.463] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 8 connections - Users: [rijey rijey rijey rijey rijey rijey rijey rijey]
+2025/05/19 19:14:19 [2025-05-19 19:14:19.282] [INFO] Received leave message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:19 [2025-05-19 19:14:19.282] [INFO] Removed connection for user 'rijey' from room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:19 [2025-05-19 19:14:19.285] [WARN] Error reading message from 127.0.0.1: websocket: close 1005 (no status)
+2025/05/19 19:14:19 [2025-05-19 19:14:19.285] [INFO] Removed connection for user 'rijey' from room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:19 [2025-05-19 19:14:19.351] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:14:19 [2025-05-19 19:14:19.353] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:14:19 [2025-05-19 19:14:19.354] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:14:21 [2025-05-19 19:14:21.821] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:14:21 [2025-05-19 19:14:21.821] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:14:21 [2025-05-19 19:14:21.821] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:14:21 [2025-05-19 19:14:21.821] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:14:21 [2025-05-19 19:14:21.822] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away): WebSocket is closed before the connection is established.
+2025/05/19 19:14:21 [2025-05-19 19:14:21.832] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:14:21 [2025-05-19 19:14:21.832] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:14:21 [2025-05-19 19:14:21.832] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:14:21 [2025-05-19 19:14:21.832] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:14:21 [2025-05-19 19:14:21.835] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:21 [2025-05-19 19:14:21.835] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:21 [2025-05-19 19:14:21.835] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:21 [2025-05-19 19:14:21.835] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:21 [2025-05-19 19:14:21.835] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:21 [2025-05-19 19:14:21.835] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:21 [2025-05-19 19:14:21.836] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:21 [2025-05-19 19:14:21.836] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 7
+2025/05/19 19:14:21 [2025-05-19 19:14:21.836] [INFO] Current room status:
+2025/05/19 19:14:21 [2025-05-19 19:14:21.836] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 7 connections - Users: [rijey rijey rijey rijey rijey rijey rijey]
+2025/05/19 19:14:23 [2025-05-19 19:14:23.063] [INFO] Received offer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:23 [2025-05-19 19:14:23.063] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.064] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.065] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:23 [2025-05-19 19:14:23.065] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.065] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.065] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.065] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.065] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:23 [2025-05-19 19:14:23.065] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.080] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.080] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.081] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.081] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.081] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.081] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.081] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.082] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.082] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.082] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.082] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.082] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.082] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.083] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.083] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.083] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.083] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.083] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.083] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.083] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.083] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.084] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.084] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.085] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.085] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.085] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.085] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.085] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.085] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.085] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.085] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.085] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.085] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.086] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.086] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.117] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.118] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.118] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.118] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.118] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.118] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.118] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.118] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.120] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.143] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.143] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.143] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.143] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.144] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.144] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.144] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.144] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.144] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.145] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.145] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.145] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.145] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.145] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.148] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.148] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.148] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.148] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.148] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.148] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.148] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.151] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.151] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.151] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.151] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.151] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.151] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.151] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.154] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:24 [2025-05-19 19:14:24.154] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.154] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.154] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.154] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.154] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:24 [2025-05-19 19:14:24.154] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:25 [2025-05-19 19:14:25.163] [INFO] Received leave message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:25 [2025-05-19 19:14:25.163] [INFO] Removed connection for user 'rijey' from room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:25 [2025-05-19 19:14:25.168] [WARN] Error reading message from 127.0.0.1: websocket: close 1005 (no status)
+2025/05/19 19:14:25 [2025-05-19 19:14:25.189] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:14:25 [2025-05-19 19:14:25.191] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:14:25 [2025-05-19 19:14:25.195] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:14:36 [2025-05-19 19:14:36.137] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:14:36 [2025-05-19 19:14:36.137] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:14:36 [2025-05-19 19:14:36.137] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:14:36 [2025-05-19 19:14:36.137] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:14:36 [2025-05-19 19:14:36.138] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away): WebSocket is closed before the connection is established.
+2025/05/19 19:14:36 [2025-05-19 19:14:36.148] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:14:36 [2025-05-19 19:14:36.148] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:14:36 [2025-05-19 19:14:36.148] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:14:36 [2025-05-19 19:14:36.148] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:14:36 [2025-05-19 19:14:36.152] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:36 [2025-05-19 19:14:36.153] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:36 [2025-05-19 19:14:36.153] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:36 [2025-05-19 19:14:36.153] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:36 [2025-05-19 19:14:36.153] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:36 [2025-05-19 19:14:36.153] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:36 [2025-05-19 19:14:36.153] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:36 [2025-05-19 19:14:36.153] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 7
+2025/05/19 19:14:36 [2025-05-19 19:14:36.153] [INFO] Current room status:
+2025/05/19 19:14:36 [2025-05-19 19:14:36.153] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 7 connections - Users: [rijey rijey rijey rijey rijey rijey rijey]
+2025/05/19 19:14:37 [2025-05-19 19:14:37.353] [INFO] Received offer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.353] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.353] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.353] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.353] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.353] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.354] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.356] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.356] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.356] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.356] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.356] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.356] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.356] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.417] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.418] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.418] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.418] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.418] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.418] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.418] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.418] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.418] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.418] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.420] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.420] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.420] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.420] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.420] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.420] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.420] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.472] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.472] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.478] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.478] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.478] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.478] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.478] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.478] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.478] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.479] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.479] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.480] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.487] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.487] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.487] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.487] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.487] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.487] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.487] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.488] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.488] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.488] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.488] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.488] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.488] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.488] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.489] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.489] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.489] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.489] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.489] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.489] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.489] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.490] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.490] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.490] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.490] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.490] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.490] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.490] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.581] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:14:37 [2025-05-19 19:14:37.581] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:14:37 [2025-05-19 19:14:37.581] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:14:37 [2025-05-19 19:14:37.581] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:14:37 [2025-05-19 19:14:37.594] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 19:14:37 [2025-05-19 19:14:37.595] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:14:37 [2025-05-19 19:14:37.595] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:14:37 [2025-05-19 19:14:37.596] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:14:37 [2025-05-19 19:14:37.597] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:14:37 [2025-05-19 19:14:37.605] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.605] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.605] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.605] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.606] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.606] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.606] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.606] [INFO] User 'jam' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 8
+2025/05/19 19:14:37 [2025-05-19 19:14:37.606] [INFO] Current room status:
+2025/05/19 19:14:37 [2025-05-19 19:14:37.606] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 8 connections - Users: [rijey rijey rijey rijey rijey rijey rijey jam]
+2025/05/19 19:14:37 [2025-05-19 19:14:37.875] [INFO] Received offer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.875] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.875] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.875] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.875] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.875] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.875] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.875] [INFO] Relayed offer message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.882] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.882] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.882] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.883] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.883] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.883] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.883] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.883] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.886] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.886] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.886] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.886] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.886] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.886] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.886] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.886] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.891] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.891] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.891] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.891] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.891] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.891] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.891] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.891] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.895] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.896] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.896] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.896] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.896] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.896] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.896] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.897] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.933] [INFO] Received answer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.933] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.933] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.933] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.933] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.933] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.933] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.933] [INFO] Relayed answer message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.937] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.937] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.937] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.937] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.937] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.937] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.937] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.937] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.939] [INFO] Relayed ice-candidate message from 'rijey' to 'jam' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.959] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:37 [2025-05-19 19:14:37.959] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.959] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.959] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.959] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.959] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.959] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:37 [2025-05-19 19:14:37.959] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:38 [2025-05-19 19:14:38.005] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:38 [2025-05-19 19:14:38.005] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.005] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.005] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.005] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.005] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.005] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.005] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:38 [2025-05-19 19:14:38.009] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:38 [2025-05-19 19:14:38.010] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.010] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.010] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.010] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.010] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.010] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:14:38 [2025-05-19 19:14:38.010] [INFO] Relayed ice-candidate message from 'jam' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:40 [2025-05-19 19:14:40.146] [INFO] Received leave message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:40 [2025-05-19 19:14:40.146] [INFO] Removed connection for user 'rijey' from room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:40 [2025-05-19 19:14:40.150] [WARN] Error reading message from 127.0.0.1: websocket: close 1005 (no status)
+2025/05/19 19:14:40 [2025-05-19 19:14:40.213] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:14:40 [2025-05-19 19:14:40.214] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:14:40 [2025-05-19 19:14:40.216] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:14:42 [2025-05-19 19:14:42.000] [INFO] Received leave message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:42 [2025-05-19 19:14:42.000] [INFO] Removed connection for user 'jam' from room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:14:42 [2025-05-19 19:14:42.014] [WARN] Error reading message from 127.0.0.1: websocket: close 1005 (no status)
+2025/05/19 19:14:42 [2025-05-19 19:14:42.029] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:14:42 [2025-05-19 19:14:42.029] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:14:42 [2025-05-19 19:14:42.030] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:14:42 [2025-05-19 19:14:42.032] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:15:44 [2025-05-19 19:15:44.611] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:15:44 [2025-05-19 19:15:44.612] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:15:44 [2025-05-19 19:15:44.612] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:15:44 [2025-05-19 19:15:44.614] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:15:47 [2025-05-19 19:15:47.057] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:15:47 [2025-05-19 19:15:47.058] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:15:47 [2025-05-19 19:15:47.059] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:16:50 [2025-05-19 19:16:50.617] [DEBUG] Request from origin: http://localhost:5173, path: /logout, method: OPTIONS
+2025/05/19 19:16:50 [2025-05-19 19:16:50.620] [DEBUG] Request from origin: http://localhost:5173, path: /logout, method: POST
+2025/05/19 19:16:54 [2025-05-19 19:16:54.369] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: OPTIONS
+2025/05/19 19:16:54 [2025-05-19 19:16:54.370] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: POST
+2025/05/19 19:16:54 [2025-05-19 19:16:54.474] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:16:54 [2025-05-19 19:16:54.475] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:16:54 [2025-05-19 19:16:54.475] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:16:54 [2025-05-19 19:16:54.476] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:16:59 [2025-05-19 19:16:59.955] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:16:59 [2025-05-19 19:16:59.956] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:16:59 [2025-05-19 19:16:59.956] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:16:59 [2025-05-19 19:16:59.957] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:16:59 [2025-05-19 19:16:59.968] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:16:59 [2025-05-19 19:16:59.968] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:16:59 [2025-05-19 19:16:59.968] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:16:59 [2025-05-19 19:16:59.968] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:16:59 [2025-05-19 19:16:59.968] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 19:16:59 [2025-05-19 19:16:59.982] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:16:59 [2025-05-19 19:16:59.982] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:16:59 [2025-05-19 19:16:59.982] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:16:59 [2025-05-19 19:16:59.982] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:16:59 [2025-05-19 19:16:59.982] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:16:59 [2025-05-19 19:16:59.982] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:16:59 [2025-05-19 19:16:59.982] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:16:59 [2025-05-19 19:16:59.982] [INFO] User 'ashu' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 7
+2025/05/19 19:16:59 [2025-05-19 19:16:59.982] [INFO] Current room status:
+2025/05/19 19:16:59 [2025-05-19 19:16:59.983] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 7 connections - Users: [rijey rijey rijey rijey rijey rijey ashu]
+2025/05/19 19:17:01 [2025-05-19 19:17:01.359] [INFO] Received offer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:01 [2025-05-19 19:17:01.359] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.359] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.359] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.359] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.359] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.359] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.366] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:01 [2025-05-19 19:17:01.366] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.366] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.366] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.366] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.366] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.366] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.369] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:01 [2025-05-19 19:17:01.369] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.369] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.369] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.370] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.370] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.370] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.390] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:01 [2025-05-19 19:17:01.390] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.390] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.390] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.390] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.390] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.390] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.393] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:01 [2025-05-19 19:17:01.393] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.393] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.393] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.393] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.393] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.393] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.473] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:01 [2025-05-19 19:17:01.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.473] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.476] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:01 [2025-05-19 19:17:01.476] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.476] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.476] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.476] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.476] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:01 [2025-05-19 19:17:01.476] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:03 [2025-05-19 19:17:03.239] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:17:03 [2025-05-19 19:17:03.239] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:17:03 [2025-05-19 19:17:03.240] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:17:03 [2025-05-19 19:17:03.240] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:17:03 [2025-05-19 19:17:03.240] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away): WebSocket is closed before the connection is established.
+2025/05/19 19:17:03 [2025-05-19 19:17:03.243] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:17:03 [2025-05-19 19:17:03.243] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:17:03 [2025-05-19 19:17:03.243] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:17:03 [2025-05-19 19:17:03.243] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:17:03 [2025-05-19 19:17:03.248] [INFO] Received join message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:03 [2025-05-19 19:17:03.248] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:17:03 [2025-05-19 19:17:03.248] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:17:03 [2025-05-19 19:17:03.248] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:17:03 [2025-05-19 19:17:03.248] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:17:03 [2025-05-19 19:17:03.249] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:17:03 [2025-05-19 19:17:03.249] [ERROR] Error sending message: websocket: close sent
+2025/05/19 19:17:03 [2025-05-19 19:17:03.249] [INFO] User 'rijey' joined room 8231ece1-07c3-4013-b1c9-d71e40afcd82, connections: 8
+2025/05/19 19:17:03 [2025-05-19 19:17:03.249] [INFO] Current room status:
+2025/05/19 19:17:03 [2025-05-19 19:17:03.249] [INFO]   Room 8231ece1-07c3-4013-b1c9-d71e40afcd82: 8 connections - Users: [rijey rijey rijey rijey rijey rijey ashu rijey]
+2025/05/19 19:17:05 [2025-05-19 19:17:05.093] [INFO] Received offer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.093] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.094] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.094] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.094] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.094] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.094] [ERROR] Error sending offer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.094] [INFO] Relayed offer message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.096] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.097] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.098] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.098] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.098] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.098] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.098] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.098] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.098] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.098] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.099] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.099] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.099] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.099] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.099] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.099] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.099] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.099] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.117] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.117] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.117] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.119] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.119] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.119] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.119] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.119] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.119] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.119] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.119] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.120] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.120] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.120] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.122] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.122] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.122] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.122] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.122] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.122] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.122] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.122] [INFO] Relayed ice-candidate message from 'rijey' to 'ashu' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.350] [INFO] Received answer message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.350] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.350] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.350] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.350] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.350] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.350] [ERROR] Error sending answer message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.350] [INFO] Relayed answer message from 'ashu' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.391] [INFO] Received ice-candidate message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:05 [2025-05-19 19:17:05.391] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.391] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.391] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.391] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.391] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.391] [ERROR] Error sending ice-candidate message: websocket: close sent
+2025/05/19 19:17:05 [2025-05-19 19:17:05.392] [INFO] Relayed ice-candidate message from 'ashu' to 'rijey' in room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:11 [2025-05-19 19:17:11.601] [INFO] Received leave message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:11 [2025-05-19 19:17:11.601] [INFO] Removed connection for user 'ashu' from room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:11 [2025-05-19 19:17:11.611] [WARN] Error reading message from 127.0.0.1: websocket: close 1005 (no status)
+2025/05/19 19:17:11 [2025-05-19 19:17:11.648] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:17:11 [2025-05-19 19:17:11.649] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:17:11 [2025-05-19 19:17:11.650] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:17:11 [2025-05-19 19:17:11.651] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:17:13 [2025-05-19 19:17:13.814] [INFO] Received leave message from 127.0.0.1 for room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:13 [2025-05-19 19:17:13.814] [INFO] Removed connection for user 'rijey' from room 8231ece1-07c3-4013-b1c9-d71e40afcd82
+2025/05/19 19:17:13 [2025-05-19 19:17:13.819] [WARN] Error reading message from 127.0.0.1: websocket: close 1005 (no status)
+2025/05/19 19:17:13 [2025-05-19 19:17:13.952] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:17:13 [2025-05-19 19:17:13.954] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:17:13 [2025-05-19 19:17:13.956] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET

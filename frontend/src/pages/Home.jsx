@@ -1,36 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 const Home = () => {
   const [roomId, setRoomId] = useState('');
-  const [userName, setUserName] = useState('');
-  const [nameError, setNameError] = useState('');
+  const [availableRooms, setAvailableRooms] = useState([]);
   const navigate = useNavigate();
 
-  const validateName = () => {
-    if (!userName.trim()) {
-      setNameError('Please enter your name');
-      return false;
+  useEffect(() => {
+    // Since we're using ProtectedRoute, we know the user is authenticated
+    fetchAvailableRooms();
+  }, []);
+
+  const fetchAvailableRooms = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      const response = await fetch('http://localhost:8080/rooms', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.ok) {
+        const rooms = await response.json();
+        setAvailableRooms(rooms);
+      }
+    } catch (error) {
+      console.error('Error fetching rooms:', error);
     }
-    setNameError('');
-    return true;
   };
 
   const createRoom = () => {
-    if (!validateName()) return;
-    
     const newRoomId = uuidv4();
-    navigate(`/room/${newRoomId}`, { state: { userName } });
+    navigate(`/room/${newRoomId}`);
   };
 
   const joinRoom = (e) => {
     e.preventDefault();
-    if (!validateName()) return;
-    
     if (roomId) {
-      navigate(`/room/${roomId}`, { state: { userName } });
+      navigate(`/room/${roomId}`);
     }
+  };
+
+  const joinExistingRoom = (roomId) => {
+    navigate(`/room/${roomId}`);
   };
 
   return (
@@ -38,18 +53,6 @@ const Home = () => {
       <div className="container">
         <h2>Welcome to MonkeyChat</h2>
         <p>Create a new room or join an existing one</p>
-        
-        <div className="name-input-container">
-          <input
-            type="text"
-            placeholder="Enter Your Name"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            required
-            className={nameError ? 'error' : ''}
-          />
-          {nameError && <div className="error-message">{nameError}</div>}
-        </div>
         
         <button onClick={createRoom} className="create-room-btn">
           Create a New Room
@@ -67,6 +70,28 @@ const Home = () => {
           />
           <button type="submit">Join Room</button>
         </form>
+
+        {availableRooms.length > 0 && (
+          <div className="available-rooms">
+            <h3 className="rooms-title">Available Rooms</h3>
+            <ul className="rooms-list">
+              {availableRooms.map(room => (
+                <li key={room.id} className="room-item">
+                  <div className="room-info">
+                    <span className="room-id">{room.id}</span>
+                    <span className="room-creator">Created by: {room.createdBy}</span>
+                  </div>
+                  <button 
+                    onClick={() => joinExistingRoom(room.id)}
+                    className="join-room-btn"
+                  >
+                    Join
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
