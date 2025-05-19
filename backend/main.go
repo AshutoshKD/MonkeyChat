@@ -24,6 +24,7 @@ var (
 type Connection struct {
 	Conn     *websocket.Conn
 	UserName string
+	UserID   int64
 }
 
 type Message struct {
@@ -53,6 +54,13 @@ func main() {
 	// Set up logging to file
 	setupLogging()
 	defer logFile.Close()
+
+	// Initialize database
+	logMessage("INFO", "Initializing database...")
+	if err := InitDatabase(); err != nil {
+		logMessage("ERROR", "Failed to initialize database: %v", err)
+		os.Exit(1)
+	}
 
 	// Initialize authentication system with test users
 	InitAuth()
@@ -87,13 +95,13 @@ func main() {
 	}
 
 	// Apply Auth middleware to the router
-	router := authMiddleware(func(ctx *fasthttp.RequestCtx, username string) {
+	router := authMiddleware(func(ctx *fasthttp.RequestCtx, username string, userID int64) {
 		path := string(ctx.Path())
 		method := string(ctx.Method())
 
 		switch {
 		case path == "/ws":
-			handleWebSocket(ctx, username)
+			handleWebSocket(ctx, username, userID)
 		case path == "/health":
 			ctx.SetBodyString("OK")
 		case path == "/logs":
@@ -104,9 +112,11 @@ func main() {
 		case path == "/register" && method == "POST":
 			handleRegister(ctx)
 		case path == "/logout" && method == "POST":
-			handleLogout(ctx, username)
+			handleLogout(ctx, username, userID)
 		case path == "/rooms" && method == "GET":
-			handleGetRooms(ctx, username)
+			handleGetRooms(ctx, username, userID)
+		case path == "/rooms/delete" && method == "POST":
+			handleDeleteRoom(ctx, username, userID)
 		default:
 			logMessage("WARN", "404 Not Found: %s", path)
 			ctx.SetStatusCode(fasthttp.StatusNotFound)
@@ -174,7 +184,7 @@ var upgrader = websocket.FastHTTPUpgrader{
 	},
 }
 
-func handleWebSocket(ctx *fasthttp.RequestCtx, authUsername string) {
+func handleWebSocket(ctx *fasthttp.RequestCtx, authUsername string, userID int64) {
 	clientIP := ctx.RemoteIP().String()
 	logMessage("INFO", "WebSocket connection request from %s", clientIP)
 
@@ -183,6 +193,7 @@ func handleWebSocket(ctx *fasthttp.RequestCtx, authUsername string) {
 		conn := &Connection{
 			Conn:     ws,
 			UserName: authUsername, // Use the authenticated username if available
+			UserID:   userID,       // Use the authenticated user ID if available
 		}
 
 		defer ws.Close()
@@ -225,9 +236,9 @@ func handleWebSocket(ctx *fasthttp.RequestCtx, authUsername string) {
 					rooms[roomID] = []*Connection{}
 					logMessage("INFO", "New room created: %s", roomID)
 
-					// If user is authenticated, add room to active rooms
-					if conn.UserName != "" && conn.UserName != "Anonymous" {
-						addActiveRoom(roomID, conn.UserName)
+					// If user is authenticated, add room to active rooms and database
+					if conn.UserName != "" && conn.UserName != "Anonymous" && conn.UserID > 0 {
+						addActiveRoom(roomID, conn.UserName, conn.UserID)
 					}
 				}
 
@@ -345,11 +356,10 @@ func cleanupConnection(conn *Connection) {
 				rooms[roomID] = append(connections[:i], connections[i+1:]...)
 				logMessage("INFO", "Removed connection for user '%s' from room %s", conn.UserName, roomID)
 
-				// If room is empty, remove it
+				// Keep the room alive even if empty
+				// Only update active room status in memory, but don't delete from database
 				if len(rooms[roomID]) == 0 {
-					delete(rooms, roomID)
-					removeActiveRoom(roomID)
-					logMessage("INFO", "Removed empty room %s", roomID)
+					logMessage("INFO", "Room %s is now empty, but will be kept alive", roomID)
 				}
 				return
 			}
@@ -411,4 +421,67 @@ func logRoomStatus() {
 		}
 		logMessage("INFO", "  Room %s: %d connections - Users: %v", roomID, len(connections), userNames)
 	}
+}
+
+func handleDeleteRoom(ctx *fasthttp.RequestCtx, username string, userID int64) {
+	// Parse request body
+	var requestBody struct {
+		RoomID string `json:"roomId"`
+	}
+
+	if err := json.Unmarshal(ctx.PostBody(), &requestBody); err != nil {
+		ctx.SetStatusCode(fasthttp.StatusBadRequest)
+		ctx.SetBodyString(`{"error":"invalid request body"}`)
+		return
+	}
+
+	roomID := requestBody.RoomID
+	if roomID == "" {
+		ctx.SetStatusCode(fasthttp.StatusBadRequest)
+		ctx.SetBodyString(`{"error":"room ID is required"}`)
+		return
+	}
+
+	// Get room from database
+	room, err := GetRoomByID(roomID)
+	if err != nil {
+		logMessage("ERROR", "Error fetching room: %v", err)
+		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+		ctx.SetBodyString(`{"error":"internal server error"}`)
+		return
+	}
+
+	if room == nil {
+		ctx.SetStatusCode(fasthttp.StatusNotFound)
+		ctx.SetBodyString(`{"error":"room not found"}`)
+		return
+	}
+
+	// Check if user is the creator of the room
+	if room.CreatedBy != userID {
+		ctx.SetStatusCode(fasthttp.StatusForbidden)
+		ctx.SetBodyString(`{"error":"only the room creator can delete the room"}`)
+		return
+	}
+
+	// Remove room from database
+	if err := DeleteRoom(roomID); err != nil {
+		logMessage("ERROR", "Error deleting room: %v", err)
+		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+		ctx.SetBodyString(`{"error":"error deleting room"}`)
+		return
+	}
+
+	// Remove room from active rooms map
+	mutex.Lock()
+	delete(rooms, roomID)
+	mutex.Unlock()
+
+	// Remove from active rooms tracking
+	activeRooms.Delete(roomID)
+
+	logMessage("INFO", "Room %s deleted by user %s (%d)", roomID, username, userID)
+
+	ctx.SetContentType("application/json")
+	ctx.SetBodyString(`{"message":"room deleted successfully"}`)
 }

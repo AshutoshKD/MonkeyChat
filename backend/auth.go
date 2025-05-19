@@ -17,11 +17,11 @@ var (
 	// Secret key for JWT signing
 	jwtSecret = []byte("monkeychat_secret_key")
 
-	// User store (in-memory for this demo)
-	userStore      = sync.Map{}
-	activeRooms    = sync.Map{}
-	userMutex      = &sync.RWMutex{}
-	roomsMutex     = &sync.RWMutex{}
+	// Room management
+	activeRooms = sync.Map{}
+	roomsMutex  = &sync.RWMutex{}
+
+	// Token management
 	tokenBlacklist = sync.Map{}
 )
 
@@ -42,12 +42,13 @@ type ActiveRoom struct {
 // JWT claims structure
 type Claims struct {
 	Username string `json:"username"`
+	UserID   int64  `json:"userId"`
 	jwt.RegisteredClaims
 }
 
 // Init initializes the auth module with test users
 func InitAuth() {
-	// Add test users
+	// Add test users if they don't exist
 	addTestUser("ashu", "admin")
 	addTestUser("rijey", "admin")
 
@@ -56,13 +57,27 @@ func InitAuth() {
 
 // Initialize test users
 func addTestUser(username, password string) {
-	passwordHash := hashPassword(password)
-	user := User{
-		Username:     username,
-		PasswordHash: passwordHash,
-		CreatedAt:    time.Now(),
+	// Check if user already exists
+	existingUser, err := GetUserByUsername(username)
+	if err != nil {
+		logMessage("ERROR", "Error checking if test user exists: %v", err)
+		return
 	}
-	userStore.Store(username, user)
+
+	if existingUser != nil {
+		logMessage("INFO", "Test user %s already exists, skipping creation", username)
+		return
+	}
+
+	// Create user in the database
+	passwordHash := hashPassword(password)
+	_, err = CreateUser(username, passwordHash)
+	if err != nil {
+		logMessage("ERROR", "Error creating test user: %v", err)
+		return
+	}
+
+	logMessage("INFO", "Created test user: %s", username)
 }
 
 // Hash a password (simple SHA-256 for demo purposes)
@@ -78,10 +93,11 @@ func verifyPassword(password, hash string) bool {
 }
 
 // Generate a JWT token for a user
-func generateToken(username string) (string, error) {
+func generateToken(username string, userID int64) (string, error) {
 	expirationTime := time.Now().Add(24 * time.Hour)
 	claims := &Claims{
 		Username: username,
+		UserID:   userID,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(expirationTime),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
@@ -141,7 +157,7 @@ func extractToken(ctx *fasthttp.RequestCtx) string {
 }
 
 // Authentication middleware for fasthttp
-func authMiddleware(next func(ctx *fasthttp.RequestCtx, username string)) fasthttp.RequestHandler {
+func authMiddleware(next func(ctx *fasthttp.RequestCtx, username string, userID int64)) fasthttp.RequestHandler {
 	return func(ctx *fasthttp.RequestCtx) {
 		// Skip auth for certain endpoints
 		path := string(ctx.Path())
@@ -152,17 +168,17 @@ func authMiddleware(next func(ctx *fasthttp.RequestCtx, username string)) fastht
 				if token != "" {
 					claims, err := validateToken(token)
 					if err == nil {
-						next(ctx, claims.Username)
+						next(ctx, claims.Username, claims.UserID)
 						return
 					}
 				}
 				// Continue without authentication for WebSocket if no valid token
-				next(ctx, "")
+				next(ctx, "", 0)
 				return
 			}
 
 			// No auth for login, register, health
-			next(ctx, "")
+			next(ctx, "", 0)
 			return
 		}
 
@@ -182,8 +198,8 @@ func authMiddleware(next func(ctx *fasthttp.RequestCtx, username string)) fastht
 			return
 		}
 
-		// Call next handler with username
-		next(ctx, claims.Username)
+		// Call next handler with username and user ID
+		next(ctx, claims.Username, claims.UserID)
 	}
 }
 
@@ -201,25 +217,30 @@ func handleLogin(ctx *fasthttp.RequestCtx) {
 		return
 	}
 
-	// Get user from store
-	userVal, exists := userStore.Load(creds.Username)
-	if !exists {
+	// Get user from database
+	user, err := GetUserByUsername(creds.Username)
+	if err != nil {
+		logMessage("ERROR", "Error fetching user: %v", err)
+		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+		ctx.SetBodyString(`{"error":"internal server error"}`)
+		return
+	}
+
+	if user == nil {
 		ctx.SetStatusCode(fasthttp.StatusUnauthorized)
 		ctx.SetBodyString(`{"error":"invalid username or password"}`)
 		return
 	}
 
-	user := userVal.(User)
-
 	// Verify password
-	if !verifyPassword(creds.Password, user.PasswordHash) {
+	if !verifyPassword(creds.Password, user.Password) {
 		ctx.SetStatusCode(fasthttp.StatusUnauthorized)
 		ctx.SetBodyString(`{"error":"invalid username or password"}`)
 		return
 	}
 
 	// Generate token
-	token, err := generateToken(creds.Username)
+	token, err := generateToken(creds.Username, user.ID)
 	if err != nil {
 		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
 		ctx.SetBodyString(`{"error":"error generating token"}`)
@@ -262,8 +283,15 @@ func handleRegister(ctx *fasthttp.RequestCtx) {
 	}
 
 	// Check if username exists
-	_, exists := userStore.Load(creds.Username)
-	if exists {
+	existingUser, err := GetUserByUsername(creds.Username)
+	if err != nil {
+		logMessage("ERROR", "Error checking if username exists: %v", err)
+		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+		ctx.SetBodyString(`{"error":"internal server error"}`)
+		return
+	}
+
+	if existingUser != nil {
 		ctx.SetStatusCode(fasthttp.StatusConflict)
 		ctx.SetBodyString(`{"error":"username already exists"}`)
 		return
@@ -271,16 +299,16 @@ func handleRegister(ctx *fasthttp.RequestCtx) {
 
 	// Create user
 	passwordHash := hashPassword(creds.Password)
-	user := User{
-		Username:     creds.Username,
-		PasswordHash: passwordHash,
-		CreatedAt:    time.Now(),
+	user, err := CreateUser(creds.Username, passwordHash)
+	if err != nil {
+		logMessage("ERROR", "Error creating user: %v", err)
+		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+		ctx.SetBodyString(`{"error":"error creating user"}`)
+		return
 	}
 
-	userStore.Store(creds.Username, user)
-
 	// Generate token
-	token, err := generateToken(creds.Username)
+	token, err := generateToken(creds.Username, user.ID)
 	if err != nil {
 		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
 		ctx.SetBodyString(`{"error":"error generating token"}`)
@@ -302,7 +330,7 @@ func handleRegister(ctx *fasthttp.RequestCtx) {
 }
 
 // Handler for user logout
-func handleLogout(ctx *fasthttp.RequestCtx, username string) {
+func handleLogout(ctx *fasthttp.RequestCtx, username string, userID int64) {
 	tokenString := extractToken(ctx)
 	if tokenString == "" {
 		ctx.SetStatusCode(fasthttp.StatusBadRequest)
@@ -318,34 +346,80 @@ func handleLogout(ctx *fasthttp.RequestCtx, username string) {
 }
 
 // Handler for getting active rooms
-func handleGetRooms(ctx *fasthttp.RequestCtx, username string) {
-	rooms := []ActiveRoom{}
+func handleGetRooms(ctx *fasthttp.RequestCtx, username string, userID int64) {
+	// Get all rooms from database
+	dbRooms, err := GetAllRooms()
+	if err != nil {
+		logMessage("ERROR", "Error fetching rooms: %v", err)
+		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+		ctx.SetBodyString(`{"error":"error fetching rooms"}`)
+		return
+	}
 
-	activeRooms.Range(func(key, value interface{}) bool {
-		room := value.(ActiveRoom)
-		rooms = append(rooms, room)
-		return true
-	})
+	// Convert to response format
+	type roomResponse struct {
+		ID        string    `json:"id"`
+		CreatedBy string    `json:"createdBy"`
+		CreatedAt time.Time `json:"createdAt"`
+	}
+
+	rooms := []roomResponse{}
+	for _, dbRoom := range dbRooms {
+		// Get creator's username
+		creator, err := GetUserByID(dbRoom.CreatedBy)
+		if err != nil {
+			logMessage("ERROR", "Error fetching room creator: %v", err)
+			continue
+		}
+
+		if creator == nil {
+			logMessage("WARN", "Room creator not found for room %s", dbRoom.ID)
+			continue
+		}
+
+		rooms = append(rooms, roomResponse{
+			ID:        dbRoom.ID,
+			CreatedBy: creator.Username,
+			CreatedAt: dbRoom.CreatedAt,
+		})
+	}
 
 	responseJSON, _ := json.Marshal(rooms)
 	ctx.SetContentType("application/json")
 	ctx.SetBody(responseJSON)
 }
 
-// Add a new room to active rooms
-func addActiveRoom(roomID string, createdBy string) {
+// Add a new room to active rooms and database
+func addActiveRoom(roomID string, createdBy string, userID int64) {
+	// Add to in-memory active rooms (for WebSocket connections)
 	room := ActiveRoom{
 		ID:        roomID,
 		CreatedBy: createdBy,
 		CreatedAt: time.Now(),
 	}
-
 	activeRooms.Store(roomID, room)
-	logMessage("INFO", "New active room added: %s created by %s", roomID, createdBy)
+
+	// Add to database
+	_, err := CreateRoom(roomID, userID)
+	if err != nil {
+		logMessage("ERROR", "Error adding room to database: %v", err)
+		return
+	}
+
+	logMessage("INFO", "New active room added: %s created by %s (ID: %d)", roomID, createdBy, userID)
 }
 
-// Remove a room from active rooms
+// Remove a room from active rooms and database
 func removeActiveRoom(roomID string) {
+	// Remove from in-memory active rooms
 	activeRooms.Delete(roomID)
+
+	// Remove from database
+	err := DeleteRoom(roomID)
+	if err != nil {
+		logMessage("ERROR", "Error removing room from database: %v", err)
+		return
+	}
+
 	logMessage("INFO", "Room removed from active rooms: %s", roomID)
 }

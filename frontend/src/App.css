@@ -419,16 +419,32 @@ video {
 
 /* Available Rooms Styles */
 .available-rooms {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--border-color);
-  padding-top: 1rem;
   text-align: left;
+}
+
+.refresh-container {
+  text-align: right;
+  margin-bottom: 0.5rem;
+}
+
+.refresh-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.refresh-btn:hover {
+  background-color: #e5e7eb;
 }
 
 .rooms-title {
   margin-bottom: 1rem;
-  font-size: 1.25rem;
   color: var(--primary-color);
+  font-size: 1.25rem;
 }
 
 .rooms-list {
@@ -440,25 +456,26 @@ video {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   border: 1px solid var(--border-color);
   border-radius: 0.375rem;
   margin-bottom: 0.75rem;
-  background-color: #f9fafb;
+  transition: background-color 0.2s;
 }
 
 .room-item:hover {
-  background-color: #f3f4f6;
+  background-color: #f9fafb;
 }
 
 .room-info {
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
 }
 
 .room-id {
-  font-weight: 500;
-  margin-bottom: 0.25rem;
+  font-weight: 600;
+  color: var(--text-color);
 }
 
 .room-creator {
@@ -466,23 +483,33 @@ video {
   color: #6b7280;
 }
 
+.room-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .join-room-btn {
-  padding: 0.5rem 1rem;
+  padding: 0.375rem 0.75rem;
   font-size: 0.875rem;
-  background-color: #8b5cf6 !important;
 }
 
 .join-room-btn:hover {
-  background-color: #7c3aed !important;
-}
-
-.refresh-btn {
-  background-color: #8b5cf6;
-  font-size: 0.875rem;
-}
-
-.refresh-btn:hover {
   background-color: #7c3aed;
+}
+
+.delete-room-btn {
+  padding: 0.375rem 0.5rem;
+  font-size: 0.875rem;
+  background-color: #ef4444;
+}
+
+.delete-room-btn:hover {
+  background-color: #dc2626;
+}
+
+.delete-room-btn:disabled {
+  background-color: #f87171;
 }
 
 /* Button styles for specific action buttons */
@@ -498,5 +525,26 @@ video {
 .join-room-btn:hover,
 .room-actions button:hover {
   background-color: #7c3aed; /* Even darker purple */
+}
+
+/* Error and Success Messages */
+.error-message {
+  background-color: #fef2f2;
+  color: #ef4444;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  border-left: 4px solid #ef4444;
+}
+
+.success-message {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  border-left: 4px solid #16a34a;
 }
 

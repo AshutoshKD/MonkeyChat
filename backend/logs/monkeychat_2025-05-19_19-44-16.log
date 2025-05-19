@@ -1,0 +1,125 @@
+2025/05/19 19:44:16 [2025-05-19 19:44:16.879] [INFO] Initializing database...
+2025/05/19 19:44:16 [2025-05-19 19:44:16.882] [INFO] Connected to MySQL database
+2025/05/19 19:44:16 [2025-05-19 19:44:16.894] [INFO] User created in database: ashu (ID: 1)
+2025/05/19 19:44:16 [2025-05-19 19:44:16.894] [INFO] Created test user: ashu
+2025/05/19 19:44:16 [2025-05-19 19:44:16.896] [INFO] User created in database: rijey (ID: 2)
+2025/05/19 19:44:16 [2025-05-19 19:44:16.896] [INFO] Created test user: rijey
+2025/05/19 19:44:16 [2025-05-19 19:44:16.896] [INFO] Auth module initialized with test users
+2025/05/19 19:44:16 [2025-05-19 19:44:16.896] [INFO] Starting MonkeyChat server on :8080
+2025/05/19 19:44:16 [2025-05-19 19:44:16.896] [INFO] Server started on :8080
+2025/05/19 19:44:23 [2025-05-19 19:44:23.847] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:44:23 [2025-05-19 19:44:23.848] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:44:23 [2025-05-19 19:44:23.851] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:44:27 [2025-05-19 19:44:27.533] [DEBUG] Request from origin: http://localhost:5173, path: /logout, method: OPTIONS
+2025/05/19 19:44:27 [2025-05-19 19:44:27.534] [DEBUG] Request from origin: http://localhost:5173, path: /logout, method: POST
+2025/05/19 19:44:34 [2025-05-19 19:44:34.193] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: OPTIONS
+2025/05/19 19:44:34 [2025-05-19 19:44:34.194] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: POST
+2025/05/19 19:44:34 [2025-05-19 19:44:34.349] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:44:34 [2025-05-19 19:44:34.350] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:44:34 [2025-05-19 19:44:34.354] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:44:39 [2025-05-19 19:44:39.344] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: OPTIONS
+2025/05/19 19:44:39 [2025-05-19 19:44:39.346] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: POST
+2025/05/19 19:44:39 [2025-05-19 19:44:39.427] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:44:39 [2025-05-19 19:44:39.429] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:44:39 [2025-05-19 19:44:39.429] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:44:39 [2025-05-19 19:44:39.430] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:44:41 [2025-05-19 19:44:41.012] [DEBUG] Request from origin: http://localhost:5173, path: /logout, method: OPTIONS
+2025/05/19 19:44:41 [2025-05-19 19:44:41.014] [DEBUG] Request from origin: http://localhost:5173, path: /logout, method: POST
+2025/05/19 19:44:43 [2025-05-19 19:44:43.811] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: POST
+2025/05/19 19:44:45 [2025-05-19 19:44:45.652] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: OPTIONS
+2025/05/19 19:44:45 [2025-05-19 19:44:45.654] [DEBUG] Request from origin: http://localhost:5173, path: /login, method: POST
+2025/05/19 19:44:49 [2025-05-19 19:44:49.296] [DEBUG] Request from origin: http://localhost:5173, path: /register, method: OPTIONS
+2025/05/19 19:44:49 [2025-05-19 19:44:49.298] [DEBUG] Request from origin: http://localhost:5173, path: /register, method: POST
+2025/05/19 19:44:49 [2025-05-19 19:44:49.302] [INFO] User created in database: jam (ID: 3)
+2025/05/19 19:44:49 [2025-05-19 19:44:49.361] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:44:49 [2025-05-19 19:44:49.361] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:44:49 [2025-05-19 19:44:49.361] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:44:49 [2025-05-19 19:44:49.362] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:44:53 [2025-05-19 19:44:53.159] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:44:53 [2025-05-19 19:44:53.160] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:44:53 [2025-05-19 19:44:53.161] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:44:53 [2025-05-19 19:44:53.161] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:44:53 [2025-05-19 19:44:53.172] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:44:53 [2025-05-19 19:44:53.172] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:44:53 [2025-05-19 19:44:53.172] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:44:53 [2025-05-19 19:44:53.172] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:44:53 [2025-05-19 19:44:53.175] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away)
+2025/05/19 19:44:53 [2025-05-19 19:44:53.193] [INFO] Received join message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:44:53 [2025-05-19 19:44:53.193] [INFO] New room created: f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:44:53 [2025-05-19 19:44:53.196] [INFO] Room created in database: f745fad3-cede-46f9-be1f-4caa84a6302b (Created by: 3)
+2025/05/19 19:44:53 [2025-05-19 19:44:53.196] [INFO] New active room added: f745fad3-cede-46f9-be1f-4caa84a6302b created by jam (ID: 3)
+2025/05/19 19:44:53 [2025-05-19 19:44:53.196] [INFO] User 'jam' joined room f745fad3-cede-46f9-be1f-4caa84a6302b, connections: 1
+2025/05/19 19:44:53 [2025-05-19 19:44:53.196] [INFO] Current room status:
+2025/05/19 19:44:53 [2025-05-19 19:44:53.196] [INFO]   Room f745fad3-cede-46f9-be1f-4caa84a6302b: 1 connections - Users: [jam]
+2025/05/19 19:44:54 [2025-05-19 19:44:54.693] [INFO] Received offer message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:44:54 [2025-05-19 19:44:54.702] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:44:54 [2025-05-19 19:44:54.707] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:44:54 [2025-05-19 19:44:54.822] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:44:54 [2025-05-19 19:44:54.827] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:44:54 [2025-05-19 19:44:54.850] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:44:54 [2025-05-19 19:44:54.855] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:44:58 [2025-05-19 19:44:58.052] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:44:58 [2025-05-19 19:44:58.053] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:44:58 [2025-05-19 19:44:58.057] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:45:00 [2025-05-19 19:45:00.568] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:45:00 [2025-05-19 19:45:00.568] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:45:00 [2025-05-19 19:45:00.568] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:45:00 [2025-05-19 19:45:00.568] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:45:00 [2025-05-19 19:45:00.569] [WARN] Error reading message from 127.0.0.1: websocket: close 1001 (going away): WebSocket is closed before the connection is established.
+2025/05/19 19:45:00 [2025-05-19 19:45:00.573] [DEBUG] Request from origin: http://localhost:5173, path: /ws, method: GET
+2025/05/19 19:45:00 [2025-05-19 19:45:00.573] [INFO] WebSocket connection request from 127.0.0.1
+2025/05/19 19:45:00 [2025-05-19 19:45:00.573] [DEBUG] WebSocket connection from origin: http://localhost:5173
+2025/05/19 19:45:00 [2025-05-19 19:45:00.573] [INFO] WebSocket connection established from 127.0.0.1
+2025/05/19 19:45:00 [2025-05-19 19:45:00.581] [INFO] Received join message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:00 [2025-05-19 19:45:00.582] [INFO] User 'ashu' joined room f745fad3-cede-46f9-be1f-4caa84a6302b, connections: 2
+2025/05/19 19:45:00 [2025-05-19 19:45:00.583] [INFO] Current room status:
+2025/05/19 19:45:00 [2025-05-19 19:45:00.583] [INFO]   Room f745fad3-cede-46f9-be1f-4caa84a6302b: 2 connections - Users: [jam ashu]
+2025/05/19 19:45:02 [2025-05-19 19:45:02.216] [INFO] Received offer message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.216] [INFO] Relayed offer message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.222] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.223] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.225] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.225] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.225] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.225] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.225] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.226] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.231] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.231] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.233] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.233] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.236] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.236] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.238] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.238] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.250] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.250] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.251] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.252] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.254] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.256] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.258] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.259] [INFO] Relayed ice-candidate message from 'ashu' to 'jam' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.591] [INFO] Received answer message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.591] [INFO] Relayed answer message from 'jam' to 'ashu' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.642] [INFO] Received ice-candidate message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:02 [2025-05-19 19:45:02.643] [INFO] Relayed ice-candidate message from 'jam' to 'ashu' in room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:09 [2025-05-19 19:45:09.881] [INFO] Received leave message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:09 [2025-05-19 19:45:09.881] [INFO] Removed connection for user 'ashu' from room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:09 [2025-05-19 19:45:09.888] [WARN] Error reading message from 127.0.0.1: websocket: close 1005 (no status)
+2025/05/19 19:45:09 [2025-05-19 19:45:09.990] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:45:09 [2025-05-19 19:45:09.991] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:45:09 [2025-05-19 19:45:09.992] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:45:09 [2025-05-19 19:45:09.992] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:45:12 [2025-05-19 19:45:12.414] [INFO] Received leave message from 127.0.0.1 for room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:12 [2025-05-19 19:45:12.415] [INFO] Removed connection for user 'jam' from room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:12 [2025-05-19 19:45:12.433] [INFO] Room deleted from database: f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:12 [2025-05-19 19:45:12.433] [INFO] Room removed from active rooms: f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:12 [2025-05-19 19:45:12.433] [INFO] Removed empty room f745fad3-cede-46f9-be1f-4caa84a6302b
+2025/05/19 19:45:12 [2025-05-19 19:45:12.433] [WARN] Error reading message from 127.0.0.1: websocket: close 1005 (no status)
+2025/05/19 19:45:12 [2025-05-19 19:45:12.451] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:45:12 [2025-05-19 19:45:12.451] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/19 19:45:12 [2025-05-19 19:45:12.452] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:45:12 [2025-05-19 19:45:12.455] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:45:14 [2025-05-19 19:45:14.331] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/19 19:45:14 [2025-05-19 19:45:14.335] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET

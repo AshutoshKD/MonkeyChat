@@ -14,6 +14,7 @@ A simple 2-person live video chat application built with Go (backend) and Vite.j
 - Go (1.16+)
 - Node.js (14+)
 - npm (6+)
+- MySQL (5.7+ or 8.0+)
 
 ## Project Structure
 
@@ -22,6 +23,28 @@ MonkeyChat/
 ├── backend/        # Go backend with WebSocket signaling server
 ├── frontend/       # Vite.js/React frontend
 ```
+
+## Database Setup
+
+The application uses MySQL to store user accounts and room information.
+
+1. Install MySQL if you haven't already:
+   - macOS: `brew install mysql`
+   - Ubuntu: `sudo apt install mysql-server`
+   - Windows: Download and install from [MySQL website](https://dev.mysql.com/downloads/installer/)
+
+2. Create the database:
+   ```
+   cd backend
+   ./setup_db.sh --user=root --password=yourpassword
+   ```
+   
+   You can customize the database connection by providing different arguments:
+   ```
+   ./setup_db.sh --user=custom_user --password=custom_pass --host=custom_host --port=custom_port
+   ```
+   
+   If you use custom credentials, make sure to update them in `backend/database.go` as well.
 
 ## Running the Application
 

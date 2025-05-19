@@ -2,10 +2,9 @@ module monkeychat
 
 go 1.23.0
 
-toolchain go1.23.9
-
 require (
 	github.com/fasthttp/websocket v1.5.12
+	github.com/go-sql-driver/mysql v1.7.1
 	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/valyala/fasthttp v1.62.0
 )
