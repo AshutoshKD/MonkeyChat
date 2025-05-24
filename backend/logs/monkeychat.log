@@ -1,0 +1,20 @@
+2025/05/23 01:46:06 [2025-05-23 01:46:06.990] [INFO] === MonkeyChat Server Started ===
+2025/05/23 01:46:06 [2025-05-23 01:46:06.991] [INFO] Log file initialized: logs/monkeychat.log
+2025/05/23 01:46:06 [2025-05-23 01:46:06.991] [INFO] Initializing database...
+2025/05/23 01:46:06 [2025-05-23 01:46:06.996] [INFO] Connected to MySQL database
+2025/05/23 01:46:06 [2025-05-23 01:46:06.999] [INFO] Test user ashu already exists, skipping creation
+2025/05/23 01:46:07 [2025-05-23 01:46:07.000] [INFO] Test user rijey already exists, skipping creation
+2025/05/23 01:46:07 [2025-05-23 01:46:07.000] [INFO] Auth module initialized with test users
+2025/05/23 01:46:07 [2025-05-23 01:46:07.000] [INFO] Starting MonkeyChat server on :8080
+2025/05/23 01:46:07 [2025-05-23 01:46:07.000] [INFO] Server started on :8080
+2025/05/23 01:46:26 [2025-05-23 01:46:26.444] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/23 01:46:26 [2025-05-23 01:46:26.445] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/23 01:46:26 [2025-05-23 01:46:26.447] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/23 01:46:27 [2025-05-23 01:46:27.882] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/23 01:46:27 [2025-05-23 01:46:27.883] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/23 01:46:27 [2025-05-23 01:46:27.883] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/23 01:46:27 [2025-05-23 01:46:27.889] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/23 01:48:52 [2025-05-23 01:48:52.118] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/23 01:48:52 [2025-05-23 01:48:52.121] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: OPTIONS
+2025/05/23 01:48:52 [2025-05-23 01:48:52.125] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET
+2025/05/23 01:48:52 [2025-05-23 01:48:52.149] [DEBUG] Request from origin: http://localhost:5173, path: /rooms, method: GET

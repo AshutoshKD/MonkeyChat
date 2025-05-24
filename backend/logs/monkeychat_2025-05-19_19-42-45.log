@@ -1,3 +1,0 @@
-2025/05/19 19:42:45 [2025-05-19 19:42:45.892] [INFO] Initializing database...
-2025/05/19 19:42:45 [2025-05-19 19:42:45.903] [INFO] Connected to MySQL database
-2025/05/19 19:42:45 [2025-05-19 19:42:45.938] [ERROR] Failed to initialize database: error creating tables: error creating rooms table: Error 3780 (HY000): Referencing column 'created_by' and referenced column 'id' in foreign key constraint 'rooms_ibfk_1' are incompatible.

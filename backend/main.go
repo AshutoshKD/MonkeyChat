@@ -142,17 +142,20 @@ func setupLogging() {
 		}
 	}
 
-	// Create log file with timestamp
-	timestamp := time.Now().Format("2006-01-02_15-04-05")
+	// Use a single log file that gets rewritten on each start
 	var err error
-	logFile, err = os.OpenFile(fmt.Sprintf("logs/monkeychat_%s.log", timestamp),
-		os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	logFile, err = os.OpenFile("logs/monkeychat.log",
+		os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
 	if err != nil {
 		log.Fatalf("Failed to open log file: %v", err)
 	}
 
 	// Set log output to file only (console output is handled by logMessage function)
 	log.SetOutput(logFile)
+
+	// Write initial log entry
+	logMessage("INFO", "=== MonkeyChat Server Started ===")
+	logMessage("INFO", "Log file initialized: %s", logFile.Name())
 }
 
 func serveLogFile(ctx *fasthttp.RequestCtx) {
