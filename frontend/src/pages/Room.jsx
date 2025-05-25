@@ -493,7 +493,7 @@ const Room = () => {
       webSocketRef.current.close();
     }
     
-    navigate('/');
+    navigate('/home');
   };
   
   const copyRoomId = () => {
