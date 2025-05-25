@@ -1,42 +1,35 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom'
-import Home from './pages/Home'
-import Room from './pages/Room'
-import Login from './pages/Login'
-import './App.css'
-
-// Protected Route component
-const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
-  const username = localStorage.getItem('username');
-  
-  if (!token || !username) {
-    // Redirect to login if not authenticated
-    return <Navigate to="/login" replace />;
-  }
-  
-  return children;
-};
+import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import Room from './pages/Room';
+import LandingPage from './pages/LandingPage';
+import './App.css';
 
 // Header component with auth controls
-const Header = () => {
+const Header = ({ isAuthenticated, setIsAuthenticated }) => {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
   const navigate = useNavigate();
 
-  // Check for username in localStorage on mount and when localStorage changes
+  // Update username when authentication state changes
+  useEffect(() => {
+    if (isAuthenticated) {
+      const storedUsername = localStorage.getItem('username');
+      setUsername(storedUsername || '');
+    } else {
+      setUsername('');
+    }
+  }, [isAuthenticated]);
+
   useEffect(() => {
     const checkAuth = () => {
       const storedUsername = localStorage.getItem('username');
       setUsername(storedUsername || '');
     };
     
-    // Initial check
     checkAuth();
-    
-    // Set up event listener for storage changes
     window.addEventListener('storage', checkAuth);
-    
-    // Create a custom event listener for auth changes within the app
     window.addEventListener('authChange', checkAuth);
     
     return () => {
@@ -58,16 +51,13 @@ const Header = () => {
         }
       });
 
-      // Clear localStorage
       localStorage.removeItem('token');
       localStorage.removeItem('username');
       setUsername('');
+      setIsAuthenticated(false);
       
-      // Dispatch auth change event
       window.dispatchEvent(new Event('authChange'));
-      
-      // Redirect to login
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -77,14 +67,22 @@ const Header = () => {
     <header className="app-header">
       <h1>MonkeyChat</h1>
       <nav>
-        {username && <Link to="/">Home</Link>}
-        {username ? (
+        {isAuthenticated && (
+          <div className="nav-links">
+            <Link to="/home" className="nav-link">Home</Link>
+            <Link to="/about" className="nav-link">About</Link>
+          </div>
+        )}
+        {isAuthenticated ? (
           <div className="user-info">
             <span>Welcome, {username}</span>
             <button onClick={handleLogout} className="logout-btn">Logout</button>
           </div>
         ) : (
-          <Link to="/login">Login / Register</Link>
+          <div className="auth-buttons">
+            <Link to="/login" className="nav-btn">Login</Link>
+            <Link to="/register" className="nav-btn">Register</Link>
+          </div>
         )}
       </nav>
     </header>
@@ -92,42 +90,97 @@ const Header = () => {
 };
 
 function App() {
-  // Listen for authentication changes
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const handleAuthChange = () => {
-      console.log("Auth state changed");
-    };
-    
-    window.addEventListener('authChange', handleAuthChange);
-    window.addEventListener('storage', handleAuthChange);
-    
-    return () => {
-      window.removeEventListener('authChange', handleAuthChange);
-      window.removeEventListener('storage', handleAuthChange);
-    };
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+    setIsLoading(false);
   }, []);
-  
+
+  const ProtectedRoute = ({ children }) => {
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+
+    if (!isAuthenticated) {
+      return <Navigate to="/" />;
+    }
+
+    return children;
+  };
+
+  const PublicRoute = ({ children }) => {
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+
+    if (isAuthenticated) {
+      return <Navigate to="/home" />;
+    }
+
+    return children;
+  };
+
   return (
     <Router>
       <div className="app">
-        <Header />
+        <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
         <main className="app-content">
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            } />
-            <Route path="/room/:roomId" element={
-              <ProtectedRoute>
-                <Room />
-              </ProtectedRoute>
-            } />
-            {/* Redirect all other paths to login if not logged in, or home if logged in */}
-            <Route path="*" element={
-              localStorage.getItem('token') ? <Navigate to="/" /> : <Navigate to="/login" />
-            } />
+            {/* Public routes */}
+            <Route path="/" element={<LandingPage />} />
+            <Route 
+              path="/login" 
+              element={
+                <PublicRoute>
+                  <Login setIsAuthenticated={setIsAuthenticated} />
+                </PublicRoute>
+              } 
+            />
+            <Route 
+              path="/register" 
+              element={
+                <PublicRoute>
+                  <Register setIsAuthenticated={setIsAuthenticated} />
+                </PublicRoute>
+              } 
+            />
+
+            {/* Protected routes */}
+            <Route 
+              path="/home" 
+              element={
+                <ProtectedRoute>
+                  <Home setIsAuthenticated={setIsAuthenticated} />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/about" 
+              element={
+                <ProtectedRoute>
+                  <LandingPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/room/:roomId" 
+              element={
+                <ProtectedRoute>
+                  <Room setIsAuthenticated={setIsAuthenticated} />
+                </ProtectedRoute>
+              } 
+            />
+
+            {/* Catch all route - redirect to home if authenticated, landing page if not */}
+            <Route 
+              path="*" 
+              element={
+                isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/" />
+              } 
+            />
           </Routes>
         </main>
       </div>
@@ -135,4 +188,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

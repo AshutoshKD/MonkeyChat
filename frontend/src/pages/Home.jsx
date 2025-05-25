@@ -14,8 +14,18 @@ const Home = () => {
   const currentUsername = localStorage.getItem('username');
 
   useEffect(() => {
-    // Since we're using ProtectedRoute, we know the user is authenticated
     fetchAvailableRooms();
+    // Listen for room update events from WebSocket
+    const handleRoomUpdate = (event) => {
+      const { type } = event.detail;
+      if (type === 'room-added' || type === 'room-removed') {
+        fetchAvailableRooms();
+      }
+    };
+    window.addEventListener('roomUpdate', handleRoomUpdate);
+    return () => {
+      window.removeEventListener('roomUpdate', handleRoomUpdate);
+    };
   }, []);
 
   const fetchAvailableRooms = async () => {
@@ -93,14 +103,13 @@ const Home = () => {
     }
   };
 
-  // Check if user is the creator of a room
-  const isRoomCreator = (room) => {
-    return room.createdBy === currentUsername;
-  };
+  // Split rooms into 'yourRooms' and 'otherRooms'
+  const yourRooms = availableRooms.filter(room => room.createdBy === currentUsername);
+  const otherRooms = availableRooms.filter(room => room.createdBy !== currentUsername);
 
   return (
-    <div className="home">
-      <div className="container">
+    <div className="home dashboard-layout">
+      <div className="container left-panel">
         <h2>Welcome to MonkeyChat</h2>
         <p>Create a new room or join an existing one</p>
         
@@ -128,21 +137,23 @@ const Home = () => {
           />
           <button type="submit">Join Room</button>
         </form>
-
-        {availableRooms.length > 0 && (
-          <div className="available-rooms">
-            <h3 className="rooms-title">Available Rooms</h3>
-            <div className="refresh-container">
+      </div>
+      <div className="dashboard-right">
+        <div className="dashboard-cards">
+          <div className="dashboard-card available-rooms-card">
+            <div className="dashboard-card-header">
+              <h3 className="rooms-title">Available Rooms</h3>
               <button 
                 onClick={fetchAvailableRooms} 
                 className="refresh-btn"
                 title="Refresh room list"
-              >
-                ↻
-              </button>
+              >↻</button>
             </div>
-            <ul className="rooms-list">
-              {availableRooms.map(room => (
+            <ul className="rooms-list scrollable-list">
+              {otherRooms.length === 0 && (
+                <li className="no-rooms">No other rooms available yet.</li>
+              )}
+              {otherRooms.map(room => (
                 <li key={room.id} className="room-item">
                   <div className="room-info">
                     <span className="room-id">{room.id}</span>
@@ -155,23 +166,46 @@ const Home = () => {
                     >
                       Join
                     </button>
-                    
-                    {isRoomCreator(room) && (
-                      <button 
-                        onClick={() => deleteRoom(room.id)}
-                        className="delete-room-btn"
-                        disabled={isDeleting}
-                        title="Delete this room"
-                      >
-                        🗑️
-                      </button>
-                    )}
                   </div>
                 </li>
               ))}
             </ul>
           </div>
-        )}
+          <div className="dashboard-card your-rooms-card">
+            <div className="dashboard-card-header">
+              <h3 className="rooms-title">Your Rooms</h3>
+            </div>
+            <ul className="rooms-list scrollable-list">
+              {yourRooms.length === 0 && (
+                <li className="no-rooms">You haven't created any rooms yet.</li>
+              )}
+              {yourRooms.map(room => (
+                <li key={room.id} className="room-item">
+                  <div className="room-info">
+                    <span className="room-id">{room.id}</span>
+                    <span className="room-creator">Created by: {room.createdBy}</span>
+                  </div>
+                  <div className="room-actions">
+                    <button 
+                      onClick={() => joinExistingRoom(room.id)}
+                      className="join-room-btn"
+                    >
+                      Join
+                    </button>
+                    <button 
+                      onClick={() => deleteRoom(room.id)}
+                      className="delete-room-btn"
+                      disabled={isDeleting}
+                      title="Delete this room"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
