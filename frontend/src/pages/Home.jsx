@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { BASE_URL } from '../config';
+import { apiRequest } from '../utils/api';
 
 const Home = () => {
   const [roomId, setRoomId] = useState('');
@@ -32,25 +32,11 @@ const Home = () => {
   const fetchAvailableRooms = async () => {
     try {
       setErrorMessage('');
-      const token = localStorage.getItem('token');
-      if (!token) return;
-
-      const response = await fetch(`${BASE_URL}/rooms`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      if (response.ok) {
-        const rooms = await response.json();
-        setAvailableRooms(rooms);
-      } else {
-        const errorData = await response.json();
-        setErrorMessage(errorData.error || 'Failed to fetch rooms');
-      }
+      const rooms = await apiRequest('/rooms');
+      setAvailableRooms(rooms);
     } catch (error) {
       console.error('Error fetching rooms:', error);
-      setErrorMessage('Network error while fetching rooms');
+      setErrorMessage(error.message || 'Network error while fetching rooms');
     }
   };
 
@@ -76,29 +62,16 @@ const Home = () => {
       setErrorMessage('');
       setSuccessMessage('');
       
-      const token = localStorage.getItem('token');
-      if (!token) return;
-      
-      const response = await fetch(`${BASE_URL}/rooms/delete`, {
+      await apiRequest('/rooms/delete', {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify({ roomId })
       });
       
-      if (response.ok) {
-        // Room deleted successfully, refresh room list
-        setSuccessMessage('Room deleted successfully');
-        fetchAvailableRooms();
-      } else {
-        const errorData = await response.json();
-        setErrorMessage(errorData.error || 'Failed to delete room');
-      }
+      // Room deleted successfully, refresh room list
+      setSuccessMessage('Room deleted successfully');
+      fetchAvailableRooms();
     } catch (error) {
-      console.error('Error deleting room:', error);
-      setErrorMessage('Network error while deleting room');
+      setErrorMessage(error.message || 'Failed to delete room');
     } finally {
       setIsDeleting(false);
     }

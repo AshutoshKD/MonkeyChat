@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { BASE_URL } from '../config';
+import { apiRequest } from '../utils/api';
 
 const Register = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState('');
@@ -33,26 +33,17 @@ const Register = ({ setIsAuthenticated }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${BASE_URL}/register`, {
+      const data = await apiRequest('/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password })
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('username', username);
-        setIsAuthenticated(true);
-        navigate('/home');
-      } else {
-        setError(data.error || 'Registration failed');
-      }
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('username', username);
+      setIsAuthenticated(true);
+      navigate('/home');
     } catch (err) {
-      setError('Network error. Please try again.');
+      setError(err.message || 'Registration failed');
     } finally {
       setIsLoading(false);
     }

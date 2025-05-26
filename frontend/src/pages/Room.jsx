@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { BASE_URL } from '../config';
+import { getWebSocketUrl } from '../utils/api';
 
 const Room = () => {
   const { roomId } = useParams();
@@ -74,11 +74,7 @@ const Room = () => {
 
   useEffect(() => {
     // Connect to WebSocket server
-    const token = localStorage.getItem('token');
-    const wsUrl = token 
-      ? `${BASE_URL.replace('http://', 'ws://').replace('https://', 'wss://')}/ws?token=${token}` 
-      : `${BASE_URL.replace('http://', 'ws://').replace('https://', 'wss://')}/ws`;
-      
+    const wsUrl = getWebSocketUrl();
     logEvent('INFO', 'Connecting to WebSocket server', { wsUrl });
     
     try {
