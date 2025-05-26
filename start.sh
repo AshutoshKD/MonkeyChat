@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Start the backend server in the background
-cd dist
 ./main &
 BACKEND_PID=$!
 
 # Start a simple HTTP server for the frontend
+cd dist
 python3 -m http.server 3000 &
 FRONTEND_PID=$!
 
