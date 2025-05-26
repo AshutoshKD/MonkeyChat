@@ -45,8 +45,8 @@ type DbRoom struct {
 
 // InitDatabase initializes the database connection and creates tables if they don't exist
 func InitDatabase() error {
-	// Use TiDB Cloud connection format with TLS
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&tls=true",
+	// Use TiDB Cloud connection format with TLS and skip verification
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&tls=skip-verify",
 		dbUsername, dbPassword, dbHost, dbPort, dbName)
 
 	var err error
