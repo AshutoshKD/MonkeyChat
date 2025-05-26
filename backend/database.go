@@ -13,11 +13,11 @@ var db *sql.DB
 
 // Database configuration - get from environment or use defaults
 var (
-	dbUsername = getEnv("DB_USERNAME", "root")
-	dbPassword = getEnv("DB_PASSWORD", "admin123") // Empty default password
-	dbHost     = getEnv("DB_HOST", "localhost")
-	dbPort     = getEnv("DB_PORT", "3306")
-	dbName     = getEnv("DB_NAME", "monkeychat")
+	dbUsername = getEnv("DB_USERNAME", "d9iqoueBRZHuCAV.root")
+	dbPassword = getEnv("DB_PASSWORD", "CY6mkPlqOrWMbJUM")
+	dbHost     = getEnv("DB_HOST", "gateway01.ap-southeast-1.prod.aws.tidbcloud.com")
+	dbPort     = getEnv("DB_PORT", "4000")
+	dbName     = getEnv("DB_NAME", "test")
 )
 
 // Helper function to get environment variables with fallback
@@ -45,7 +45,8 @@ type DbRoom struct {
 
 // InitDatabase initializes the database connection and creates tables if they don't exist
 func InitDatabase() error {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
+	// Use TiDB Cloud connection format with TLS
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&tls=true",
 		dbUsername, dbPassword, dbHost, dbPort, dbName)
 
 	var err error
@@ -54,12 +55,17 @@ func InitDatabase() error {
 		return fmt.Errorf("error opening database connection: %v", err)
 	}
 
+	// Set connection pool settings for TiDB Cloud
+	db.SetMaxOpenConns(10)
+	db.SetMaxIdleConns(5)
+	db.SetConnMaxLifetime(time.Hour)
+
 	// Test the connection
 	if err = db.Ping(); err != nil {
 		return fmt.Errorf("error connecting to the database: %v", err)
 	}
 
-	logMessage("INFO", "Connected to MySQL database")
+	logMessage("INFO", "Connected to TiDB Cloud database")
 
 	// Create tables if they don't exist
 	if err = createTables(); err != nil {
