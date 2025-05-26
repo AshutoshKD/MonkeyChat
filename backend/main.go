@@ -55,6 +55,16 @@ func main() {
 	setupLogging()
 	defer logFile.Close()
 
+	// Log environment variables
+	logMessage("INFO", "=== Environment Variables ===")
+	logMessage("INFO", "BASE_URL: %s", os.Getenv("BASE_URL"))
+	logMessage("INFO", "DB_HOST: %s", os.Getenv("DB_HOST"))
+	logMessage("INFO", "DB_NAME: %s", os.Getenv("DB_NAME"))
+	logMessage("INFO", "DB_PORT: %s", os.Getenv("DB_PORT"))
+	logMessage("INFO", "PORT: %s", os.Getenv("PORT"))
+	logMessage("INFO", "CORS_ORIGIN: %s", os.Getenv("CORS_ORIGIN"))
+	logMessage("INFO", "=== End Environment Variables ===")
+
 	// Initialize database
 	logMessage("INFO", "Initializing database...")
 	if err := InitDatabase(); err != nil {

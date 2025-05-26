@@ -38,10 +38,10 @@ const Register = ({ setIsAuthenticated }) => {
         body: JSON.stringify({ username, password })
       });
 
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('username', username);
-      setIsAuthenticated(true);
-      navigate('/home');
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('username', username);
+        setIsAuthenticated(true);
+        navigate('/home');
     } catch (err) {
       setError(err.message || 'Registration failed');
     } finally {

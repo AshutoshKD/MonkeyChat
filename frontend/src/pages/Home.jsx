@@ -33,7 +33,7 @@ const Home = () => {
     try {
       setErrorMessage('');
       const rooms = await apiRequest('/rooms');
-      setAvailableRooms(rooms);
+        setAvailableRooms(rooms);
     } catch (error) {
       console.error('Error fetching rooms:', error);
       setErrorMessage(error.message || 'Network error while fetching rooms');
@@ -67,9 +67,9 @@ const Home = () => {
         body: JSON.stringify({ roomId })
       });
       
-      // Room deleted successfully, refresh room list
-      setSuccessMessage('Room deleted successfully');
-      fetchAvailableRooms();
+        // Room deleted successfully, refresh room list
+        setSuccessMessage('Room deleted successfully');
+        fetchAvailableRooms();
     } catch (error) {
       setErrorMessage(error.message || 'Failed to delete room');
     } finally {

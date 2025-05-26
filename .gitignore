@@ -42,7 +42,7 @@ yarn-error.log*
 .npm
 
 # Optional eslint cache
-.eslintcache
+.eslintcache 
 
 # Build artifacts
 dist/
