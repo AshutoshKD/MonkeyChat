@@ -9,19 +9,20 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: process.env.VITE_BASE_URL || 'https://monkeychat-ela7.onrender.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       },
       '/ws': {
-        target: 'ws://localhost:8080',
+        target: (process.env.VITE_BASE_URL || 'https://monkeychat-ela7.onrender.com').replace('http', 'ws').replace('https', 'wss'),
         ws: true
       }
     }
   },
   preview: {
     port: 3000,
-    host: true
+    host: true,
+    strictPort: true
   },
   build: {
     outDir: 'dist',

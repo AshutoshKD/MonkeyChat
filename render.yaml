@@ -19,15 +19,19 @@ services:
         sync: false
       - key: CORS_ORIGIN
         value: https://monkeychat-ela7.onrender.com
+      - key: PORT
+        value: 8080
 
   - type: web
     name: monkeychat-frontend
     env: node
     buildCommand: cd frontend && npm install && npm run build
-    startCommand: cd frontend && npm run preview
+    startCommand: cd frontend && npm run preview -- --host 0.0.0.0 --port 3000
     envVars:
       - key: VITE_BASE_URL
         value: https://monkeychat-ela7.onrender.com
+      - key: PORT
+        value: 3000
     routes:
       - type: rewrite
         source: /*
