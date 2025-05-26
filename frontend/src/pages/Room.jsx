@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { BASE_URL } from '../config';
 
 const Room = () => {
   const { roomId } = useParams();
@@ -75,8 +76,8 @@ const Room = () => {
     // Connect to WebSocket server
     const token = localStorage.getItem('token');
     const wsUrl = token 
-      ? `ws://localhost:8080/ws?token=${token}` 
-      : 'ws://localhost:8080/ws';
+      ? `${BASE_URL.replace('http://', 'ws://').replace('https://', 'wss://')}/ws?token=${token}` 
+      : `${BASE_URL.replace('http://', 'ws://').replace('https://', 'wss://')}/ws`;
       
     logEvent('INFO', 'Connecting to WebSocket server', { wsUrl });
     

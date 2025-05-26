@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { BASE_URL } from '../config';
 
 const Home = () => {
   const [roomId, setRoomId] = useState('');
@@ -34,7 +35,7 @@ const Home = () => {
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const response = await fetch('http://localhost:8080/rooms', {
+      const response = await fetch(`${BASE_URL}/rooms`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -78,7 +79,7 @@ const Home = () => {
       const token = localStorage.getItem('token');
       if (!token) return;
       
-      const response = await fetch('http://localhost:8080/rooms/delete', {
+      const response = await fetch(`${BASE_URL}/rooms/delete`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

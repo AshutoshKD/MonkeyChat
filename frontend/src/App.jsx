@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Room from './pages/Room';
 import LandingPage from './pages/LandingPage';
+import { BASE_URL } from './config';
 import './App.css';
 
 // Header component with auth controls
@@ -43,7 +44,7 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      await fetch('http://localhost:8080/logout', {
+      await fetch(`${BASE_URL}/logout`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

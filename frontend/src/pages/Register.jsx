@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { BASE_URL } from '../config';
 
 const Register = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState('');
@@ -32,7 +33,7 @@ const Register = ({ setIsAuthenticated }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8080/register', {
+      const response = await fetch(`${BASE_URL}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
