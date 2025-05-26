@@ -16,9 +16,9 @@ services:
       - key: TIDB_DATABASE
         sync: false
       - key: JWT_SECRET
-        sync: false
+        value: "monkeychat_secret_key"
       - key: CORS_ORIGIN
-        value: https://monkeychat-ela7.onrender.com
+        value: "*"
       - key: PORT
         value: 8080
       - key: BASE_URL
