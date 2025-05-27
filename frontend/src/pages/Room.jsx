@@ -18,11 +18,14 @@ const Room = () => {
   const [isVideoOff, setIsVideoOff] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [peerName, setPeerName] = useState('');
+  const [reconnectAttempts, setReconnectAttempts] = useState(0);
+  const maxReconnectAttempts = 3;
   
   const localVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
   const peerConnectionRef = useRef(null);
   const webSocketRef = useRef(null);
+  const reconnectTimeoutRef = useRef(null);
   
   // Configuration for STUN/TURN servers
   const iceServers = {
@@ -43,8 +46,7 @@ const Room = () => {
     }
   }, [navigate]);
 
-  useEffect(() => {
-    // Connect to WebSocket server
+  const connectWebSocket = () => {
     const wsUrl = getWebSocketUrl();
     
     try {
@@ -53,6 +55,7 @@ const Room = () => {
       webSocketRef.current.onopen = () => {
         // Clear any connection error when WebSocket connects
         setErrorMessage('');
+        setReconnectAttempts(0); // Reset reconnect attempts on successful connection
         
         // Join the room with userName
         sendMessage({
@@ -118,7 +121,7 @@ const Room = () => {
       webSocketRef.current.onclose = () => {
         setConnectionStatus('Server disconnected');
         if (isConnected) {
-          setErrorMessage('Connection to server lost. Please refresh the page to reconnect.');
+          setErrorMessage('Connection to server lost. Attempting to reconnect...');
           
           // Clean up the peer connection
           if (remoteStream) {
@@ -129,6 +132,17 @@ const Room = () => {
           if (peerConnectionRef.current) {
             peerConnectionRef.current.close();
             peerConnectionRef.current = null;
+          }
+
+          // Attempt to reconnect if we haven't exceeded max attempts
+          if (reconnectAttempts < maxReconnectAttempts) {
+            const timeout = Math.min(1000 * Math.pow(2, reconnectAttempts), 10000); // Exponential backoff with max 10s
+            reconnectTimeoutRef.current = setTimeout(() => {
+              setReconnectAttempts(prev => prev + 1);
+              connectWebSocket();
+            }, timeout);
+          } else {
+            setErrorMessage('Failed to reconnect after multiple attempts. Please refresh the page.');
           }
         }
       };
@@ -141,17 +155,22 @@ const Room = () => {
       setConnectionStatus('Connection error');
       setErrorMessage('Failed to create WebSocket connection: ' + error.message);
     }
+  };
+
+  useEffect(() => {
+    connectWebSocket();
     
     // Cleanup function
     return () => {
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+      }
       if (localStream) {
         localStream.getTracks().forEach(track => track.stop());
       }
-      
       if (peerConnectionRef.current) {
         peerConnectionRef.current.close();
       }
-      
       if (webSocketRef.current) {
         webSocketRef.current.close();
       }
