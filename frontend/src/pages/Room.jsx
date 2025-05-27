@@ -43,45 +43,14 @@ const Room = () => {
     }
   }, [navigate]);
 
-  // Logger function to help with debugging
-  const logEvent = (type, message, data) => {
-    const timestamp = new Date().toISOString();
-    const logEntry = {
-      timestamp,
-      type,
-      message,
-      data,
-      roomId,
-      userName
-    };
-    console.log(`[${timestamp}] [${type}] ${message}`, data || '');
-    
-    // Store logs - avoid using localStorage and save to file later
-    const logFileName = `monkeychat_${roomId}.logs`;
-    try {
-      // Create log content as string
-      const logContent = JSON.stringify(logEntry) + '\n';
-      
-      // In a browser environment, we can't write directly to a file system
-      // So we'll just add to an array in localStorage that can be downloaded later
-      const logs = JSON.parse(localStorage.getItem('monkeyChatLogsData') || '[]');
-      logs.push(logEntry);
-      localStorage.setItem('monkeyChatLogsData', JSON.stringify(logs));
-    } catch (error) {
-      console.error('Error logging:', error);
-    }
-  };
-
   useEffect(() => {
     // Connect to WebSocket server
     const wsUrl = getWebSocketUrl();
-    logEvent('INFO', 'Connecting to WebSocket server', { wsUrl });
     
     try {
       webSocketRef.current = new WebSocket(wsUrl);
       
       webSocketRef.current.onopen = () => {
-        logEvent('INFO', 'WebSocket connected successfully');
         // Clear any connection error when WebSocket connects
         setErrorMessage('');
         
@@ -98,7 +67,6 @@ const Room = () => {
       
       webSocketRef.current.onmessage = (event) => {
         const message = JSON.parse(event.data);
-        logEvent('INFO', 'Received WebSocket message', { event: message.event, payload: message.payload });
         
         switch (message.event) {
           case 'joined':
@@ -115,30 +83,21 @@ const Room = () => {
                 if (data.userName) {
                   // Ensure we don't set our own name as the peer name
                   if (data.userName !== userName) {
-                    logEvent('INFO', 'Setting peer name from user-joined event', { 
-                      peerName: data.userName,
-                      currentPeerName: peerName,
-                      myUserName: userName
-                    });
-                    
                     setPeerName(data.userName);
                     
                     // If we already have a remote stream, update the connection status
                     if (remoteStream) {
                       setConnectionStatus(`Connected to ${data.userName}`);
                     }
-                  } else {
-                    logEvent('INFO', 'Ignored own username from user-joined event');
                   }
                 }
               } catch (err) {
-                logEvent('ERROR', 'Error parsing user-joined payload', { error: err.message, payload: message.payload });
+                setErrorMessage('Error processing user join message');
               }
             }
             break;
             
           case 'user-left':
-            logEvent('INFO', 'Peer left the room');
             handlePeerDisconnect();
             break;
             
@@ -157,7 +116,6 @@ const Room = () => {
       };
       
       webSocketRef.current.onclose = () => {
-        logEvent('WARN', 'WebSocket disconnected');
         setConnectionStatus('Server disconnected');
         if (isConnected) {
           setErrorMessage('Connection to server lost. Please refresh the page to reconnect.');
@@ -176,12 +134,10 @@ const Room = () => {
       };
       
       webSocketRef.current.onerror = (error) => {
-        logEvent('ERROR', 'WebSocket error', error);
         setConnectionStatus('Connection error');
         setErrorMessage('Failed to connect to signaling server. Please check if the backend is running.');
       };
     } catch (error) {
-      logEvent('ERROR', 'Failed to create WebSocket connection', error);
       setConnectionStatus('Connection error');
       setErrorMessage('Failed to create WebSocket connection: ' + error.message);
     }
@@ -189,17 +145,14 @@ const Room = () => {
     // Cleanup function
     return () => {
       if (localStream) {
-        logEvent('INFO', 'Stopping local media tracks');
         localStream.getTracks().forEach(track => track.stop());
       }
       
       if (peerConnectionRef.current) {
-        logEvent('INFO', 'Closing peer connection');
         peerConnectionRef.current.close();
       }
       
       if (webSocketRef.current) {
-        logEvent('INFO', 'Closing WebSocket connection');
         webSocketRef.current.close();
       }
     };
@@ -208,12 +161,10 @@ const Room = () => {
   // Effect to update video elements when streams change
   useEffect(() => {
     if (localVideoRef.current && localStream) {
-      logEvent('INFO', 'Setting local video stream');
       localVideoRef.current.srcObject = localStream;
     }
     
     if (remoteVideoRef.current && remoteStream) {
-      logEvent('INFO', 'Setting remote video stream');
       remoteVideoRef.current.srcObject = remoteStream;
       // We have a remote stream, so we're fully connected to a peer
       setConnectionStatus(peerName ? `Connected to ${peerName}` : 'Connected to peer');
@@ -222,12 +173,10 @@ const Room = () => {
   }, [localStream, remoteStream, peerName]);
 
   const initLocalVideo = async () => {
-    logEvent('INFO', 'Initializing local video');
     try {
       // Check if getUserMedia is supported
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         const errorMsg = 'getUserMedia is not supported in this browser';
-        logEvent('ERROR', errorMsg);
         setErrorMessage(errorMsg);
         setConnectionStatus('Failed to access camera');
         return;
@@ -239,21 +188,14 @@ const Room = () => {
         audio: true,
       });
       
-      logEvent('INFO', 'Camera and microphone access granted', { 
-        videoTracks: stream.getVideoTracks().length,
-        audioTracks: stream.getAudioTracks().length
-      });
-      
       // Verify that we actually got video tracks
       if (stream.getVideoTracks().length === 0) {
-        logEvent('WARN', 'No video tracks found in media stream');
+        setErrorMessage('No video tracks found in media stream');
       }
 
       // Ensure all tracks start in the enabled state
       stream.getTracks().forEach(track => {
         track.enabled = true;
-        logEvent('INFO', `Initial track enabled state: ${track.enabled}`, 
-          { kind: track.kind, id: track.id });
       });
       
       // Reset UI state
@@ -267,12 +209,10 @@ const Room = () => {
       
       // Add local stream to peer connection
       stream.getTracks().forEach(track => {
-        logEvent('INFO', 'Adding track to peer connection', { kind: track.kind });
         peerConnectionRef.current.addTrack(track, stream);
       });
       
     } catch (error) {
-      logEvent('ERROR', 'Error accessing media devices', { error: error.message, name: error.name });
       setConnectionStatus('Failed to access camera/microphone');
       
       // Provide more specific error messages based on error type
@@ -287,7 +227,6 @@ const Room = () => {
   };
   
   const createPeerConnection = () => {
-    logEvent('INFO', 'Creating RTCPeerConnection');
     try {
       // Create RTCPeerConnection
       peerConnectionRef.current = new RTCPeerConnection(iceServers);
@@ -295,8 +234,6 @@ const Room = () => {
       // Set up event handlers
       peerConnectionRef.current.onicecandidate = (event) => {
         if (event.candidate) {
-          logEvent('INFO', 'Generated ICE candidate', { candidate: event.candidate.candidate });
-          
           // Include username with ICE candidate
           const candidateWithName = {
             candidate: event.candidate,
@@ -312,7 +249,6 @@ const Room = () => {
       };
       
       peerConnectionRef.current.ontrack = (event) => {
-        logEvent('INFO', 'Received remote track', { kind: event.track.kind });
         // Make sure we use the same stream if multiple tracks are received
         setRemoteStream(event.streams[0]);
         
@@ -323,12 +259,10 @@ const Room = () => {
         // rather than "Waiting for peer..." since we're clearly connected
         if (!peerName) {
           setPeerName('Peer');
-          logEvent('INFO', 'Setting generic peer name since actual name not received yet');
         }
       };
       
       peerConnectionRef.current.onnegotiationneeded = async () => {
-        logEvent('INFO', 'Negotiation needed, creating offer');
         try {
           // Create and send offer
           const offer = await peerConnectionRef.current.createOffer({
@@ -343,20 +277,18 @@ const Room = () => {
             userName: userName
           };
           
-          logEvent('INFO', 'Sending offer', { type: offer.type });
           sendMessage({
             event: 'offer',
             roomId: roomId,
             payload: JSON.stringify(offerWithName),
           });
         } catch (error) {
-          logEvent('ERROR', 'Error creating offer', { error: error.message });
+          setErrorMessage('Error creating offer: ' + error.message);
         }
       };
       
       peerConnectionRef.current.oniceconnectionstatechange = () => {
         const state = peerConnectionRef.current.iceConnectionState;
-        logEvent('INFO', 'ICE connection state changed', { state });
         
         if (state === 'disconnected' || state === 'failed' || state === 'closed') {
           handlePeerDisconnect();
@@ -367,24 +299,17 @@ const Room = () => {
         }
       };
     } catch (error) {
-      logEvent('ERROR', 'Error creating peer connection', { error: error.message });
       setErrorMessage(`Failed to create peer connection: ${error.message}`);
     }
   };
   
   const handleOffer = async (offerData) => {
-    logEvent('INFO', 'Received offer, creating answer', { offerData });
     try {
       // Extract the SDP and userName
       const { sdp, userName: peerUserName } = offerData;
       
       // Update peer name if it was included in the offer
       if (peerUserName && peerUserName !== userName) {
-        logEvent('INFO', 'Setting peer name from offer', { 
-          peerName: peerUserName,
-          currentPeerName: peerName,
-          myUserName: userName
-        });
         setPeerName(peerUserName);
       }
       
@@ -401,52 +326,39 @@ const Room = () => {
         userName: userName
       };
       
-      logEvent('INFO', 'Sending answer', { type: answer.type, myUserName: userName });
       sendMessage({
         event: 'answer',
         roomId: roomId,
         payload: JSON.stringify(answerWithName),
       });
     } catch (error) {
-      logEvent('ERROR', 'Error handling offer', { error: error.message });
+      setErrorMessage('Error handling offer: ' + error.message);
     }
   };
   
   const handleAnswer = async (answerData) => {
-    logEvent('INFO', 'Received answer', { answerData });
     try {
       // Extract the SDP and userName
       const { sdp, userName: peerUserName } = answerData;
       
       // Update peer name if it was included in the answer
       if (peerUserName && peerUserName !== userName) {
-        logEvent('INFO', 'Setting peer name from answer', { 
-          peerName: peerUserName,
-          currentPeerName: peerName,
-          myUserName: userName
-        });
         setPeerName(peerUserName);
       }
       
       await peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
     } catch (error) {
-      logEvent('ERROR', 'Error handling answer', { error: error.message });
+      setErrorMessage('Error handling answer: ' + error.message);
     }
   };
   
   const handleIceCandidate = async (candidateData) => {
-    logEvent('INFO', 'Received ICE candidate', { candidateData });
     try {
       // Extract the candidate and userName
       const { candidate, userName: peerUserName } = candidateData;
       
       // Update peer name if it was included in the candidate and we don't have one yet
       if (peerUserName && peerUserName !== userName && (!peerName || peerName === 'Peer')) {
-        logEvent('INFO', 'Setting peer name from ICE candidate', { 
-          peerName: peerUserName,
-          currentPeerName: peerName,
-          myUserName: userName
-        });
         setPeerName(peerUserName);
       }
       
@@ -454,22 +366,17 @@ const Room = () => {
         await peerConnectionRef.current.addIceCandidate(new RTCIceCandidate(candidate));
       }
     } catch (error) {
-      logEvent('ERROR', 'Error adding ice candidate', { error: error.message });
+      setErrorMessage('Error adding ice candidate: ' + error.message);
     }
   };
   
   const sendMessage = (message) => {
     if (webSocketRef.current && webSocketRef.current.readyState === WebSocket.OPEN) {
-      logEvent('INFO', 'Sending WebSocket message', { event: message.event });
       webSocketRef.current.send(JSON.stringify(message));
-    } else {
-      logEvent('ERROR', 'Cannot send message, WebSocket not open');
     }
   };
   
   const leaveRoom = () => {
-    logEvent('INFO', 'Leaving room');
-    
     // Notify server that user is leaving
     sendMessage({
       event: 'leave',
@@ -495,7 +402,6 @@ const Room = () => {
   
   const copyRoomId = () => {
     navigator.clipboard.writeText(roomId);
-    logEvent('INFO', 'Room ID copied to clipboard');
     alert('Room ID copied to clipboard!');
   };
 
@@ -513,12 +419,10 @@ const Room = () => {
         // Apply to all audio tracks
         audioTracks.forEach(track => {
           track.enabled = newEnabledState;
-          logEvent('INFO', `Setting audio track enabled to: ${newEnabledState}`, { trackId: track.id });
         });
         
         // Update UI state
         setIsAudioMuted(!newEnabledState);
-        logEvent('INFO', newEnabledState ? 'Audio unmuted' : 'Audio muted');
       }
     }
   };
@@ -536,19 +440,16 @@ const Room = () => {
         // Apply to all video tracks
         videoTracks.forEach(track => {
           track.enabled = newEnabledState;
-          logEvent('INFO', `Setting video track enabled to: ${newEnabledState}`, { trackId: track.id });
         });
         
         // Update UI state
         setIsVideoOff(!newEnabledState);
-        logEvent('INFO', newEnabledState ? 'Video turned on' : 'Video turned off');
       }
     }
   };
 
   // Add a new function to send a name refresh request
   const requestPeerNameRefresh = () => {
-    logEvent('INFO', 'Manually requesting peer name refresh');
     // Resend our name to trigger a reciprocal response
     sendMessage({
       event: 'join',
@@ -559,8 +460,6 @@ const Room = () => {
 
   // Add this function to handle peer disconnection properly
   const handlePeerDisconnect = () => {
-    logEvent('INFO', 'Peer disconnected, cleaning up resources');
-    
     // Stop displaying the remote stream
     if (remoteStream) {
       // Stop all tracks
@@ -582,51 +481,51 @@ const Room = () => {
   return (
     <div className="room">
       <div className="room-header">
-        <h2>Room: {roomId}</h2>
+        <div>
+          <h2>Room: {roomId}</h2>
+          <div className="connection-status">{connectionStatus}</div>
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
+        </div>
         <div className="room-actions">
           <button onClick={copyRoomId}>Copy Room ID</button>
           <button onClick={leaveRoom}>Leave Room</button>
-          {remoteStream && !peerName && (
-            <button onClick={requestPeerNameRefresh} className="refresh-btn">
-              Refresh Peer Name
-            </button>
-          )}
         </div>
-        <div className="connection-status">Status: {connectionStatus}</div>
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
       </div>
       
       <div className="video-container">
-        <div className="video-wrapper local-video">
-          <video ref={localVideoRef} autoPlay muted playsInline></video>
-          <div className="video-label">{userName} (You)</div>
-          {isVideoOff && <div className="video-off-indicator">Video Off</div>}
+        <div className="video-wrapper">
+          <video
+            ref={localVideoRef}
+            autoPlay
+            playsInline
+            muted
+            className="local-video"
+          />
           <div className="media-controls">
-            <button 
-              onClick={toggleAudio} 
-              className={`media-btn ${isAudioMuted ? 'off' : ''}`}
-              title={isAudioMuted ? 'Unmute' : 'Mute'}
+            <button
+              className="media-btn"
+              onClick={toggleAudio}
+              title={isAudioMuted ? "Unmute" : "Mute"}
             >
-              {isAudioMuted ? '🔇' : '🔊'}
+              {isAudioMuted ? "🔇" : "🔊"}
             </button>
-            <button 
-              onClick={toggleVideo} 
-              className={`media-btn ${isVideoOff ? 'off' : ''}`}
-              title={isVideoOff ? 'Turn Video On' : 'Turn Video Off'}
+            <button
+              className="media-btn"
+              onClick={toggleVideo}
+              title={isVideoOff ? "Turn on video" : "Turn off video"}
             >
-              {isVideoOff ? '🚫' : '📹'}
+              {isVideoOff ? "📹" : "🎥"}
             </button>
           </div>
         </div>
         
-        <div className="video-wrapper remote-video">
-          <video ref={remoteVideoRef} autoPlay playsInline></video>
-          <div className="video-label">
-            {remoteStream 
-              ? (peerName && peerName !== 'Peer' ? peerName : userName) 
-              : 'Waiting for peer...'}
-          </div>
-          {!remoteStream && <div className="waiting-message">Waiting for peer to join...</div>}
+        <div className="video-wrapper">
+          <video
+            ref={remoteVideoRef}
+            autoPlay
+            playsInline
+            className="remote-video"
+          />
         </div>
       </div>
     </div>

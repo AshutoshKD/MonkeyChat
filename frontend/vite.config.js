@@ -1,12 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Log environment variables during build
-console.log('=== Frontend Environment Variables ===')
-console.log('VITE_BASE_URL:', process.env.VITE_BASE_URL)
-console.log('PORT:', process.env.PORT)
-console.log('=== End Environment Variables ===')
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],

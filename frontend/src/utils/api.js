@@ -36,7 +36,6 @@ export const apiRequest = async (endpoint, options = {}) => {
 
     return data;
   } catch (error) {
-    console.error('API request error:', error);
     throw error;
   }
 };
