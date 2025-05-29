@@ -22,9 +22,12 @@ var (
 )
 
 func init() {
-	// Load .env file
+	// Load .env file if it exists
 	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
+		// Only log error if we're in development
+		if os.Getenv("ENV") != "production" {
+			log.Printf("Warning: Error loading .env file: %v", err)
+		}
 	}
 }
 
