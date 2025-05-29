@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -14,8 +15,8 @@ import (
 )
 
 var (
-	// Secret key for JWT signing
-	jwtSecret = []byte("monkeychat_secret_key")
+	// Secret key for JWT signing - get from environment
+	jwtSecret = []byte(os.Getenv("JWT_SECRET"))
 
 	// Room management
 	activeRooms = sync.Map{}

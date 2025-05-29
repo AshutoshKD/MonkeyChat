@@ -59,7 +59,7 @@ The application uses MySQL to store user accounts and room information.
    ```
    go run main.go
    ```
-   The server will start on port 8080 by default.
+   The server will start on port 8000 by default.
 
 ### Frontend
 
@@ -98,7 +98,7 @@ The frontend application stores logs in the browser's localStorage. You can:
 ### Backend Logs
 The backend server stores logs in the `logs` directory. You can:
 - View logs directly from the log files in the logs directory
-- Download current logs via the `/logs` endpoint (http://localhost:8080/logs)
+- Download current logs via the `/logs` endpoint (http://localhost:8000/logs)
 
 ## Troubleshooting
 
@@ -111,7 +111,7 @@ The backend server stores logs in the `logs` directory. You can:
 
 ### Connection Issues
 1. Ensure both the backend and frontend servers are running
-2. Verify the backend server is accessible at http://localhost:8080/health
+2. Verify the backend server is accessible at http://localhost:8000/health
 3. Check if your firewall or network blocks WebRTC traffic
 4. Try using a different network if possible
 5. Check logs for WebSocket or ICE connection errors

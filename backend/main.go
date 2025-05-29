@@ -4,21 +4,29 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"sync"
 	"time"
 
 	"github.com/fasthttp/websocket"
+	"github.com/joho/godotenv"
 	"github.com/valyala/fasthttp"
 )
 
 var (
-	addr    = flag.String("addr", ":8080", "http service address")
 	rooms   = make(map[string][]*Connection)
 	mutex   = sync.RWMutex{}
 	logFile *os.File
 )
+
+func init() {
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
 
 // Connection represents a WebSocket connection with user info
 type Connection struct {
@@ -38,21 +46,54 @@ type UserInfo struct {
 	UserName string `json:"userName"`
 }
 
-// Logger function
+// Logger function with environment-based logging
 func logMessage(level, format string, v ...interface{}) {
+	isProd := os.Getenv("ENV") == "production"
 	timestamp := time.Now().Format("2006-01-02 15:04:05.000")
 	logMsg := fmt.Sprintf("[%s] [%s] %s", timestamp, level, fmt.Sprintf(format, v...))
-	log.Print(logMsg)
 
-	// Also print to terminal stdout
-	fmt.Println(logMsg)
+	// Always write to the log file
+	if logFile != nil {
+		if _, err := logFile.WriteString(logMsg + "\n"); err != nil {
+			fmt.Printf("Error writing to log file: %v\n", err)
+		}
+		logFile.Sync() // Ensure the log is written to disk
+	}
+
+	// In development, also print to console with colors
+	if !isProd {
+		var color string
+		switch level {
+		case "ERROR":
+			color = "\033[31m" // Red
+		case "WARN":
+			color = "\033[33m" // Yellow
+		case "INFO":
+			color = "\033[32m" // Green
+		case "DEBUG":
+			color = "\033[36m" // Cyan
+		default:
+			color = "\033[0m" // Reset
+		}
+		fmt.Printf("%s%s\033[0m\n", color, logMsg)
+	}
 }
 
 func main() {
+	// Get port from environment or use default
+	port := os.Getenv("PORT")
+
+	// Set up server address
+	addr := flag.String("addr", ":"+port, "http service address")
 	flag.Parse()
 
-	// Set up logging to file
-	setupLogging()
+	// Set up logging based on environment
+	isProd := os.Getenv("ENV") == "production"
+	if isProd {
+		setupProductionLogging()
+	} else {
+		setupDevelopmentLogging()
+	}
 	defer logFile.Close()
 
 	// Initialize database
@@ -75,8 +116,10 @@ func main() {
 				origin = "*"
 			}
 
-			logMessage("DEBUG", "Request from origin: %s, path: %s, method: %s",
-				origin, ctx.Path(), ctx.Method())
+			if !isProd {
+				logMessage("DEBUG", "Request from origin: %s, path: %s, method: %s",
+					origin, ctx.Path(), ctx.Method())
+			}
 
 			// Set CORS headers
 			ctx.Response.Header.Set("Access-Control-Allow-Origin", origin)
@@ -134,7 +177,7 @@ func main() {
 	}
 }
 
-func setupLogging() {
+func setupProductionLogging() {
 	// Create logs directory if it doesn't exist
 	if _, err := os.Stat("logs"); os.IsNotExist(err) {
 		if err := os.Mkdir("logs", 0755); err != nil {
@@ -150,12 +193,30 @@ func setupLogging() {
 		log.Fatalf("Failed to open log file: %v", err)
 	}
 
-	// Set log output to file only (console output is handled by logMessage function)
-	log.SetOutput(logFile)
+	// Set up multi-writer to log to both console and file
+	mw := io.MultiWriter(os.Stdout, logFile)
+	log.SetOutput(mw)
+}
 
-	// Write initial log entry
-	logMessage("INFO", "=== MonkeyChat Server Started ===")
-	logMessage("INFO", "Log file initialized: %s", logFile.Name())
+func setupDevelopmentLogging() {
+	// Create logs directory if it doesn't exist
+	if _, err := os.Stat("logs"); os.IsNotExist(err) {
+		if err := os.Mkdir("logs", 0755); err != nil {
+			log.Fatalf("Failed to create logs directory: %v", err)
+		}
+	}
+
+	// In development, log to both console and a development log file
+	var err error
+	logFile, err = os.OpenFile("logs/monkeychat.dev.log",
+		os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	if err != nil {
+		log.Fatalf("Failed to open development log file: %v", err)
+	}
+
+	// Set up multi-writer to log to both console and file
+	mw := io.MultiWriter(os.Stdout, logFile)
+	log.SetOutput(mw)
 }
 
 func serveLogFile(ctx *fasthttp.RequestCtx) {

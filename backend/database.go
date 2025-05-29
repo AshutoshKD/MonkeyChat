@@ -11,23 +11,6 @@ import (
 
 var db *sql.DB
 
-// Database configuration - get from environment or use defaults
-var (
-	dbUsername = getEnv("DB_USERNAME", "d9iqoueBRZHuCAV.root")
-	dbPassword = getEnv("DB_PASSWORD", "CY6mkPlqOrWMbJUM")
-	dbHost     = getEnv("DB_HOST", "gateway01.ap-southeast-1.prod.aws.tidbcloud.com")
-	dbPort     = getEnv("DB_PORT", "4000")
-	dbName     = getEnv("DB_NAME", "test")
-)
-
-// Helper function to get environment variables with fallback
-func getEnv(key, fallback string) string {
-	if value, exists := os.LookupEnv(key); exists {
-		return value
-	}
-	return fallback
-}
-
 // DbUser represents a user record in the database
 type DbUser struct {
 	ID        int64     `json:"id"`
@@ -45,9 +28,33 @@ type DbRoom struct {
 
 // InitDatabase initializes the database connection and creates tables if they don't exist
 func InitDatabase() error {
-	// Use TiDB Cloud connection format with TLS and skip verification
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&tls=skip-verify",
-		dbUsername, dbPassword, dbHost, dbPort, dbName)
+	// Check if we're in production or development
+	isProd := os.Getenv("ENV") == "production"
+
+	// Read DB config from environment variables (after godotenv.Load)
+	dbUsername := os.Getenv("DB_USERNAME")
+	dbPassword := os.Getenv("DB_PASSWORD")
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbName := os.Getenv("DB_NAME")
+
+	// Log environment variables
+	logMessage("DEBUG", "Database configuration: username=%s, host=%s, port=%s, dbname=%s",
+		dbUsername, dbHost, dbPort, dbName)
+
+	// Configure DSN based on environment
+	var dsn string
+	if isProd {
+		// Production: Use TiDB Cloud with TLS
+		dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&tls=skip-verify",
+			dbUsername, dbPassword, dbHost, dbPort, dbName)
+	} else {
+		// Development: Use local MySQL
+		dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
+			dbUsername, dbPassword, dbHost, dbPort, dbName)
+	}
+
+	logMessage("DEBUG", "DSN: %s", dsn)
 
 	var err error
 	db, err = sql.Open("mysql", dsn)
@@ -55,17 +62,29 @@ func InitDatabase() error {
 		return fmt.Errorf("error opening database connection: %v", err)
 	}
 
-	// Set connection pool settings for TiDB Cloud
-	db.SetMaxOpenConns(10)
-	db.SetMaxIdleConns(5)
-	db.SetConnMaxLifetime(time.Hour)
+	// Set connection pool settings
+	if isProd {
+		// Production settings
+		db.SetMaxOpenConns(10)
+		db.SetMaxIdleConns(5)
+		db.SetConnMaxLifetime(time.Hour)
+	} else {
+		// Development settings
+		db.SetMaxOpenConns(5)
+		db.SetMaxIdleConns(2)
+		db.SetConnMaxLifetime(30 * time.Minute)
+	}
 
 	// Test the connection
 	if err = db.Ping(); err != nil {
 		return fmt.Errorf("error connecting to the database: %v", err)
 	}
 
-	logMessage("INFO", "Connected to TiDB Cloud database")
+	envMsg := "development"
+	if isProd {
+		envMsg = "production"
+	}
+	logMessage("INFO", "Connected to %s database in %s environment", dbName, envMsg)
 
 	// Create tables if they don't exist
 	if err = createTables(); err != nil {

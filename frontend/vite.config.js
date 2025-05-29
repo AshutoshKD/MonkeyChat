@@ -9,12 +9,12 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: process.env.VITE_BASE_URL || 'https://monkeychat-ela7.onrender.com',
+        target: process.env.VITE_BASE_URL || 'http://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       },
       '/ws': {
-        target: (process.env.VITE_BASE_URL || 'https://monkeychat-ela7.onrender.com').replace('http', 'ws').replace('https', 'wss'),
+        target: (process.env.VITE_BASE_URL || 'http://localhost:8000').replace('http', 'ws').replace('https', 'wss'),
         ws: true
       }
     }
