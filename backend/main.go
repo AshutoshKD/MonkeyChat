@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -85,31 +84,49 @@ func logMessage(level, format string, v ...interface{}) {
 func main() {
 	// Get port from environment or use default
 	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Default port if not specified
+		log.Printf("No PORT environment variable set, using default port: %s", port)
+	} else {
+		log.Printf("Using PORT from environment: %s", port)
+	}
 
 	// Set up server address
-	addr := flag.String("addr", ":"+port, "http service address")
-	flag.Parse()
+	addr := ":" + port // Ensure we bind to all interfaces with the specified port
+	log.Printf("Server will bind to address: %s", addr)
 
 	// Set up logging based on environment
 	isProd := os.Getenv("ENV") == "production"
+	log.Printf("Environment: %s", os.Getenv("ENV"))
 	if isProd {
+		log.Printf("Setting up production logging")
 		setupProductionLogging()
 	} else {
+		log.Printf("Setting up development logging")
 		setupDevelopmentLogging()
 	}
 	defer logFile.Close()
 
 	// Initialize database
 	logMessage("INFO", "Initializing database...")
+	log.Printf("Database configuration - Host: %s, Port: %s, User: %s, DB: %s",
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_PORT"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_NAME"))
+
 	if err := InitDatabase(); err != nil {
 		logMessage("ERROR", "Failed to initialize database: %v", err)
+		log.Printf("Fatal error initializing database: %v", err)
 		os.Exit(1)
 	}
 
 	// Initialize authentication system with test users
+	log.Printf("Initializing auth system...")
 	InitAuth()
 
-	logMessage("INFO", "Starting MonkeyChat server on %s", *addr)
+	logMessage("INFO", "Starting MonkeyChat server on %s", addr)
+	log.Printf("Server starting on %s", addr)
 
 	// Create a CORS middleware
 	corsMiddleware := func(next fasthttp.RequestHandler) fasthttp.RequestHandler {
@@ -173,9 +190,11 @@ func main() {
 	handler := corsMiddleware(router)
 
 	// Start the server
-	logMessage("INFO", "Server started on %s", *addr)
-	if err := fasthttp.ListenAndServe(*addr, handler); err != nil {
+	logMessage("INFO", "Server started on %s", addr)
+	log.Printf("Attempting to start server on %s", addr)
+	if err := fasthttp.ListenAndServe(addr, handler); err != nil {
 		logMessage("ERROR", "Error in ListenAndServe: %v", err)
+		log.Printf("Fatal error starting server: %v", err)
 		os.Exit(1)
 	}
 }
