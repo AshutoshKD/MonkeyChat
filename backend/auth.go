@@ -206,6 +206,7 @@ func authMiddleware(next func(ctx *fasthttp.RequestCtx, username string, userID 
 
 // Handler for user login
 func handleLogin(ctx *fasthttp.RequestCtx) {
+	fmt.Println("handleLogin called")
 	var creds struct {
 		Username string `json:"username"`
 		Password string `json:"password"`
@@ -213,21 +214,25 @@ func handleLogin(ctx *fasthttp.RequestCtx) {
 
 	// Parse request body
 	if err := json.Unmarshal(ctx.PostBody(), &creds); err != nil {
+		fmt.Printf("handleLogin: failed to parse request body: %v\n", err)
 		ctx.SetStatusCode(fasthttp.StatusBadRequest)
 		ctx.SetBodyString(`{"error":"invalid request body"}`)
 		return
 	}
+	fmt.Printf("handleLogin: parsed username=%s\n", creds.Username)
 
 	// Get user from database
 	user, err := GetUserByUsername(creds.Username)
 	if err != nil {
-		logMessage("ERROR", "Error fetching user: %v", err)
+		fmt.Printf("handleLogin: error fetching user from DB: %v\n", err)
 		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
 		ctx.SetBodyString(`{"error":"internal server error"}`)
 		return
 	}
+	fmt.Printf("handleLogin: user fetch result: %v\n", user)
 
 	if user == nil {
+		fmt.Println("handleLogin: user not found")
 		ctx.SetStatusCode(fasthttp.StatusUnauthorized)
 		ctx.SetBodyString(`{"error":"invalid username or password"}`)
 		return
@@ -235,18 +240,22 @@ func handleLogin(ctx *fasthttp.RequestCtx) {
 
 	// Verify password
 	if !verifyPassword(creds.Password, user.Password) {
+		fmt.Println("handleLogin: invalid password")
 		ctx.SetStatusCode(fasthttp.StatusUnauthorized)
 		ctx.SetBodyString(`{"error":"invalid username or password"}`)
 		return
 	}
+	fmt.Println("handleLogin: password verified")
 
 	// Generate token
 	token, err := generateToken(creds.Username, user.ID)
 	if err != nil {
+		fmt.Printf("handleLogin: error generating token: %v\n", err)
 		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
 		ctx.SetBodyString(`{"error":"error generating token"}`)
 		return
 	}
+	fmt.Println("handleLogin: token generated")
 
 	// Return token
 	response := struct {
@@ -260,6 +269,7 @@ func handleLogin(ctx *fasthttp.RequestCtx) {
 	responseJSON, _ := json.Marshal(response)
 	ctx.SetContentType("application/json")
 	ctx.SetBody(responseJSON)
+	fmt.Println("handleLogin: response sent")
 }
 
 // Handler for user registration
