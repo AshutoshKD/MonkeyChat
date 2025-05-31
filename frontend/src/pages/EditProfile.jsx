@@ -11,6 +11,7 @@ const EditProfile = () => {
   const [showNameChangeWarning, setShowNameChangeWarning] = useState(false);
   const [originalUsername, setOriginalUsername] = useState(username);
   const fileInputRef = useRef();
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     const currentUser = localStorage.getItem('username');
@@ -89,6 +90,7 @@ const EditProfile = () => {
     const token = localStorage.getItem('token');
     const formData = new FormData();
     formData.append('image', file);
+    setUploading(true);
     try {
       const res = await fetch(`${BASE_URL}/users/${username}/upload-profile-pic`, {
         method: 'POST',
@@ -104,6 +106,7 @@ const EditProfile = () => {
     } catch {
       alert('Failed to upload image');
     }
+    setUploading(false);
   };
 
   if (loading) return <div>Loading...</div>;
@@ -118,6 +121,7 @@ const EditProfile = () => {
           After saving, you will be redirected to the login page.
         </div>
       )}
+      {uploading && <div style={{ color: '#8b5cf6', marginBottom: 12 }}>Uploading image...</div>}
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: 16 }}>
           <label>Name</label>
@@ -134,7 +138,9 @@ const EditProfile = () => {
             <img src={form.profilePic} alt="Profile Preview" style={{ width: 80, height: 80, borderRadius: '50%', marginTop: 8, objectFit: 'cover' }} />
           )}
         </div>
-        <button type="submit" className="nav-btn" style={{ width: '100%' }}>Save</button>
+        <button type="submit" className="nav-btn" style={{ width: '100%' }} disabled={uploading}>
+          {uploading ? "Uploading..." : "Save"}
+        </button>
       </form>
     </div>
   );

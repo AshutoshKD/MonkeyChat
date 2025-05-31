@@ -146,7 +146,7 @@ func main() {
 	// Create a CORS middleware
 	corsMiddleware := func(next fasthttp.RequestHandler) fasthttp.RequestHandler {
 		return func(ctx *fasthttp.RequestCtx) {
-			fmt.Printf("CORS middleware: %s %s\n", ctx.Method(), ctx.Path())
+			// fmt.Printf("CORS middleware: %s %s\n", ctx.Method(), ctx.Path())
 			origin := string(ctx.Request.Header.Peek("Origin"))
 			if origin == "" {
 				origin = "*"
