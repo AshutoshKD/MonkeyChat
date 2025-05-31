@@ -86,6 +86,17 @@ func logMessage(level, format string, v ...interface{}) {
 }
 
 func main() {
+	fmt.Println("================ MonkeyChat server starting ================")
+	fmt.Printf("ENV: '%s'\n", os.Getenv("ENV"))
+	fmt.Printf("PORT: '%s'\n", os.Getenv("PORT"))
+	fmt.Printf("DB_USERNAME: '%s'\n", os.Getenv("DB_USERNAME"))
+	fmt.Printf("DB_PASSWORD: '%s'\n", os.Getenv("DB_PASSWORD"))
+	fmt.Printf("DB_HOST: '%s'\n", os.Getenv("DB_HOST"))
+	fmt.Printf("DB_PORT: '%s'\n", os.Getenv("DB_PORT"))
+	fmt.Printf("DB_NAME: '%s'\n", os.Getenv("DB_NAME"))
+	fmt.Printf("JWT_SECRET: '%s'\n", os.Getenv("JWT_SECRET"))
+	fmt.Printf("CLOUDINARY_URL: '%s'\n", os.Getenv("CLOUDINARY_URL"))
+
 	// Get port from environment or use default
 	port := os.Getenv("PORT")
 	if port == "" {
