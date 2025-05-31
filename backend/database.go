@@ -13,10 +13,12 @@ var db *sql.DB
 
 // DbUser represents a user record in the database
 type DbUser struct {
-	ID        int64     `json:"id"`
-	Username  string    `json:"username"`
-	Password  string    `json:"-"` // Hashed password, not returned in JSON
-	CreatedAt time.Time `json:"createdAt"`
+	ID         int64     `json:"id"`
+	Username   string    `json:"username"`
+	Password   string    `json:"-"` // Hashed password, not returned in JSON
+	Bio        string    `json:"bio"`
+	ProfilePic string    `json:"profilePic"`
+	CreatedAt  time.Time `json:"createdAt"`
 }
 
 // DbRoom represents a room record in the database
@@ -102,6 +104,8 @@ func createTables() error {
 			id BIGINT NOT NULL AUTO_INCREMENT,
 			username VARCHAR(50) NOT NULL UNIQUE,
 			password VARCHAR(100) NOT NULL,
+			bio TEXT,
+			profile_pic TEXT,
 			created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY (id)
 		)
@@ -157,9 +161,9 @@ func CreateUser(username, passwordHash string) (*DbUser, error) {
 func GetUserByUsername(username string) (*DbUser, error) {
 	var user DbUser
 	err := db.QueryRow(
-		"SELECT id, username, password, created_at FROM users WHERE username = ?",
+		"SELECT id, username, password, COALESCE(bio, ''), COALESCE(profile_pic, ''), created_at FROM users WHERE username = ?",
 		username,
-	).Scan(&user.ID, &user.Username, &user.Password, &user.CreatedAt)
+	).Scan(&user.ID, &user.Username, &user.Password, &user.Bio, &user.ProfilePic, &user.CreatedAt)
 
 	if err == sql.ErrNoRows {
 		return nil, nil // User not found, but not an error
@@ -174,9 +178,9 @@ func GetUserByUsername(username string) (*DbUser, error) {
 func GetUserByID(id int64) (*DbUser, error) {
 	var user DbUser
 	err := db.QueryRow(
-		"SELECT id, username, password, created_at FROM users WHERE id = ?",
+		"SELECT id, username, password, COALESCE(bio, ''), COALESCE(profile_pic, ''), created_at FROM users WHERE id = ?",
 		id,
-	).Scan(&user.ID, &user.Username, &user.Password, &user.CreatedAt)
+	).Scan(&user.ID, &user.Username, &user.Password, &user.Bio, &user.ProfilePic, &user.CreatedAt)
 
 	if err == sql.ErrNoRows {
 		return nil, nil // User not found, but not an error
@@ -285,4 +289,10 @@ func DeleteRoom(roomID string) error {
 
 	logMessage("INFO", "Room deleted from database: %s", roomID)
 	return nil
+}
+
+// UpdateUserProfile updates a user's profile by username
+func UpdateUserProfile(oldUsername, newUsername, bio, profilePic string) error {
+	_, err := db.Exec("UPDATE users SET username = ?, bio = ?, profile_pic = ? WHERE username = ?", newUsername, bio, profilePic, oldUsername)
+	return err
 }

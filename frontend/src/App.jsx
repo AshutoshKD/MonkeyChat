@@ -7,10 +7,14 @@ import Room from './pages/Room';
 import LandingPage from './pages/LandingPage';
 import { BASE_URL } from './config';
 import './App.css';
+import UserAvatar from './components/UserAvatar';
+import UserProfile from './pages/UserProfile';
+import EditProfile from './pages/EditProfile';
 
 // Header component with auth controls
 const Header = ({ isAuthenticated, setIsAuthenticated }) => {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
+  const [profilePic, setProfilePic] = useState(null);
   const navigate = useNavigate();
 
   // Update username when authentication state changes
@@ -20,6 +24,7 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
       setUsername(storedUsername || '');
     } else {
       setUsername('');
+      setProfilePic(null);
     }
   }, [isAuthenticated]);
 
@@ -38,6 +43,28 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
       window.removeEventListener('authChange', checkAuth);
     };
   }, []);
+
+  // Fetch profile picture for the current user
+  useEffect(() => {
+    const fetchProfilePic = async () => {
+      if (!username) return;
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(`${BASE_URL}/users/${username}/profile`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setProfilePic(data.profilePic || null);
+        } else {
+          setProfilePic(null);
+        }
+      } catch {
+        setProfilePic(null);
+      }
+    };
+    if (isAuthenticated && username) fetchProfilePic();
+  }, [isAuthenticated, username]);
 
   const handleLogout = async () => {
     try {
@@ -76,7 +103,7 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
         )}
         {isAuthenticated ? (
           <div className="user-info">
-            <span>Welcome, {username}</span>
+            <UserAvatar username={username} profilePic={profilePic} size={36} showName={true} />
             <button onClick={handleLogout} className="logout-btn">Logout</button>
           </div>
         ) : (
@@ -174,6 +201,9 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+            {/* User profile routes */}
+            <Route path=":username/profile" element={<UserProfile />} />
+            <Route path=":username/edit" element={<EditProfile />} />
 
             {/* Catch all route - redirect to home if authenticated, landing page if not */}
             <Route 

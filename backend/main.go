@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"strings"
 	"sync"
 	"time"
 
@@ -180,6 +181,10 @@ func main() {
 			handleGetRooms(ctx, username, userID)
 		case path == "/rooms/delete" && method == "POST":
 			handleDeleteRoom(ctx, username, userID)
+		case strings.HasPrefix(path, "/users/") && strings.HasSuffix(path, "/profile") && method == "GET":
+			handleGetUserProfile(ctx, username, userID)
+		case strings.HasPrefix(path, "/users/") && strings.HasSuffix(path, "/profile") && method == "PUT":
+			handleUpdateUserProfile(ctx, username, userID)
 		default:
 			logMessage("WARN", "404 Not Found: %s", path)
 			ctx.SetStatusCode(fasthttp.StatusNotFound)
@@ -570,4 +575,68 @@ func handleDeleteRoom(ctx *fasthttp.RequestCtx, username string, userID int64) {
 
 	ctx.SetContentType("application/json")
 	ctx.SetBodyString(`{"message":"room deleted successfully"}`)
+}
+
+func handleGetUserProfile(ctx *fasthttp.RequestCtx, authUsername string, userID int64) {
+	// Extract username from path
+	path := string(ctx.Path())
+	parts := strings.Split(path, "/")
+	if len(parts) < 3 {
+		ctx.SetStatusCode(fasthttp.StatusBadRequest)
+		ctx.SetBodyString(`{"error":"invalid path"}`)
+		return
+	}
+	username := parts[2]
+	user, err := GetUserByUsername(username)
+	if err != nil || user == nil {
+		ctx.SetStatusCode(fasthttp.StatusNotFound)
+		ctx.SetBodyString(`{"error":"user not found"}`)
+		return
+	}
+	resp := struct {
+		Username   string `json:"username"`
+		Bio        string `json:"bio"`
+		ProfilePic string `json:"profilePic"`
+	}{
+		Username:   user.Username,
+		Bio:        user.Bio,
+		ProfilePic: user.ProfilePic,
+	}
+	ctx.SetContentType("application/json")
+	json.NewEncoder(ctx).Encode(resp)
+}
+
+func handleUpdateUserProfile(ctx *fasthttp.RequestCtx, authUsername string, userID int64) {
+	// Extract username from path
+	path := string(ctx.Path())
+	parts := strings.Split(path, "/")
+	if len(parts) < 3 {
+		ctx.SetStatusCode(fasthttp.StatusBadRequest)
+		ctx.SetBodyString(`{"error":"invalid path"}`)
+		return
+	}
+	username := parts[2]
+	if authUsername != username {
+		ctx.SetStatusCode(fasthttp.StatusForbidden)
+		ctx.SetBodyString(`{"error":"cannot edit another user's profile"}`)
+		return
+	}
+	var req struct {
+		Username   string `json:"username"`
+		Bio        string `json:"bio"`
+		ProfilePic string `json:"profilePic"`
+	}
+	if err := json.Unmarshal(ctx.PostBody(), &req); err != nil {
+		ctx.SetStatusCode(fasthttp.StatusBadRequest)
+		ctx.SetBodyString(`{"error":"invalid request body"}`)
+		return
+	}
+	// Use helper function
+	if err := UpdateUserProfile(username, req.Username, req.Bio, req.ProfilePic); err != nil {
+		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+		ctx.SetBodyString(`{"error":"failed to update profile"}`)
+		return
+	}
+	ctx.SetContentType("application/json")
+	ctx.SetBodyString(`{"message":"profile updated"}`)
 }
