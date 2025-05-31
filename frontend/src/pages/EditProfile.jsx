@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../config';
 
@@ -10,6 +10,7 @@ const EditProfile = () => {
   const [error, setError] = useState('');
   const [showNameChangeWarning, setShowNameChangeWarning] = useState(false);
   const [originalUsername, setOriginalUsername] = useState(username);
+  const fileInputRef = useRef();
 
   useEffect(() => {
     const currentUser = localStorage.getItem('username');
@@ -75,6 +76,36 @@ const EditProfile = () => {
     }
   };
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      setForm((prev) => ({ ...prev, profilePic: ev.target.result }));
+    };
+    reader.readAsDataURL(file);
+    // Upload to backend
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+      const res = await fetch(`${BASE_URL}/users/${username}/upload-profile-pic`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` },
+        body: formData,
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setForm((prev) => ({ ...prev, profilePic: data.url }));
+      } else {
+        alert('Failed to upload image');
+      }
+    } catch {
+      alert('Failed to upload image');
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -97,8 +128,11 @@ const EditProfile = () => {
           <textarea name="bio" value={form.bio} onChange={handleChange} rows={3} style={{ width: '100%', padding: 8, marginTop: 4 }} />
         </div>
         <div style={{ marginBottom: 16 }}>
-          <label>Profile Picture URL</label>
-          <input name="profilePic" value={form.profilePic} onChange={handleChange} style={{ width: '100%', padding: 8, marginTop: 4 }} />
+          <label>Profile Picture</label>
+          <input type="file" accept="image/*" ref={fileInputRef} onChange={handleFileChange} style={{ width: '100%', padding: 8, marginTop: 4 }} />
+          {form.profilePic && (
+            <img src={form.profilePic} alt="Profile Preview" style={{ width: 80, height: 80, borderRadius: '50%', marginTop: 8, objectFit: 'cover' }} />
+          )}
         </div>
         <button type="submit" className="nav-btn" style={{ width: '100%' }}>Save</button>
       </form>

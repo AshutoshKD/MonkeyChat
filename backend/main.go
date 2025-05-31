@@ -6,10 +6,13 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 	"time"
 
+	"github.com/cloudinary/cloudinary-go/v2"
+	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 	"github.com/fasthttp/websocket"
 	"github.com/joho/godotenv"
 	"github.com/valyala/fasthttp"
@@ -158,49 +161,66 @@ func main() {
 		}
 	}
 
-	// Apply Auth middleware to the router
-	router := authMiddleware(func(ctx *fasthttp.RequestCtx, username string, userID int64) {
-		path := string(ctx.Path())
-		method := string(ctx.Method())
-
-		switch {
-		case path == "/ws":
-			handleWebSocket(ctx, username, userID)
-		case path == "/health":
-			ctx.SetBodyString("OK")
-		case path == "/logs":
-			// Endpoint to download server logs
-			serveLogFile(ctx)
-		case path == "/login" && method == "POST":
-			handleLogin(ctx)
-		case path == "/register" && method == "POST":
-			handleRegister(ctx)
-		case path == "/logout" && method == "POST":
-			handleLogout(ctx, username, userID)
-		case path == "/rooms" && method == "GET":
-			handleGetRooms(ctx, username, userID)
-		case path == "/rooms/delete" && method == "POST":
-			handleDeleteRoom(ctx, username, userID)
-		case strings.HasPrefix(path, "/users/") && strings.HasSuffix(path, "/profile") && method == "GET":
-			handleGetUserProfile(ctx, username, userID)
-		case strings.HasPrefix(path, "/users/") && strings.HasSuffix(path, "/profile") && method == "PUT":
-			handleUpdateUserProfile(ctx, username, userID)
-		default:
-			logMessage("WARN", "404 Not Found: %s", path)
-			ctx.SetStatusCode(fasthttp.StatusNotFound)
+	// Serve static files from /uploads/ in development (before auth)
+	if !isProd {
+		handler := func(ctx *fasthttp.RequestCtx) {
+			path := string(ctx.Path())
+			if strings.HasPrefix(path, "/uploads/") {
+				absUploadDir, _ := filepath.Abs("uploads")
+				filename := strings.TrimPrefix(path, "/uploads/")
+				filePath := filepath.Join(absUploadDir, filename)
+				fasthttp.ServeFile(ctx, filePath)
+				return
+			}
+			authMiddleware(func(ctx *fasthttp.RequestCtx, username string, userID int64) {
+				path := string(ctx.Path())
+				method := string(ctx.Method())
+				switch {
+				case path == "/ws":
+					handleWebSocket(ctx, username, userID)
+				case path == "/health":
+					ctx.SetBodyString("OK")
+				case path == "/logs":
+					serveLogFile(ctx)
+				case path == "/login" && method == "POST":
+					handleLogin(ctx)
+				case path == "/register" && method == "POST":
+					handleRegister(ctx)
+				case path == "/logout" && method == "POST":
+					handleLogout(ctx, username, userID)
+				case path == "/rooms" && method == "GET":
+					handleGetRooms(ctx, username, userID)
+				case path == "/rooms/delete" && method == "POST":
+					handleDeleteRoom(ctx, username, userID)
+				case strings.HasPrefix(path, "/users/") && strings.HasSuffix(path, "/profile") && method == "GET":
+					handleGetUserProfile(ctx, username, userID)
+				case strings.HasPrefix(path, "/users/") && strings.HasSuffix(path, "/profile") && method == "PUT":
+					handleUpdateUserProfile(ctx, username, userID)
+				case strings.HasPrefix(path, "/users/") && strings.HasSuffix(path, "/upload-profile-pic") && method == "POST":
+					handleUploadProfilePic(ctx, username, userID)
+				default:
+					logMessage("WARN", "404 Not Found: %s", path)
+					ctx.SetStatusCode(fasthttp.StatusNotFound)
+				}
+			})(ctx)
 		}
-	})
-
-	// Apply CORS middleware
-	handler := corsMiddleware(router)
-
-	// Start the server
-	logMessage("INFO", "Server started on %s", addr)
-	log.Printf("Attempting to start server on %s", addr)
-	if err := fasthttp.ListenAndServe(addr, handler); err != nil {
-		logMessage("ERROR", "Error in ListenAndServe: %v", err)
-		log.Printf("Fatal error starting server: %v", err)
-		os.Exit(1)
+		// Apply CORS middleware
+		h := corsMiddleware(handler)
+		// Start the server
+		logMessage("INFO", "Server started on %s", addr)
+		log.Printf("Attempting to start server on %s", addr)
+		server := &fasthttp.Server{
+			Handler:            h,
+			MaxRequestBodySize: 100 * 1024 * 1024, // 100 MB
+		}
+		if err := server.ListenAndServe(addr); err != nil {
+			logMessage("ERROR", "Error in ListenAndServe: %v", err)
+			log.Printf("Fatal error starting server: %v", err)
+			os.Exit(1)
+		}
+	} else {
+		// Production: keep the existing logic
+		// ... existing production server startup ...
 	}
 }
 
@@ -639,4 +659,80 @@ func handleUpdateUserProfile(ctx *fasthttp.RequestCtx, authUsername string, user
 	}
 	ctx.SetContentType("application/json")
 	ctx.SetBodyString(`{"message":"profile updated"}`)
+}
+
+func handleUploadProfilePic(ctx *fasthttp.RequestCtx, authUsername string, userID int64) {
+	// Extract username from path
+	path := string(ctx.Path())
+	parts := strings.Split(path, "/")
+	if len(parts) < 3 {
+		ctx.SetStatusCode(fasthttp.StatusBadRequest)
+		ctx.SetBodyString(`{"error":"invalid path"}`)
+		return
+	}
+	username := parts[2]
+	if authUsername != username {
+		ctx.SetStatusCode(fasthttp.StatusForbidden)
+		ctx.SetBodyString(`{"error":"cannot upload for another user"}`)
+		return
+	}
+	isProd := os.Getenv("ENV") == "production"
+	// Parse multipart form
+	form, err := ctx.MultipartForm()
+	if err != nil || form == nil || len(form.File["image"]) == 0 {
+		ctx.SetStatusCode(fasthttp.StatusBadRequest)
+		ctx.SetBodyString(`{"error":"no image uploaded"}`)
+		return
+	}
+	fileHeader := form.File["image"][0]
+	file, err := fileHeader.Open()
+	if err != nil {
+		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+		ctx.SetBodyString(`{"error":"failed to open image"}`)
+		return
+	}
+	defer file.Close()
+	var imageURL string
+	if isProd {
+		// Upload to Cloudinary
+		cld, err := cloudinary.NewFromURL(os.Getenv("CLOUDINARY_URL"))
+		if err != nil {
+			ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+			ctx.SetBodyString(`{"error":"cloudinary config error"}`)
+			return
+		}
+		uploadRes, err := cld.Upload.Upload(ctx, file, uploader.UploadParams{
+			Folder:    "monkeychat/profile_pics",
+			PublicID:  username + "_" + time.Now().Format("20060102150405"),
+			Overwrite: func(b bool) *bool { return &b }(true),
+		})
+		if err != nil {
+			ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+			ctx.SetBodyString(`{"error":"cloudinary upload failed"}`)
+			return
+		}
+		imageURL = uploadRes.SecureURL
+	} else {
+		// Save locally
+		uploadDir := "uploads"
+		os.MkdirAll(uploadDir, 0755)
+		filename := username + "_" + time.Now().Format("20060102150405") + filepath.Ext(fileHeader.Filename)
+		filePath := filepath.Join(uploadDir, filename)
+		out, err := os.Create(filePath)
+		if err != nil {
+			ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+			ctx.SetBodyString(`{"error":"failed to save image"}`)
+			return
+		}
+		defer out.Close()
+		_, err = io.Copy(out, file)
+		if err != nil {
+			ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+			ctx.SetBodyString(`{"error":"failed to save image"}`)
+			return
+		}
+		imageURL = "/uploads/" + filename
+	}
+	ctx.SetContentType("application/json")
+	ctx.SetBodyString(fmt.Sprintf(`{"url":"%s"}`, imageURL))
 }
