@@ -93,6 +93,11 @@ func InitDatabase() error {
 		return fmt.Errorf("error creating tables: %v", err)
 	}
 
+	// --- AUTO-MIGRATION: Add missing columns if needed ---
+	if err = autoMigrateUsersTable(); err != nil {
+		return fmt.Errorf("error in auto-migration: %v", err)
+	}
+
 	return nil
 }
 
@@ -295,4 +300,32 @@ func DeleteRoom(roomID string) error {
 func UpdateUserProfile(oldUsername, newUsername, bio, profilePic string) error {
 	_, err := db.Exec("UPDATE users SET username = ?, bio = ?, profile_pic = ? WHERE username = ?", newUsername, bio, profilePic, oldUsername)
 	return err
+}
+
+// autoMigrateUsersTable checks and adds missing columns to the users table
+func autoMigrateUsersTable() error {
+	columns := []struct {
+		Name       string
+		Definition string
+	}{
+		{"bio", "TEXT NOT NULL DEFAULT ''"},
+		{"profile_pic", "TEXT NOT NULL DEFAULT ''"},
+	}
+	for _, col := range columns {
+		var exists int
+		query := `SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'users' AND COLUMN_NAME = ?`
+		err := db.QueryRow(query, col.Name).Scan(&exists)
+		if err != nil {
+			return fmt.Errorf("error checking for column '%s': %v", col.Name, err)
+		}
+		if exists == 0 {
+			alter := fmt.Sprintf("ALTER TABLE users ADD COLUMN %s %s", col.Name, col.Definition)
+			_, err := db.Exec(alter)
+			if err != nil {
+				return fmt.Errorf("error adding '%s' column: %v", col.Name, err)
+			}
+			logMessage("INFO", "Added missing column '%s' to users table", col.Name)
+		}
+	}
+	return nil
 }
