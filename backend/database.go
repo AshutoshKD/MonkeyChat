@@ -308,8 +308,8 @@ func autoMigrateUsersTable() error {
 		Name       string
 		Definition string
 	}{
-		{"bio", "TEXT NOT NULL DEFAULT ''"},
-		{"profile_pic", "TEXT NOT NULL DEFAULT ''"},
+		{"bio", "TEXT NOT NULL"},
+		{"profile_pic", "TEXT NOT NULL"},
 	}
 	for _, col := range columns {
 		var exists int
