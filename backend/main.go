@@ -162,8 +162,9 @@ func main() {
 	}
 
 	// Serve static files from /uploads/ in development (before auth)
+	var handler fasthttp.RequestHandler
 	if !isProd {
-		handler := func(ctx *fasthttp.RequestCtx) {
+		handler = func(ctx *fasthttp.RequestCtx) {
 			path := string(ctx.Path())
 			if strings.HasPrefix(path, "/uploads/") {
 				absUploadDir, _ := filepath.Abs("uploads")
@@ -204,23 +205,54 @@ func main() {
 				}
 			})(ctx)
 		}
-		// Apply CORS middleware
-		h := corsMiddleware(handler)
-		// Start the server
-		logMessage("INFO", "Server started on %s", addr)
-		log.Printf("Attempting to start server on %s", addr)
-		server := &fasthttp.Server{
-			Handler:            h,
-			MaxRequestBodySize: 100 * 1024 * 1024, // 100 MB
-		}
-		if err := server.ListenAndServe(addr); err != nil {
-			logMessage("ERROR", "Error in ListenAndServe: %v", err)
-			log.Printf("Fatal error starting server: %v", err)
-			os.Exit(1)
-		}
 	} else {
-		// Production: keep the existing logic
-		// ... existing production server startup ...
+		handler = func(ctx *fasthttp.RequestCtx) {
+			authMiddleware(func(ctx *fasthttp.RequestCtx, username string, userID int64) {
+				path := string(ctx.Path())
+				method := string(ctx.Method())
+				switch {
+				case path == "/ws":
+					handleWebSocket(ctx, username, userID)
+				case path == "/health":
+					ctx.SetBodyString("OK")
+				case path == "/logs":
+					serveLogFile(ctx)
+				case path == "/login" && method == "POST":
+					handleLogin(ctx)
+				case path == "/register" && method == "POST":
+					handleRegister(ctx)
+				case path == "/logout" && method == "POST":
+					handleLogout(ctx, username, userID)
+				case path == "/rooms" && method == "GET":
+					handleGetRooms(ctx, username, userID)
+				case path == "/rooms/delete" && method == "POST":
+					handleDeleteRoom(ctx, username, userID)
+				case strings.HasPrefix(path, "/users/") && strings.HasSuffix(path, "/profile") && method == "GET":
+					handleGetUserProfile(ctx, username, userID)
+				case strings.HasPrefix(path, "/users/") && strings.HasSuffix(path, "/profile") && method == "PUT":
+					handleUpdateUserProfile(ctx, username, userID)
+				case strings.HasPrefix(path, "/users/") && strings.HasSuffix(path, "/upload-profile-pic") && method == "POST":
+					handleUploadProfilePic(ctx, username, userID)
+				default:
+					logMessage("WARN", "404 Not Found: %s", path)
+					ctx.SetStatusCode(fasthttp.StatusNotFound)
+				}
+			})(ctx)
+		}
+	}
+	// Apply CORS middleware
+	h := corsMiddleware(handler)
+	// Start the server
+	logMessage("INFO", "Server started on %s", addr)
+	log.Printf("Attempting to start server on %s", addr)
+	server := &fasthttp.Server{
+		Handler:            h,
+		MaxRequestBodySize: 100 * 1024 * 1024, // 100 MB
+	}
+	if err := server.ListenAndServe(addr); err != nil {
+		logMessage("ERROR", "Error in ListenAndServe: %v", err)
+		log.Printf("Fatal error starting server: %v", err)
+		os.Exit(1)
 	}
 }
 
