@@ -146,24 +146,25 @@ func main() {
 	// Create a CORS middleware
 	corsMiddleware := func(next fasthttp.RequestHandler) fasthttp.RequestHandler {
 		return func(ctx *fasthttp.RequestCtx) {
+			fmt.Printf("CORS middleware: %s %s\n", ctx.Method(), ctx.Path())
 			origin := string(ctx.Request.Header.Peek("Origin"))
 			if origin == "" {
 				origin = "*"
 			}
 
-			if !isProd {
-				logMessage("DEBUG", "Request from origin: %s, path: %s, method: %s",
-					origin, ctx.Path(), ctx.Method())
-			}
-
-			// Set CORS headers
+			// Always set CORS headers
 			ctx.Response.Header.Set("Access-Control-Allow-Origin", origin)
 			ctx.Response.Header.Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
 			ctx.Response.Header.Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 			ctx.Response.Header.Set("Access-Control-Allow-Credentials", "true")
 
+			if !isProd {
+				logMessage("DEBUG", "Request from origin: %s, path: %s, method: %s", origin, ctx.Path(), ctx.Method())
+			}
+
 			// Handle preflight requests
 			if string(ctx.Method()) == "OPTIONS" {
+				fmt.Println("CORS middleware: OPTIONS preflight handled")
 				ctx.SetStatusCode(fasthttp.StatusOK)
 				return
 			}
