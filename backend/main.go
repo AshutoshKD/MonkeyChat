@@ -268,24 +268,8 @@ func main() {
 }
 
 func setupProductionLogging() {
-	// Create logs directory if it doesn't exist
-	if _, err := os.Stat("logs"); os.IsNotExist(err) {
-		if err := os.Mkdir("logs", 0755); err != nil {
-			log.Fatalf("Failed to create logs directory: %v", err)
-		}
-	}
-
-	// Use a single log file that gets rewritten on each start
-	var err error
-	logFile, err = os.OpenFile("logs/monkeychat.log",
-		os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
-	if err != nil {
-		log.Fatalf("Failed to open log file: %v", err)
-	}
-
-	// Set up multi-writer to log to both console and file
-	mw := io.MultiWriter(os.Stdout, logFile)
-	log.SetOutput(mw)
+	// Just log to stdout in production for Render
+	log.SetOutput(os.Stdout)
 }
 
 func setupDevelopmentLogging() {
