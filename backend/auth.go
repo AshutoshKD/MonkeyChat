@@ -95,7 +95,7 @@ func verifyPassword(password, hash string) bool {
 
 // Generate a JWT token for a user
 func generateToken(username string, userID int64) (string, error) {
-	expirationTime := time.Now().Add(24 * time.Hour)
+	expirationTime := time.Now().Add(30 * 24 * time.Hour)
 	claims := &Claims{
 		Username: username,
 		UserID:   userID,
