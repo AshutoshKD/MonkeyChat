@@ -68,7 +68,6 @@ const UserProfile = () => {
                 }
                 alt={profile.username}
               />
-              <div className="profile-status-indicator"></div>
             </div>
           </div>
           

@@ -49,6 +49,23 @@ body {
   font-size: 2rem;
 }
 
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.logo-link:hover {
+  opacity: 0.8;
+}
+
+.logo-link h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
 .app-header nav {
   display: flex;
   align-items: center;
@@ -984,20 +1001,6 @@ video {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
-.profile-status-indicator {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  width: 24px;
-  height: 24px;
-  background: #10b981;
-  border-radius: 50%;
-  border: 3px solid white;
-  animation: pulseIndicator 2.5s ease-in-out infinite;
-  animation-delay: 1.2s;
-  box-shadow: 0 3px 8px rgba(16, 185, 129, 0.4);
-}
-
 .profile-info {
   animation: slideDownText 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
@@ -1224,19 +1227,6 @@ video {
   100% {
     opacity: 1;
     transform: scale(1);
-  }
-}
-
-@keyframes pulseIndicator {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-    box-shadow: 0 3px 8px rgba(16, 185, 129, 0.4);
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.9;
-    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.6);
   }
 }
 

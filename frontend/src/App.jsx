@@ -93,7 +93,9 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
 
   return (
     <header className="app-header">
-      <h1>MonkeyChat</h1>
+      <Link to="/about" className="logo-link">
+        <h1>MonkeyChat</h1>
+      </Link>
       <nav>
         {isAuthenticated && (
           <div className="nav-links">
