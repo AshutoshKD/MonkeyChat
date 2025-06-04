@@ -109,39 +109,158 @@ const EditProfile = () => {
     setUploading(false);
   };
 
-  if (loading) return <div>Loading...</div>;
+  const handlePhotoClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  if (loading) {
+    return (
+      <div className="edit-profile-loading">
+        <div className="loading-spinner"></div>
+        <p>Loading profile...</p>
+      </div>
+    );
+  }
+
+  const getProfileImageUrl = () => {
+    if (!form.profilePic) {
+      return `https://ui-avatars.com/api/?name=${encodeURIComponent(form.username || 'User')}&background=8b5cf6&color=fff&size=130`;
+    }
+    if (form.profilePic.startsWith('/uploads/')) {
+      return `http://localhost:8080${form.profilePic}`;
+    }
+    return form.profilePic;
+  };
 
   return (
-    <div style={{ maxWidth: 400, margin: '2rem auto', background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px #eee', padding: 32 }}>
-      <h2>Edit Profile</h2>
-      {error && <div style={{ color: 'red', marginBottom: 12 }}>{error}</div>}
-      {showNameChangeWarning && (
-        <div style={{ color: '#b45309', background: '#fef3c7', border: '1px solid #fbbf24', borderRadius: 4, padding: 10, marginBottom: 16 }}>
-          Changing your name will log you out and you will need to log in again.<br />
-          After saving, you will be redirected to the login page.
+    <div className="edit-profile-page">
+      <div className="edit-profile-container">
+        <div className="edit-profile-header">
+          <h1>✏️ Edit Profile</h1>
         </div>
-      )}
-      {uploading && <div style={{ color: '#8b5cf6', marginBottom: 12 }}>Uploading image...</div>}
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 16 }}>
-          <label>Name</label>
-          <input name="username" value={form.username} onChange={handleChange} required style={{ width: '100%', padding: 8, marginTop: 4 }} />
-        </div>
-        <div style={{ marginBottom: 16 }}>
-          <label>Bio</label>
-          <textarea name="bio" value={form.bio} onChange={handleChange} rows={3} style={{ width: '100%', padding: 8, marginTop: 4 }} />
-        </div>
-        <div style={{ marginBottom: 16 }}>
-          <label>Profile Picture</label>
-          <input type="file" accept="image/*" ref={fileInputRef} onChange={handleFileChange} style={{ width: '100%', padding: 8, marginTop: 4 }} />
-          {form.profilePic && (
-            <img src={form.profilePic} alt="Profile Preview" style={{ width: 80, height: 80, borderRadius: '50%', marginTop: 8, objectFit: 'cover' }} />
-          )}
-        </div>
-        <button type="submit" className="nav-btn" style={{ width: '100%' }} disabled={uploading}>
-          {uploading ? "Uploading..." : "Save"}
-        </button>
-      </form>
+
+        {error && (
+          <div className="error-banner">
+            <span className="error-icon">⚠️</span>
+            {error}
+          </div>
+        )}
+
+        {showNameChangeWarning && (
+          <div className="warning-banner">
+            <span className="warning-icon">🔄</span>
+            <div>
+              <strong>Username Change Warning</strong>
+              <p>Changing your username will log you out and you'll need to log in again with your new username.</p>
+            </div>
+          </div>
+        )}
+
+        {uploading && (
+          <div className="upload-banner">
+            <span className="upload-icon">📤</span>
+            Uploading image...
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="edit-profile-form">
+          {/* Profile Picture Section */}
+          <div className="edit-section photo-section">
+            <div className="section-content">
+              <div className="photo-upload-container">
+                <div className="current-photo" onClick={handlePhotoClick}>
+                  <img
+                    src={getProfileImageUrl()}
+                    alt="Profile Preview"
+                  />
+                  <div className="photo-overlay">
+                    <span className="camera-icon">📷</span>
+                    <p>Change Photo</p>
+                  </div>
+                </div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  style={{ display: 'none' }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Basic Information Section */}
+          <div className="edit-section basic-info-section">
+            <div className="section-content">
+              <div className="form-group">
+                <label className="form-label">
+                  <span className="label-icon">✨</span>
+                  Username
+                </label>
+                <input
+                  name="username"
+                  value={form.username}
+                  onChange={handleChange}
+                  required
+                  className="form-input"
+                  placeholder="Enter your username"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* About Section */}
+          <div className="edit-section about-edit-section">
+            <div className="section-content">
+              <div className="form-group">
+                <label className="form-label">
+                  <span className="label-icon">📝</span>
+                  About
+                </label>
+                <textarea
+                  name="bio"
+                  value={form.bio}
+                  onChange={handleChange}
+                  rows={4}
+                  className="form-textarea"
+                  placeholder="Tell others about yourself..."
+                />
+                <div className="char-count">
+                  {form.bio.length}/500 characters
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="form-actions">
+            <button
+              type="button"
+              onClick={() => navigate(`/${originalUsername}/profile`)}
+              className="cancel-btn"
+            >
+              <span className="btn-icon">❌</span>
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="save-btn"
+              disabled={uploading}
+            >
+              {uploading ? (
+                <>
+                  <span className="btn-spinner"></span>
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <span className="btn-icon">💾</span>
+                  Save Changes
+                </>
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
