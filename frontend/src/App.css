@@ -304,14 +304,19 @@ body {
 }
 
 .register-link {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-  color: white;
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.08);
+  color: #8b5cf6;
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .register-link:hover {
+  background: rgba(139, 92, 246, 0.15);
+  color: #7c3aed;
+  border-color: rgba(139, 92, 246, 0.3);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
 }
 
 /* Mobile Responsive */
