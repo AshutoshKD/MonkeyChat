@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -16,6 +16,7 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
   const [profilePic, setProfilePic] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Update username when authentication state changes
   useEffect(() => {
@@ -92,29 +93,59 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
   };
 
   return (
-    <header className="app-header">
-      <Link to="/about" className="logo-link">
-        <h1>MonkeyChat</h1>
-      </Link>
-      <nav>
+    <header className="modern-header">
+      <div className="header-container">
+        <div className="header-left">
+          <Link to="/home" className="brand-logo">
+            <div className="logo-icon">
+              <span>🐵</span>
+            </div>
+            <span className="brand-name">MonkeyChat</span>
+          </Link>
+        </div>
+
+        <div className="header-center">
         {isAuthenticated && (
-          <div className="nav-links">
-            <Link to="/home" className="nav-link">Home</Link>
-            <Link to="/about" className="nav-link">About</Link>
+            <nav className="main-nav">
+              <Link to="/home" className={`nav-item ${location.pathname === '/home' ? 'active' : ''}`}>
+                <span className="nav-icon">🏠</span>
+                <span>Home</span>
+              </Link>
+              <Link to="/chat" className={`nav-item ${location.pathname === '/chat' ? 'active' : ''}`}>
+                <span className="nav-icon">💬</span>
+                <span>Chat</span>
+              </Link>
+            </nav>
+          )}
           </div>
-        )}
+
+        <div className="header-right">
         {isAuthenticated ? (
-          <div className="user-info">
-            <UserAvatar username={username} profilePic={profilePic} size={36} showName={true} />
-            <button onClick={handleLogout} className="logout-btn">Logout</button>
+            <div className="user-section">
+              <Link to={`/${username}/profile`} className="user-profile">
+                <UserAvatar username={username} profilePic={profilePic} size={32} showName={false} />
+                <div className="user-info-text">
+                  <span className="username">{username}</span>
+                  <span className="user-status">Online</span>
+                </div>
+              </Link>
+              <button onClick={handleLogout} className="logout-button">
+                <span className="logout-icon">🚪</span>
+                Logout
+              </button>
           </div>
         ) : (
-          <div className="auth-buttons">
-            <Link to="/login" className="nav-btn">Login</Link>
-            <Link to="/register" className="nav-btn">Register</Link>
+            <div className="auth-section">
+              <Link to="/login" className="auth-link login-link">
+                Sign In
+              </Link>
+              <Link to="/register" className="auth-link register-link">
+                Get Started
+              </Link>
           </div>
         )}
-      </nav>
+        </div>
+      </div>
     </header>
   );
 };
@@ -147,7 +178,7 @@ function App() {
     }
 
     if (isAuthenticated) {
-      return <Navigate to="/home" />;
+      return <Navigate to="/chat" />;
     }
 
     return children;
@@ -180,7 +211,7 @@ function App() {
 
             {/* Protected routes */}
             <Route 
-              path="/home" 
+              path="/chat" 
               element={
                 <ProtectedRoute>
                   <Home setIsAuthenticated={setIsAuthenticated} />
@@ -188,7 +219,7 @@ function App() {
               } 
             />
             <Route 
-              path="/about" 
+              path="/home" 
               element={
                 <ProtectedRoute>
                   <LandingPage />
@@ -207,11 +238,11 @@ function App() {
             <Route path=":username/profile" element={<UserProfile />} />
             <Route path=":username/edit" element={<EditProfile />} />
 
-            {/* Catch all route - redirect to home if authenticated, landing page if not */}
+            {/* Catch all route - redirect to chat if authenticated, landing page if not */}
             <Route 
               path="*" 
               element={
-                isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/" />
+                isAuthenticated ? <Navigate to="/chat" /> : <Navigate to="/" />
               } 
             />
           </Routes>

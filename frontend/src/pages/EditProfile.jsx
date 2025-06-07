@@ -143,8 +143,8 @@ const EditProfile = () => {
           <div className="error-banner">
             <span className="error-icon">⚠️</span>
             {error}
-          </div>
-        )}
+        </div>
+      )}
 
         {showNameChangeWarning && (
           <div className="warning-banner">
@@ -153,14 +153,14 @@ const EditProfile = () => {
               <strong>Username Change Warning</strong>
               <p>Changing your username will log you out and you'll need to log in again with your new username.</p>
             </div>
-          </div>
+        </div>
         )}
 
         {uploading && (
           <div className="upload-banner">
             <span className="upload-icon">📤</span>
             Uploading image...
-          </div>
+        </div>
         )}
 
         <form onSubmit={handleSubmit} className="edit-profile-form">
@@ -230,7 +230,7 @@ const EditProfile = () => {
                 </div>
               </div>
             </div>
-          </div>
+        </div>
 
           <div className="form-actions">
             <button
@@ -257,9 +257,9 @@ const EditProfile = () => {
                   Save Changes
                 </>
               )}
-            </button>
+        </button>
           </div>
-        </form>
+      </form>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ const Room = () => {
   const [peerName, setPeerName] = useState('');
   const [reconnectAttempts, setReconnectAttempts] = useState(0);
   const maxReconnectAttempts = 3;
+  const [showTroubleshooting, setShowTroubleshooting] = useState(false);
   
   const localVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
@@ -181,10 +182,18 @@ const Room = () => {
   useEffect(() => {
     if (localVideoRef.current && localStream) {
       localVideoRef.current.srcObject = localStream;
+      // Ensure video plays
+      localVideoRef.current.play().catch(error => {
+        console.warn('Auto-play failed for local video:', error);
+      });
     }
     
     if (remoteVideoRef.current && remoteStream) {
       remoteVideoRef.current.srcObject = remoteStream;
+      // Ensure video plays
+      remoteVideoRef.current.play().catch(error => {
+        console.warn('Auto-play failed for remote video:', error);
+      });
       // We have a remote stream, so we're fully connected to a peer
       setConnectionStatus(peerName ? `Connected to ${peerName}` : 'Connected to peer');
       setErrorMessage('');
@@ -193,23 +202,68 @@ const Room = () => {
 
   const initLocalVideo = async () => {
     try {
+      // Clear any previous error messages
+      setErrorMessage('');
+      setConnectionStatus('Requesting camera access...');
+
       // Check if getUserMedia is supported
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        const errorMsg = 'getUserMedia is not supported in this browser';
+        const errorMsg = 'getUserMedia is not supported in this browser. Please use Chrome, Firefox, or Edge.';
         setErrorMessage(errorMsg);
-        setConnectionStatus('Failed to access camera');
+        setConnectionStatus('Browser not supported');
         return;
       }
 
-      // Request permission explicitly
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true,
-      });
+      // Check if we're on HTTPS (required in production)
+      if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+        setErrorMessage('Video chat requires HTTPS in production. Please use HTTPS or test locally.');
+        setConnectionStatus('HTTPS required');
+        return;
+      }
+
+      // Try different media constraints in order of preference
+      const constraints = [
+        // First try: Full video and audio
+        { video: true, audio: true },
+        // Fallback: Video only
+        { video: true, audio: false },
+        // Last resort: Low quality video
+        { 
+          video: { 
+            width: { ideal: 640 }, 
+            height: { ideal: 480 },
+            frameRate: { ideal: 15 } 
+          }, 
+          audio: true 
+        }
+      ];
+
+      let stream = null;
+      let lastError = null;
+
+      for (const constraint of constraints) {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia(constraint);
+          break; // Success, exit the loop
+        } catch (error) {
+          lastError = error;
+          continue; // Try next constraint
+        }
+      }
+
+      if (!stream) {
+        throw lastError || new Error('Could not access media devices with any constraints');
+      }
       
       // Verify that we actually got video tracks
-      if (stream.getVideoTracks().length === 0) {
-        setErrorMessage('No video tracks found in media stream');
+      const videoTracks = stream.getVideoTracks();
+      const audioTracks = stream.getAudioTracks();
+      
+      if (videoTracks.length === 0) {
+        setErrorMessage('No video tracks found in media stream. Please check your camera.');
+        setConnectionStatus('No video available');
+        stream.getTracks().forEach(track => track.stop());
+        return;
       }
 
       // Ensure all tracks start in the enabled state
@@ -222,6 +276,7 @@ const Room = () => {
       setIsVideoOff(false);
       
       setLocalStream(stream);
+      setConnectionStatus('Camera access granted');
       
       // Initialize WebRTC peer connection
       createPeerConnection();
@@ -236,11 +291,22 @@ const Room = () => {
       
       // Provide more specific error messages based on error type
       if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
-        setErrorMessage('Camera/microphone access denied. Please allow camera and microphone access in your browser settings.');
+        setErrorMessage(`Camera/microphone access denied. Please:
+        1. Click the camera icon in your browser's address bar
+        2. Allow camera and microphone access
+        3. Refresh the page`);
       } else if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
-        setErrorMessage('No camera or microphone found. Please connect a device and try again.');
+        setErrorMessage('No camera or microphone found. Please connect a device and refresh the page.');
+      } else if (error.name === 'NotReadableError' || error.name === 'TrackStartError') {
+        setErrorMessage('Camera is already in use by another application. Please close other apps using the camera and try again.');
+      } else if (error.name === 'OverconstrainedError' || error.name === 'ConstraintNotSatisfiedError') {
+        setErrorMessage('Camera does not support the required video settings. Please try with a different camera.');
+      } else if (error.name === 'AbortError') {
+        setErrorMessage('Camera access was aborted. Please try again.');
+      } else if (error.name === 'NotSupportedError') {
+        setErrorMessage('Camera access is not supported in this browser. Please use Chrome, Firefox, or Edge.');
       } else {
-        setErrorMessage(`Error accessing media devices: ${error.message}`);
+        setErrorMessage(`Error accessing media devices: ${error.message}. Please check browser permissions and try again.`);
       }
     }
   };
@@ -416,7 +482,7 @@ const Room = () => {
       webSocketRef.current.close();
     }
     
-    navigate('/home');
+    navigate('/chat');
   };
   
   const copyRoomId = () => {
@@ -497,16 +563,162 @@ const Room = () => {
     }
   };
 
+  // Add retry function
+  const retryVideoAccess = () => {
+    // Stop existing stream if any
+    if (localStream) {
+      localStream.getTracks().forEach(track => track.stop());
+      setLocalStream(null);
+    }
+    
+    // Clear video elements
+    if (localVideoRef.current) {
+      localVideoRef.current.srcObject = null;
+    }
+    
+    // Retry initialization
+    initLocalVideo();
+  };
+
+  // Troubleshooting modal component
+  const TroubleshootingModal = () => (
+    showTroubleshooting && (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000
+      }}>
+        <div style={{
+          backgroundColor: 'white',
+          padding: '2rem',
+          borderRadius: '8px',
+          maxWidth: '600px',
+          maxHeight: '80vh',
+          overflow: 'auto',
+          margin: '1rem'
+        }}>
+          <h3>Video Chat Troubleshooting</h3>
+          
+          <h4>🎥 Camera Not Working?</h4>
+          <ol>
+            <li>Check if your camera is connected and working</li>
+            <li>Close other applications that might be using your camera (Zoom, Teams, etc.)</li>
+            <li>In your browser, click the camera icon in the address bar and allow access</li>
+            <li>Try refreshing the page</li>
+            <li>Check if your browser supports video chat (Chrome, Firefox, Edge recommended)</li>
+          </ol>
+
+          <h4>🔊 Audio Issues?</h4>
+          <ol>
+            <li>Check if your microphone is connected</li>
+            <li>Make sure microphone isn't muted in your system settings</li>
+            <li>Allow microphone access in your browser</li>
+            <li>Try using headphones to prevent echo</li>
+          </ol>
+
+          <h4>🌐 Connection Problems?</h4>
+          <ol>
+            <li>Check your internet connection</li>
+            <li>Try using a different network (mobile hotspot)</li>
+            <li>Make sure the backend server is running</li>
+            <li>For HTTPS sites, ensure SSL certificate is valid</li>
+          </ol>
+
+          <h4>🖥️ Browser Issues?</h4>
+          <ul>
+            <li><strong>Chrome:</strong> Best support for WebRTC</li>
+            <li><strong>Firefox:</strong> Good alternative</li>
+            <li><strong>Safari:</strong> Limited support, use Chrome instead</li>
+            <li><strong>Edge:</strong> Good support</li>
+          </ul>
+
+          <p><strong>Still having issues?</strong> Try opening developer tools (F12) and check the console for error messages.</p>
+
+          <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+            <button 
+              onClick={() => setShowTroubleshooting(false)}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: '#8b5cf6',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                marginRight: '10px'
+              }}
+            >
+              Close
+            </button>
+            <button 
+              onClick={() => {
+                setShowTroubleshooting(false);
+                retryVideoAccess();
+              }}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: '#10b981',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  );
+
   return (
     <div className="room">
+      <TroubleshootingModal />
       <div className="room-header">
         <div>
           <h2>Room: {roomId}</h2>
           <div className="connection-status">{connectionStatus}</div>
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
+          {errorMessage && (
+            <div className="error-message">
+              {errorMessage}
+              {(errorMessage.includes('Camera/microphone access denied') || 
+                errorMessage.includes('Error accessing media devices') ||
+                errorMessage.includes('No camera found') ||
+                errorMessage.includes('Camera is already in use')) && (
+                <button 
+                  onClick={retryVideoAccess}
+                  style={{
+                    marginLeft: '10px',
+                    padding: '5px 10px',
+                    backgroundColor: '#8b5cf6',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  Retry Video Access
+                </button>
+              )}
+            </div>
+          )}
         </div>
         <div className="room-actions">
           <button onClick={copyRoomId}>Copy Room ID</button>
+          <button 
+            onClick={() => setShowTroubleshooting(true)}
+            style={{ backgroundColor: '#f59e0b' }}
+          >
+            Troubleshoot
+          </button>
           <button onClick={leaveRoom}>Leave Room</button>
         </div>
       </div>
@@ -520,18 +732,34 @@ const Room = () => {
             muted
             className="local-video"
           />
+          {!localStream && (
+            <div className="video-off-indicator">
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📹</div>
+                <div>Your video will appear here</div>
+                <div style={{ fontSize: '0.875rem', marginTop: '0.5rem', opacity: 0.8 }}>
+                  Allow camera access when prompted
+                </div>
+              </div>
+            </div>
+          )}
+          {localStream && (
+            <div className="video-label">You ({userName})</div>
+          )}
           <div className="media-controls">
             <button
-              className="media-btn"
+              className={`media-btn ${isAudioMuted ? 'off' : ''}`}
               onClick={toggleAudio}
               title={isAudioMuted ? "Unmute" : "Mute"}
+              disabled={!localStream}
             >
               {isAudioMuted ? "🔇" : "🔊"}
             </button>
             <button
-              className="media-btn"
+              className={`media-btn ${isVideoOff ? 'off' : ''}`}
               onClick={toggleVideo}
               title={isVideoOff ? "Turn on video" : "Turn off video"}
+              disabled={!localStream}
             >
               {isVideoOff ? "📹" : "🎥"}
             </button>
@@ -545,6 +773,20 @@ const Room = () => {
             playsInline
             className="remote-video"
           />
+          {!remoteStream && (
+            <div className="waiting-message">
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👥</div>
+                <div>Waiting for {peerName || 'peer'} to join...</div>
+                <div style={{ fontSize: '0.875rem', marginTop: '0.5rem', opacity: 0.8 }}>
+                  Share the room ID: <strong>{roomId}</strong>
+                </div>
+              </div>
+            </div>
+          )}
+          {remoteStream && peerName && (
+            <div className="video-label">{peerName}</div>
+          )}
         </div>
       </div>
     </div>

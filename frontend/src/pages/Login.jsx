@@ -23,7 +23,7 @@ const Login = ({ setIsAuthenticated }) => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('username', username);
         setIsAuthenticated(true);
-        navigate('/home');
+        navigate('/chat');
     } catch (err) {
       setError(err.message || 'Login failed');
     } finally {
@@ -32,42 +32,100 @@ const Login = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <h2>Welcome Back</h2>
-        {error && <div className="error-message">{error}</div>}
-        <form onSubmit={handleSubmit}>
+    <div className="auth-page">
+      <div className="auth-background">
+        <div className="auth-particles"></div>
+      </div>
+      <div className="auth-container boxing-layout">
+        <div className="auth-card boxing-card">
+          <div className="auth-header">
+            <div className="auth-icon">
+              <span className="icon">🔐</span>
+            </div>
+            <h2 className="auth-title">Welcome Back</h2>
+            <p className="auth-subtitle">Sign in to continue to MonkeyChat</p>
+          </div>
+
+          {error && (
+            <div className="error-message">
+              <span className="error-icon">⚠️</span>
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="boxing-form">
+            <div className="boxing-left">
+              <div className="form-fields">
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+                  <label htmlFor="username" className="form-label">
+                    <span className="label-icon">👤</span>
+                    Username
+                  </label>
+                  <div className="input-wrapper">
             <input
               type="text"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
+                      className="form-input"
+                      placeholder="Enter your username"
             />
           </div>
+                </div>
+
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+                  <label htmlFor="password" className="form-label">
+                    <span className="label-icon">🔒</span>
+                    Password
+                  </label>
+                  <div className="input-wrapper">
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+                      className="form-input"
+                      placeholder="Enter your password"
             />
           </div>
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? 'Logging in...' : 'Login'}
+                </div>
+              </div>
+            </div>
+
+            <div className="boxing-divider"></div>
+
+            <div className="boxing-right">
+              <div className="action-section">
+                <button type="submit" disabled={isLoading} className="auth-button primary">
+                  {isLoading ? (
+                    <span className="loading-spinner">
+                      <span className="spinner"></span>
+                      Signing in...
+                    </span>
+                  ) : (
+                    <span>
+                      <span className="btn-icon">✨</span>
+                      Sign In
+                    </span>
+                  )}
           </button>
+
+                <div className="auth-divider">
+                  <span>or</span>
+                </div>
+
+                <div className="auth-option">
+                  <p className="option-text">Don't have an account?</p>
+                  <Link to="/register" className="auth-link-button">
+                    <span className="btn-icon">🚀</span>
+                    Create New Account
+                  </Link>
+                </div>
+              </div>
+            </div>
         </form>
-        <div className="toggle-form">
-          <p>
-            Don't have an account?{' '}
-            <Link to="/register" className="toggle-btn">
-              Register here
-            </Link>
-          </p>
         </div>
       </div>
     </div>

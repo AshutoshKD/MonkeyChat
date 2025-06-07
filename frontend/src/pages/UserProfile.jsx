@@ -47,7 +47,7 @@ const UserProfile = () => {
         <div className="error-icon">👤</div>
         <h2>Profile not found</h2>
         <p>The user you're looking for doesn't exist or has been removed.</p>
-        <Link to="/home" className="nav-btn">Back to Home</Link>
+        <Link to="/chat" className="nav-btn">Back to Chat</Link>
       </div>
     );
   }
@@ -115,7 +115,7 @@ const UserProfile = () => {
           </div>
 
           {/* Edit Profile Section - Only shown for current user */}
-          {isCurrentUser && (
+      {isCurrentUser && (
             <div className="profile-section edit-section">
               <div className="section-content">
                 <div className="edit-profile-actions">

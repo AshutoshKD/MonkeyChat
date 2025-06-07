@@ -9,6 +9,8 @@ const Home = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [showCameraTest, setShowCameraTest] = useState(false);
+  const [testStream, setTestStream] = useState(null);
   const navigate = useNavigate();
   
   // Get the current username from localStorage
@@ -81,11 +83,100 @@ const Home = () => {
   const yourRooms = availableRooms.filter(room => room.createdBy === currentUsername);
   const otherRooms = availableRooms.filter(room => room.createdBy !== currentUsername);
 
+  // Camera test functions
+  const testCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      setTestStream(stream);
+      setShowCameraTest(true);
+      setErrorMessage('');
+      setSuccessMessage('Camera test successful! You can now join video calls.');
+    } catch (error) {
+      setErrorMessage(`Camera test failed: ${error.message}. Please check your camera permissions.`);
+    }
+  };
+
+  const stopCameraTest = () => {
+    if (testStream) {
+      testStream.getTracks().forEach(track => track.stop());
+      setTestStream(null);
+    }
+    setShowCameraTest(false);
+  };
+
+  // Camera test modal
+  const CameraTestModal = () => (
+    showCameraTest && (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000
+      }}>
+        <div style={{
+          backgroundColor: 'white',
+          padding: '2rem',
+          borderRadius: '8px',
+          maxWidth: '500px',
+          textAlign: 'center'
+        }}>
+          <h3>Camera Test</h3>
+          <div style={{
+            width: '400px',
+            height: '300px',
+            backgroundColor: '#000',
+            borderRadius: '8px',
+            marginBottom: '1rem',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            <video
+              autoPlay
+              playsInline
+              muted
+              ref={(video) => {
+                if (video && testStream) {
+                  video.srcObject = testStream;
+                }
+              }}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
+          <p>Can you see yourself in the video above?</p>
+          <button 
+            onClick={stopCameraTest}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#8b5cf6',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Close Test
+          </button>
+        </div>
+      </div>
+    )
+  );
+
   return (
     <div className="home dashboard-layout">
+      <CameraTestModal />
       <div className="container left-panel">
         <h2>Welcome to MonkeyChat</h2>
-        <p>Create a new room or join an existing one</p>
+        <p>Create a new chat room or join an existing one</p>
         
         {errorMessage && (
           <div className="error-message">{errorMessage}</div>
@@ -94,6 +185,17 @@ const Home = () => {
         {successMessage && (
           <div className="success-message">{successMessage}</div>
         )}
+        
+        <button 
+          onClick={testCamera}
+          style={{
+            backgroundColor: '#10b981',
+            marginBottom: '1rem',
+            width: '100%'
+          }}
+        >
+          🎥 Test Camera & Microphone
+        </button>
         
         <button onClick={createRoom} className="create-room-btn">
           Create a New Room
