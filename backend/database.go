@@ -56,11 +56,18 @@ func InitDatabase() error {
 			dbUsername, dbPassword, dbHost, dbPort, dbName)
 	}
 
-	logMessage("DEBUG", "DSN: %s", dsn)
+	logMessage("DEBUG", "DSN configured for %s environment", func() string {
+		if isProd {
+			return "production"
+		}
+		return "development"
+	}())
 
 	var err error
+	logMessage("DEBUG", "Opening database connection...")
 	db, err = sql.Open("mysql", dsn)
 	if err != nil {
+		logMessage("ERROR", "Failed to open database connection: %v", err)
 		return fmt.Errorf("error opening database connection: %v", err)
 	}
 
@@ -70,15 +77,19 @@ func InitDatabase() error {
 		db.SetMaxOpenConns(10)
 		db.SetMaxIdleConns(5)
 		db.SetConnMaxLifetime(time.Hour)
+		logMessage("DEBUG", "Applied production connection pool settings")
 	} else {
 		// Development settings
 		db.SetMaxOpenConns(5)
 		db.SetMaxIdleConns(2)
 		db.SetConnMaxLifetime(30 * time.Minute)
+		logMessage("DEBUG", "Applied development connection pool settings")
 	}
 
 	// Test the connection
+	logMessage("DEBUG", "Testing database connection with ping...")
 	if err = db.Ping(); err != nil {
+		logMessage("ERROR", "Failed to ping database: %v", err)
 		return fmt.Errorf("error connecting to the database: %v", err)
 	}
 
@@ -103,7 +114,10 @@ func InitDatabase() error {
 
 // createTables creates the necessary tables if they don't exist
 func createTables() error {
+	logMessage("DEBUG", "Creating database tables if they don't exist...")
+
 	// Create users table
+	logMessage("DEBUG", "Creating users table...")
 	_, err := db.Exec(`
 		CREATE TABLE IF NOT EXISTS users (
 			id BIGINT NOT NULL AUTO_INCREMENT,
@@ -116,10 +130,13 @@ func createTables() error {
 		)
 	`)
 	if err != nil {
+		logMessage("ERROR", "Failed to create users table: %v", err)
 		return fmt.Errorf("error creating users table: %v", err)
 	}
+	logMessage("DEBUG", "Users table created successfully")
 
 	// Create rooms table
+	logMessage("DEBUG", "Creating rooms table...")
 	_, err = db.Exec(`
 		CREATE TABLE IF NOT EXISTS rooms (
 			id VARCHAR(50) NOT NULL,
@@ -130,35 +147,48 @@ func createTables() error {
 		)
 	`)
 	if err != nil {
+		logMessage("ERROR", "Failed to create rooms table: %v", err)
 		return fmt.Errorf("error creating rooms table: %v", err)
 	}
+	logMessage("DEBUG", "Rooms table created successfully")
 
+	logMessage("INFO", "All database tables created successfully")
 	return nil
 }
 
 // CreateUser creates a new user in the database
 func CreateUser(username, passwordHash string) (*DbUser, error) {
+	logMessage("DEBUG", "Attempting to create user: %s", username)
+
 	result, err := db.Exec(
 		"INSERT INTO users (username, password) VALUES (?, ?)",
 		username,
 		passwordHash,
 	)
 	if err != nil {
+		logMessage("ERROR", "Failed to execute INSERT query for user '%s': %v", username, err)
 		return nil, fmt.Errorf("error creating user: %v", err)
 	}
 
+	logMessage("DEBUG", "INSERT query executed successfully for user: %s", username)
+
 	userID, err := result.LastInsertId()
 	if err != nil {
+		logMessage("ERROR", "Failed to get last insert ID for user '%s': %v", username, err)
 		return nil, fmt.Errorf("error getting user ID: %v", err)
 	}
 
+	logMessage("DEBUG", "User '%s' inserted with ID: %d", username, userID)
+
 	// Fetch the created user
+	logMessage("DEBUG", "Fetching created user by ID: %d", userID)
 	user, err := GetUserByID(userID)
 	if err != nil {
+		logMessage("ERROR", "Failed to fetch created user '%s' with ID %d: %v", username, userID, err)
 		return nil, fmt.Errorf("error fetching created user: %v", err)
 	}
 
-	logMessage("INFO", "User created in database: %s (ID: %d)", username, userID)
+	logMessage("INFO", "User created successfully in database: %s (ID: %d)", username, userID)
 	return user, nil
 }
 
@@ -308,8 +338,8 @@ func autoMigrateUsersTable() error {
 		Name       string
 		Definition string
 	}{
-		{"bio", "TEXT NOT NULL"},
-		{"profile_pic", "TEXT NOT NULL"},
+		{"bio", "TEXT"},
+		{"profile_pic", "TEXT"},
 	}
 	for _, col := range columns {
 		var exists int
@@ -325,6 +355,25 @@ func autoMigrateUsersTable() error {
 				return fmt.Errorf("error adding '%s' column: %v", col.Name, err)
 			}
 			logMessage("INFO", "Added missing column '%s' to users table", col.Name)
+		} else {
+			// Column exists, check if it's nullable and fix if needed
+			logMessage("DEBUG", "Column '%s' already exists, checking if it needs to be made nullable", col.Name)
+			var isNullable string
+			nullQuery := `SELECT IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'users' AND COLUMN_NAME = ?`
+			err := db.QueryRow(nullQuery, col.Name).Scan(&isNullable)
+			if err != nil {
+				logMessage("WARN", "Could not check nullability of column '%s': %v", col.Name, err)
+			} else if isNullable == "NO" {
+				// Column is NOT NULL, make it nullable
+				logMessage("INFO", "Making column '%s' nullable", col.Name)
+				alter := fmt.Sprintf("ALTER TABLE users MODIFY COLUMN %s %s", col.Name, col.Definition)
+				_, err := db.Exec(alter)
+				if err != nil {
+					logMessage("ERROR", "Failed to modify column '%s' to be nullable: %v", col.Name, err)
+				} else {
+					logMessage("INFO", "Successfully modified column '%s' to be nullable", col.Name)
+				}
+			}
 		}
 	}
 	return nil

@@ -274,6 +274,8 @@ func handleLogin(ctx *fasthttp.RequestCtx) {
 
 // Handler for user registration
 func handleRegister(ctx *fasthttp.RequestCtx) {
+	logMessage("INFO", "Registration request received")
+
 	var creds struct {
 		Username string `json:"username"`
 		Password string `json:"password"`
@@ -281,19 +283,25 @@ func handleRegister(ctx *fasthttp.RequestCtx) {
 
 	// Parse request body
 	if err := json.Unmarshal(ctx.PostBody(), &creds); err != nil {
+		logMessage("ERROR", "Failed to parse registration request body: %v", err)
 		ctx.SetStatusCode(fasthttp.StatusBadRequest)
 		ctx.SetBodyString(`{"error":"invalid request body"}`)
 		return
 	}
 
+	logMessage("INFO", "Registration request for username: %s", creds.Username)
+
 	// Validate input
 	if len(creds.Username) < 3 || len(creds.Password) < 4 {
+		logMessage("WARN", "Registration validation failed - username: %d chars, password: %d chars",
+			len(creds.Username), len(creds.Password))
 		ctx.SetStatusCode(fasthttp.StatusBadRequest)
 		ctx.SetBodyString(`{"error":"username must be at least 3 characters and password at least 4 characters"}`)
 		return
 	}
 
 	// Check if username exists
+	logMessage("DEBUG", "Checking if username exists: %s", creds.Username)
 	existingUser, err := GetUserByUsername(creds.Username)
 	if err != nil {
 		logMessage("ERROR", "Error checking if username exists: %v", err)
@@ -303,24 +311,30 @@ func handleRegister(ctx *fasthttp.RequestCtx) {
 	}
 
 	if existingUser != nil {
+		logMessage("INFO", "Username already exists: %s", creds.Username)
 		ctx.SetStatusCode(fasthttp.StatusConflict)
 		ctx.SetBodyString(`{"error":"username already exists"}`)
 		return
 	}
 
 	// Create user
+	logMessage("DEBUG", "Creating new user: %s", creds.Username)
 	passwordHash := hashPassword(creds.Password)
 	user, err := CreateUser(creds.Username, passwordHash)
 	if err != nil {
-		logMessage("ERROR", "Error creating user: %v", err)
+		logMessage("ERROR", "Error creating user '%s': %v", creds.Username, err)
 		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
 		ctx.SetBodyString(`{"error":"error creating user"}`)
 		return
 	}
 
+	logMessage("INFO", "User created successfully: %s (ID: %d)", creds.Username, user.ID)
+
 	// Generate token
+	logMessage("DEBUG", "Generating JWT token for user: %s", creds.Username)
 	token, err := generateToken(creds.Username, user.ID)
 	if err != nil {
+		logMessage("ERROR", "Error generating token for user '%s': %v", creds.Username, err)
 		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
 		ctx.SetBodyString(`{"error":"error generating token"}`)
 		return
@@ -338,6 +352,7 @@ func handleRegister(ctx *fasthttp.RequestCtx) {
 	responseJSON, _ := json.Marshal(response)
 	ctx.SetContentType("application/json")
 	ctx.SetBody(responseJSON)
+	logMessage("INFO", "Registration completed successfully for user: %s", creds.Username)
 }
 
 // Handler for user logout

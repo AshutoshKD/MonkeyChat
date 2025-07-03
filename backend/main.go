@@ -66,8 +66,12 @@ func logMessage(level, format string, v ...interface{}) {
 		logFile.Sync() // Ensure the log is written to disk
 	}
 
-	// In development, also print to console with colors
-	if !isProd {
+	// Always print to console, but with colors only in development
+	if isProd {
+		// Production: Simple console output without colors
+		fmt.Println(logMsg)
+	} else {
+		// Development: Console output with colors
 		var color string
 		switch level {
 		case "ERROR":
