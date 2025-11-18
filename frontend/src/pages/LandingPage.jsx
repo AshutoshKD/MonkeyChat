@@ -1,9 +1,25 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/LandingPage.css';
 
 const LandingPage = () => {
+  const [showBackendNote, setShowBackendNote] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowBackendNote(false);
+    }, 30000); // 30 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="landing-page">
+      {showBackendNote && (
+        <div className="backend-startup-note">
+          ⚠️ If it's your first time opening, the backend will take around 50 seconds to start.
+        </div>
+      )}
       <div className="hero-section">
         <div className="hero-background"></div>
         <div className="hero-content">
